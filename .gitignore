@@ -1,0 +1,27 @@
+# Android specific files
+android/
+build/
+.gradle/
+local.properties
+
+# iOS specific files
+ios/
+Pods/
+Podfile.lock
+Podfile.resolved
+*.xcworkspace
+*.pbxproj
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Flutter/Dart specific files
+.idea/
+*.iml
+*.metadata
+*.lock
+.pub/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
