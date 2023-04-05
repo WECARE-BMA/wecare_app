@@ -25,28 +25,54 @@ class KidTile extends StatelessWidget {
             color: Colors.grey
           )
         ),
-        child: ListTile(
-          leading: Image.network(
-            image,
-          ),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                style: const TextStyle(fontSize: 18),
-              ),
-              Text(
-                '$age',
-                style: const TextStyle(fontSize: 12),
-              ),
-            ],
-          ),
-          subtitle: Text(
-            description,
-            style: const TextStyle(fontSize: 15),
-          ),
+        child: Row(
+          children: [
+            Container(
+              width: 50,
+              child: Image.network(image)
+            ),
+            Column(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    Text(
+                      '$age',
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+
+              ],
+            )
+          ],
         ),
+        // child: ListTile(
+        //   leading: Image.network(
+        //     image,
+        //   ),
+        //   title: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       Text(
+        //         name,
+        //         style: const TextStyle(fontSize: 18),
+        //       ),
+        //       Text(
+        //         '$age',
+        //         style: const TextStyle(fontSize: 12),
+        //       ),
+        //     ],
+        //   ),
+        //   subtitle: Text(
+        //     description,
+        //     style: const TextStyle(fontSize: 15),
+        //   ),
+        // ),
       ),
     );
   }
