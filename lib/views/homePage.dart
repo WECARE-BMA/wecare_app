@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:wecare_app/components/kid_card.dart';
 import 'package:wecare_app/components/top_nav.dart';
 
 class Home_Page extends StatefulWidget {
@@ -76,12 +77,19 @@ class _Home_Page extends State<Home_Page> {
               ),
             ],
           ),
+          const SizedBox(
+            height: 5,
+          ),
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              '    Urgent Fundrasing',
+              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+            ),
+          ),
           Row(
-            children: [
-              ListView(
-                children: [],
-                scrollDirection: Axis.horizontal,
-              )
+            children: const [
+              KidCard(),
             ],
           )
         ],
