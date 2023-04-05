@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:wecare_app/components/top_nav.dart';
 
 class Home_Page extends StatefulWidget {
   const Home_Page({super.key});
@@ -37,27 +38,17 @@ class _Home_Page extends State<Home_Page> {
       child: Column(
         children: [
           Row(
-            children: [
-              Container(
-                height: 100,
-                child: Text(
-                  'Okay',
-                  style: TextStyle(color: Colors.amber),
-                ),
-              )
+            children: const [
+              TopNav(),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                decoration: BoxDecoration(
-                  //borderRadius: BorderRadius.circular(20.0),
-                  color: Colors.black,
-                  border: Border.all(color: Colors.grey),
-                ),
-                width: 400.0,
-                height: 200.0,
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                width: MediaQuery.of(context).size.width,
+                height: 150.0,
                 child: Stack(
                   children: [
                     Image.asset(
@@ -66,12 +57,18 @@ class _Home_Page extends State<Home_Page> {
                       width: 400.0,
                       height: 300.0,
                     ),
-                    const Text(
-                      '   Help this Kids',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
+                    const Positioned(
+                      bottom: 0, // Set the bottom position of the text
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 30, left: 20),
+                        child: Text(
+                          'Help this Kids',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -80,7 +77,12 @@ class _Home_Page extends State<Home_Page> {
             ],
           ),
           Row(
-            children: [Container()],
+            children: [
+              ListView(
+                children: [],
+                scrollDirection: Axis.horizontal,
+              )
+            ],
           )
         ],
       ),
