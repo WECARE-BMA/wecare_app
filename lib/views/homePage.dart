@@ -2,7 +2,6 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:wecare_app/components/New_kid_card.dart';
 import 'package:wecare_app/components/kid_card.dart';
 import 'package:wecare_app/components/top_nav.dart';
 
@@ -41,11 +40,7 @@ class _Home_Page extends State<Home_Page> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: const [
-                  TopNav(),
-                ],
-              ),
+              const TopNav(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -83,28 +78,22 @@ class _Home_Page extends State<Home_Page> {
               const SizedBox(
                 height: 5,
               ),
-              const Align(
-                alignment: Alignment.centerLeft,
+              const Padding(
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Text(
                   '    Urgent Fundrasing',
                   style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                 ),
               ),
-              Row(
-                children: const [
-                  KidCard(),
-                ],
-              ),
-              const Align(
-                alignment: Alignment.centerLeft,
+              const KidCard(),
+              const Padding(
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Text(
                   '    New Fundrasing',
                   style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                 ),
               ),
-              Row(
-                children: const [NewKidCard()],
-              )
+              const KidCard()
             ],
           ),
         ),
