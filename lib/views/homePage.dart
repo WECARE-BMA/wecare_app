@@ -79,7 +79,7 @@ class _Home_Page extends State<Home_Page> {
                 height: 5,
               ),
               const Padding(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   '    Urgent Fundrasing',
                   style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
@@ -87,7 +87,7 @@ class _Home_Page extends State<Home_Page> {
               ),
               const KidCard(),
               const Padding(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   '    New Fundrasing',
                   style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
