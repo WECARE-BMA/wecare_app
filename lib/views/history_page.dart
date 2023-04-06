@@ -9,24 +9,31 @@ class HistoryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Container(
-        child: Column(
-          children: [
-            const Text(
-              "History Page",
-              style: TextStyle(fontSize: 20)
-            ),
-            Expanded(child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return KidTile(
-                  name: "Steve Jobs", 
-                  image: "https://nationaltoday.com/wp-content/uploads/2021/04/Every-Kid-Healthy.jpg", 
-                  age: 12, 
-                  description: "Lorem Ipsum blah blah some stuff just talking, also very good student we love homeboy"
-                );
-              }
-            )
-          )],
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "History of your donations",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24
+                  )
+              ),
+              Expanded(child: ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return KidTile(
+                    name: "Abel Mekonene", 
+                    image: "https://nationaltoday.com/wp-content/uploads/2021/04/Every-Kid-Healthy.jpg", 
+                    age: 12, 
+                    description: "Lorem Ipsum blah blah some stuff just talking, also very good student we love homeboy"
+                  );
+                }
+              )
+            )],
+          ),
         ),
       ),
     );

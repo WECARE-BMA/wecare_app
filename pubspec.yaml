@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  animated_splash_screen:
+
 
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.3
@@ -17,7 +19,7 @@ dependencies:
 
 dev_dependencies:
   flutter_test:
-    sdk: flutter
+    sdk: flutter   
 
   flutter_lints: ^2.0.0
 
