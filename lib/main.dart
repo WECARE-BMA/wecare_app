@@ -1,11 +1,12 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:wecare_app/home.dart';
-import 'package:wecare_app/views/auth_pages/signin_page.dart';
-import 'package:wecare_app/views/auth_pages/signup_page.dart';
+import '../views/auth_pages/signin_page.dart';
+import '../views/auth_pages/signup_page.dart';
+import '../views/history_page.dart';
+import '../views/profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:firebase_core/firebase_core.dart';
-import 'package:wecare_app/views/homePage.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -33,18 +34,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: myCustomColor,
-          // textTheme: GoogleFonts.poppinsTextTheme(
-          //   Theme.of(context).textTheme,
-          // ),
-        ),
-        home: AnimatedSplashScreen(
-            splash: 'images/logo.png',
-            duration: 3000,
-            splashTransition: SplashTransition.fadeTransition,
-            backgroundColor: Color(0xFFE9FFA6),
-            nextScreen: MyHomePage(title: 'WeCare')));
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: myCustomColor,
+        // textTheme: GoogleFonts.poppinsTextTheme(
+        //   Theme.of(context).textTheme,
+        // ),
+      ),
+      home: 
+      AnimatedSplashScreen(
+        splash: 'images/logo.png',
+        duration: 3000,
+        splashTransition: SplashTransition.fadeTransition,
+        backgroundColor: Color(0xFFE9FFA6),
+        nextScreen: MyHomePage(title: 'WeCare')
+      )
+    );
   }
 }
