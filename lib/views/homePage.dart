@@ -37,6 +37,7 @@ class _Home_Page extends State<Home_Page> {
     return Scaffold(
         body: SafeArea(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: const [

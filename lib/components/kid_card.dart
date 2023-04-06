@@ -27,42 +27,47 @@ class KidCard extends StatelessWidget {
               child: Stack(
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/image1.jpg',
-                              fit: BoxFit.cover,
-                            ),
-                            const SizedBox(height: 2),
-                            const Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                '  Eyosi hemen',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
+                      Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/image1.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                          const SizedBox(height: 2),
+                          const Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              '  Eyosi hemen',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
                               ),
                             ),
-                            const Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                '   12 years Old',
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.black,
-                                ),
+                          ),
+                          const Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              '   12 years Old',
+                              style: TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.black,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       const SizedBox(
-                        height: 5,
+                        height: 10,
                       ),
-                      DonationTracker(),
+                      Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.amber,
+                      ),
+                      // const SizedBox(
+                      //     width: 50, height: 40, child: DonationTracker())
                     ],
                   ),
                   Positioned(
