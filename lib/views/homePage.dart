@@ -41,55 +41,60 @@ class _Home_Page extends State<Home_Page> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const TopNav(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    width: MediaQuery.of(context).size.width,
-                    height: 150.0,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          _imagePaths[_currentIndex],
-                          fit: BoxFit.cover,
-                          width: 400.0,
-                          height: 300.0,
-                        ),
-                        const Positioned(
-                          bottom: 0, // Set the bottom position of the text
-                          child: Padding(
-                            padding: EdgeInsets.only(bottom: 30, left: 20),
-                            child: Text(
-                              'Help this Kids',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+              Container(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                width: MediaQuery.of(context).size.width,
+                height: 150.0,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
+                        image: DecorationImage(
+                            image: AssetImage(
+                              _imagePaths[_currentIndex],
                             ),
+                            fit: BoxFit.cover),
+                      ),
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                    ),
+                    const Positioned(
+                      bottom: 0, // Set the bottom position of the text
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 30, left: 20),
+                        child: Text(
+                          'Help this Kids',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 5,
               ),
               const Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 20),
                 child: Text(
-                  '    Urgent Fundrasing',
+                  'Urgent Fundrasing',
                   style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                 ),
               ),
               const KidCard(),
               const Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left: 20),
                 child: Text(
-                  '    New Fundrasing',
+                  'New Fundrasing',
                   style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                 ),
               ),
