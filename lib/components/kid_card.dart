@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:wecare_app/components/donation_tracker.dart';
 
 class KidCard extends StatelessWidget {
   const KidCard({super.key});
@@ -8,7 +9,7 @@ class KidCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       child: Card(
         elevation: 4.0,
         margin: const EdgeInsets.all(8.0),
@@ -20,15 +21,14 @@ class KidCard extends StatelessWidget {
           children: [
             Container(
               // padding: const EdgeInsets.only(left: 10),
-              height: 300,
+              height: 310,
               width: 225,
               color: Colors.white,
               child: Stack(
                 children: [
                   Column(
                     children: [
-                      SizedBox(
-                        width: 300,
+                      Expanded(
                         child: Column(
                           children: [
                             Image.asset(
@@ -41,7 +41,9 @@ class KidCard extends StatelessWidget {
                               child: Text(
                                 '  Eyosi hemen',
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
                               ),
                             ),
                             const Align(
@@ -57,6 +59,10 @@ class KidCard extends StatelessWidget {
                           ],
                         ),
                       ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      DonationTracker(),
                     ],
                   ),
                   Positioned(
@@ -82,7 +88,7 @@ class KidCard extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
