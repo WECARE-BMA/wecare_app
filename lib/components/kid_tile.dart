@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wecare_app/components/donation_tracker.dart';
 
 class KidTile extends StatelessWidget {
   final String name;
@@ -28,51 +29,51 @@ class KidTile extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: 50,
-              child: Image.network(image)
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Colors.black
+                )
+              ),
+              width: 120,
+              height: 120,
+              child: Image.network(
+                fit: BoxFit.fill,
+                image,
+                )
             ),
-            Column(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      name,
-                      style: const TextStyle(fontSize: 18),
-                    ),
-                    Text(
-                      '$age',
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
-
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold ,
+                          fontSize: 20
+                        ),
+                      ),
+                      Text(
+                        '$age years old',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    width: 240,
+                    height: 50,
+                    child: const DonationTracker()
+                  )
+                ],
+              ),
             )
           ],
         ),
-        // child: ListTile(
-        //   leading: Image.network(
-        //     image,
-        //   ),
-        //   title: Column(
-        //     crossAxisAlignment: CrossAxisAlignment.start,
-        //     children: [
-        //       Text(
-        //         name,
-        //         style: const TextStyle(fontSize: 18),
-        //       ),
-        //       Text(
-        //         '$age',
-        //         style: const TextStyle(fontSize: 12),
-        //       ),
-        //     ],
-        //   ),
-        //   subtitle: Text(
-        //     description,
-        //     style: const TextStyle(fontSize: 15),
-        //   ),
-        // ),
       ),
     );
   }
