@@ -23,24 +23,18 @@ class KidTile extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: Colors.grey
+            color: Color.fromARGB(255, 203, 203, 203)
           )
         ),
         child: Row(
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: Colors.black
-                )
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12), topLeft: Radius.circular(12)),
+                image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover)
               ),
               width: 120,
               height: 120,
-              child: Image.network(
-                fit: BoxFit.fill,
-                image,
-                )
             ),
             Padding(
               padding: const EdgeInsets.only(left: 15.0),
