@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:wecare_app/components/New_kid_card.dart';
 import 'package:wecare_app/components/kid_card.dart';
 import 'package:wecare_app/components/top_nav.dart';
 
@@ -35,66 +36,79 @@ class _Home_Page extends State<Home_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: const [
-              TopNav(),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                width: MediaQuery.of(context).size.width,
-                height: 150.0,
-                child: Stack(
-                  children: [
-                    Image.asset(
-                      _imagePaths[_currentIndex],
-                      fit: BoxFit.cover,
-                      width: 400.0,
-                      height: 300.0,
-                    ),
-                    const Positioned(
-                      bottom: 0, // Set the bottom position of the text
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 30, left: 20),
-                        child: Text(
-                          'Help this Kids',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
+              Row(
+                children: const [
+                  TopNav(),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    width: MediaQuery.of(context).size.width,
+                    height: 150.0,
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          _imagePaths[_currentIndex],
+                          fit: BoxFit.cover,
+                          width: 400.0,
+                          height: 300.0,
+                        ),
+                        const Positioned(
+                          bottom: 0, // Set the bottom position of the text
+                          child: Padding(
+                            padding: EdgeInsets.only(bottom: 30, left: 20),
+                            child: Text(
+                              'Help this Kids',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 24.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '    Urgent Fundrasing',
+                  style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                 ),
               ),
+              Row(
+                children: const [
+                  KidCard(),
+                ],
+              ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '    New Fundrasing',
+                  style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Row(
+                children: const [NewKidCard()],
+              )
             ],
           ),
-          const SizedBox(
-            height: 5,
-          ),
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              '    Urgent Fundrasing',
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Row(
-            children: const [
-              KidCard(),
-            ],
-          )
-        ],
+        ),
       ),
-    ));
+    );
   }
 }
