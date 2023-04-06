@@ -34,7 +34,10 @@ class _DetailsPageState extends State<DetailsPage> {
                 color: Color(0xff212121)),
           ),
         ),
-        DonationTracker(),
+        Padding(
+          padding: EdgeInsets.only(left: 20, right: 20),
+          child: DonationTracker(),
+        ),
         Padding(
           padding:
               const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
@@ -48,7 +51,7 @@ class _DetailsPageState extends State<DetailsPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 10),
+                padding: const EdgeInsets.only(bottom: 5),
                 child: Text(
                   'Needs',
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -69,7 +72,7 @@ class NeedsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 5, bottom: 5),
+      padding: EdgeInsets.only(top: 8, bottom: 8),
       height: 90,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
