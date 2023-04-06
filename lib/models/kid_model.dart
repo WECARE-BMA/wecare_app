@@ -1,19 +1,19 @@
-import '../Models/need_model.dart';
+// import '../Models/need_model.dart';
 
-class Kid {
-  final int id;
-  final String name;
-  final int age;
-  final String description;
-  final String image;
-  final Need needs;  
+// class Kid {
+//   final int id;
+//   final String name;
+//   final int age;
+//   final String description;
+//   final String image;
+//   final Need needs;  
 
-  Kid({
-    required this.id,
-    required this.name,
-    required this.age,
-    required this.description,
-    required this.image,
-    required this.needs,
-  });
-}
+//   Kid({
+//     required this.id,
+//     required this.name,
+//     required this.age,
+//     required this.description,
+//     required this.image,
+//     required this.needs,
+//   });
+// }
