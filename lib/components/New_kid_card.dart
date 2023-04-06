@@ -3,8 +3,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:wecare_app/components/donation_tracker.dart';
 
-class KidCard extends StatelessWidget {
-  const KidCard({super.key});
+class NewKidCard extends StatelessWidget {
+  const NewKidCard({super.key});
 
   @override
   Widget build(BuildContext context) {
