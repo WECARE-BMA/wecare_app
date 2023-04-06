@@ -8,91 +8,87 @@ class KidCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 10),
-      child: Card(
-        elevation: 4.0,
-        margin: const EdgeInsets.all(8.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        color: Colors.grey[200],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 360,
+        width: 250,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            border:
+                Border.all(color: const Color.fromARGB(255, 203, 203, 203))),
         child: Column(
           children: [
-            Container(
-              // padding: const EdgeInsets.only(left: 10),
-              height: 310,
-              width: 225,
-              color: Colors.white,
-              child: Stack(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        children: [
-                          Image.asset(
-                            'assets/images/image1.jpg',
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(height: 2),
-                          const Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              '  Eyosi hemen',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
+            Stack(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12)),
+                          image: DecorationImage(
+                              image: AssetImage('assets/images/image1.jpg'))),
+                      width: MediaQuery.of(context).size.width,
+                      height: 218,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 8.0, right: 8.0, top: 10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            'Abem Mekonene',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
                             ),
                           ),
-                          const Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              '   12 years Old',
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                color: Colors.black,
-                              ),
+                          Text(
+                            '12 years Old',
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: Colors.black,
                             ),
                           ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          SizedBox(
+                            width: 240,
+                            height: 50,
+                            child: DonationTracker(),
+                          )
                         ],
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        color: Colors.amber,
-                      ),
-                      // const SizedBox(
-                      //     width: 50, height: 40, child: DonationTracker())
-                    ],
-                  ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        // Code to execute when the button is pressed
-                      },
-                      icon: const Icon(
-                        Icons.bookmark_add_outlined,
-                        size: 30,
-                      ),
-                      style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                            Theme.of(context).primaryColor),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.transparent),
-                        elevation: const MaterialStatePropertyAll(0),
-                      ),
-                      label: const Text(''),
                     ),
+                  ],
+                ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      // Code to execute when the button is pressed
+                    },
+                    icon: const Icon(
+                      Icons.bookmark_add_outlined,
+                      size: 30,
+                    ),
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context).primaryColor),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.transparent),
+                      elevation: const MaterialStatePropertyAll(0),
+                    ),
+                    label: const Text(''),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),
