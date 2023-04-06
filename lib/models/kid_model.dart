@@ -1,4 +1,4 @@
-import '../Models/need_model.dart';
+import 'package:wecare_app/models/need_model.dart';
 
 class Kid {
   final int id;
