@@ -14,12 +14,15 @@ class HistoryPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "History of your donations",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24
-                  )
+              const Padding(
+                padding: EdgeInsets.only(left: 10.0, bottom: 10.0),
+                child: Text(
+                  "History of your donations",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24
+                    )
+                ),
               ),
               Expanded(child: ListView.builder(
                 itemCount: 5,
