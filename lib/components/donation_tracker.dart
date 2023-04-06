@@ -18,8 +18,8 @@ class _DonationTrackerState extends State<DonationTracker> {
     double progress_value = currently_collected / full_amount;
 
     return Container(
-      height: 50,
-      padding: EdgeInsets.only(left: 20, right: 20),
+      height: 60,
+      // padding: EdgeInsets.only(left: 20, right: 20),
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
