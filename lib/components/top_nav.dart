@@ -9,12 +9,6 @@ class TopNav extends StatelessWidget {
         padding: const EdgeInsets.only(right: 20, left: 20),
         height: 90,
         width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/nav_background.png'),
-              fit: BoxFit.cover,
-              alignment: Alignment.topLeft),
-        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
