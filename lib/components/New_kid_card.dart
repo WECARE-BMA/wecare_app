@@ -11,7 +11,7 @@ class NewKidCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 360,
+        height: 320,
         width: 250,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
@@ -33,7 +33,7 @@ class NewKidCard extends StatelessWidget {
                               image: AssetImage('assets/images/image1.jpg'),
                               fit: BoxFit.cover)),
                       width: MediaQuery.of(context).size.width,
-                      height: 218,
+                      height: 180,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
