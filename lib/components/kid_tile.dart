@@ -28,7 +28,8 @@ class KidTile extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: 50,
+              width: 100,
+              height: 100,
               child: Image.network(image)
             ),
             Column(
@@ -51,28 +52,6 @@ class KidTile extends StatelessWidget {
             )
           ],
         ),
-        // child: ListTile(
-        //   leading: Image.network(
-        //     image,
-        //   ),
-        //   title: Column(
-        //     crossAxisAlignment: CrossAxisAlignment.start,
-        //     children: [
-        //       Text(
-        //         name,
-        //         style: const TextStyle(fontSize: 18),
-        //       ),
-        //       Text(
-        //         '$age',
-        //         style: const TextStyle(fontSize: 12),
-        //       ),
-        //     ],
-        //   ),
-        //   subtitle: Text(
-        //     description,
-        //     style: const TextStyle(fontSize: 15),
-        //   ),
-        // ),
       ),
     );
   }
