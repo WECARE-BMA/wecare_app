@@ -2,18 +2,17 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:wecare_app/components/New_kid_card.dart';
 import 'package:wecare_app/components/kid_card.dart';
 import 'package:wecare_app/components/top_nav.dart';
 
-class Home_Page extends StatefulWidget {
-  const Home_Page({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  _Home_Page createState() => _Home_Page();
+  _HomePage createState() => _HomePage();
 }
 
-class _Home_Page extends State<Home_Page> {
+class _HomePage extends State<HomePage> {
   int _currentIndex = 0;
   final List<String> _imagePaths = [
     'assets/images/image1.jpg',
@@ -103,7 +102,7 @@ class _Home_Page extends State<Home_Page> {
                 ),
               ),
               Row(
-                children: const [NewKidCard()],
+                children: const [KidCard()],
               )
             ],
           ),
