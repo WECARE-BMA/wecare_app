@@ -6,7 +6,7 @@ class Kid {
   final int age;
   final String description;
   final String image;
-  final Need needs;  
+  final List<Need> needs;  
 
   Kid({
     required this.id,
