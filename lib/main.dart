@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
     900: Color(0xFF578B32),
   });
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
