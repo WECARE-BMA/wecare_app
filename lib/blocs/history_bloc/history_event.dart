@@ -10,7 +10,7 @@ class GetHistoryItems extends HistoryEvent {
 }
 
 class AddHistoryItem extends HistoryEvent {
-  Item cartItem;
+  String cartItem;
 
   AddHistoryItem({
     required this.cartItem
@@ -20,7 +20,7 @@ class AddHistoryItem extends HistoryEvent {
   List<Object> get props => [];
 }
 class RemoveHistoryItem extends HistoryEvent {
-  Item cartItem;
+  String cartItem;
   int index;
 
   RemoveHistoryItem({

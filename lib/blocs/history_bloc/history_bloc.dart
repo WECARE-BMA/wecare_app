@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:wecare_app/blocs/history_bloc/history_event.dart';
+import 'package:wecare_app/blocs/history_bloc/history_state.dart';
 
 class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   final _apiServiceProvider = ApiServiceProvider();
