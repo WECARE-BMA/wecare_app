@@ -5,55 +5,46 @@ class TopNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.only(right: 20, left: 20),
-        height: 90,
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset('assets/images/nav_logo.png'),
-            Row(
-              children: [
-                ElevatedButton.icon(
-                  onPressed: () {
-                    // Code to execute when the button is pressed
-                  },
-                  icon: const Icon(
-                    Icons.bookmark_outline,
-                    size: 30,
-                  ),
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).primaryColor),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.transparent),
-                    elevation: const MaterialStatePropertyAll(0),
-                  ),
-                  label: const Text(''),
-                ),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    // Code to execute when the button is pressed
-                  },
-                  icon: const Icon(
-                    Icons.notifications_none_outlined,
-                    size: 30,
-                  ),
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).primaryColor),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.transparent),
-                    elevation: const MaterialStatePropertyAll(0),
-                  ),
-                  label: const Text(''),
-                ),
-              ],
-            ),
-          ],
-        ) // Your content goes here
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenPadding = screenWidth * 0.05;
 
-        );
+    return Expanded(
+      child: Container(
+          padding: EdgeInsets.only(right: screenPadding, left: screenPadding),
+          height: screenHeight * 0.1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset('assets/images/nav_logo.png'),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      // Code to execute when the button is pressed
+                    },
+                    icon: Icon(
+                      Icons.bookmark_outline,
+                      size: 30,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      // Code to execute when the button is pressed
+                    },
+                    icon: Icon(
+                      Icons.notifications_none_outlined,
+                      size: 30,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ) // Your content goes here
+
+          ),
+    );
   }
 }
