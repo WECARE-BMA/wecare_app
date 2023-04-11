@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:wecare_app/views/auth_pages/signin_page.dart';
 import 'package:wecare_app/views/auth_pages/signup_page.dart';
 import 'package:wecare_app/views/history_page.dart';
+import 'package:wecare_app/views/home_page.dart';
 import 'package:wecare_app/views/profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:firebase_core/firebase_core.dart';
@@ -45,6 +46,22 @@ class MyApp extends StatelessWidget {
             duration: 3000,
             splashTransition: SplashTransition.fadeTransition,
             backgroundColor: Colors.white,
-            nextScreen: SigninPage()));
+            nextScreen: AppScreen()));
+  }
+}
+
+class AppScreen extends StatefulWidget {
+  const AppScreen({super.key});
+
+  @override
+  State<AppScreen> createState() => _AppScreenState();
+}
+
+class _AppScreenState extends State<AppScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: HomePage(),
+    );
   }
 }
