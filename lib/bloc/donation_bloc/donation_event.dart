@@ -1,8 +1,6 @@
 part of 'donation_bloc.dart';
 
 abstract class DonationEvent extends Equatable {
-  const DonationEvent();
-
   @override
   List<Object> get props => [];
 }
