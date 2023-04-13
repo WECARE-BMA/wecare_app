@@ -62,7 +62,7 @@ class KidTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   Container(
-                    width: screenWidth / 1.8,
+                    width: screenWidth / 1.7,
                     height: screenHeight / 18.6,
                     child: const DonationTracker()
                   )
