@@ -30,7 +30,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
       // cartKids.add(event.cartKid);
       _service.saveKid(event.kidList);
       
-      emit(HistorySuccessState(Kid: kidsList))
+      emit(HistorySuccessState(Kid: kidsList));
     });
 
     on<RemoveKidHistory>((event, emit) {
