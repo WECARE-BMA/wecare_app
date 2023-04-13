@@ -1,32 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_onboarding_screen/OnbordingData.dart';
-import 'package:flutter_onboarding_screen/flutteronboardingscreens.dart';
 import 'package:wecare_app/views/auth_pages/signin_page.dart';
+import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
 
-class Onboardingpage extends StatelessWidget {
-  final List<OnbordingData> list = [
-    OnbordingData(
-      imagePath: "assets/images/logo.png",
-      title: "Donate easily Quickly and on target",
-      desc: "",
-    ),
-    OnbordingData(
-      imagePath: "assets/images/logo.png",
-      title: "trusted ,transparent & effective in sharing kindness",
-      desc: "",
-    ),
-    OnbordingData(
-      imagePath: "assets/images/logo.png",
-      title: "fulfill the children's needs",
-      desc: "",
-    ),
-  ];
-
+class OnBoarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return IntroScreen(
-      list,
-      MaterialPageRoute(builder: (context) => SigninPage()),
+    return MaterialApp(
+      home: OnBoardingSlider(
+        headerBackgroundColor: Colors.white,
+        finishButtonText: 'Register',
+        finishButtonStyle: FinishButtonStyle(
+          backgroundColor: Colors.green,
+        ),
+        skipTextButton: Text('Skip'),
+        trailing: Text('Next'),
+        background: [
+          Image.asset('assets/images/firstonboarding.png'),
+          Image.asset('assets/images/secondonboarding.png'),
+          Image.asset('assets/images/thirdonboarding.png')
+        ],
+        totalPage: 3,
+        speed: 1.8,
+        pageBodies: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 480,
+                ),
+                Text('Description Text 1'),
+              ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 480,
+                ),
+                Text('Description Text 2'),
+              ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 480,
+                ),
+                Text('Description Text 3'),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

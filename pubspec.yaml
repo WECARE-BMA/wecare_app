@@ -10,12 +10,14 @@ dependencies:
   flutter:
     sdk: flutter
   animated_splash_screen:
+  flutter_onboarding_slider:
 
 
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.3
   firebase_core: ^1.12.0
   firebase_auth: ^3.3.0
+  
 
 dev_dependencies:
   flutter_test:
