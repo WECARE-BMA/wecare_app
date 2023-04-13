@@ -7,12 +7,18 @@ class HistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TopNav(),
+            Container(
+              width: screenWidth,
+              height: screenHeight / 13,
+              child: TopNav()
+            ),
             const Padding(
               padding: EdgeInsets.all(15.0),
               child: Text(
