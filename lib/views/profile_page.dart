@@ -5,6 +5,9 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
         color: Colors.white,
@@ -13,7 +16,7 @@ class ProfilePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 300,
+                height: screenHeight / 3.1,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
@@ -50,18 +53,18 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 60.0, right: 60.0, top: 20.0),
+                padding: EdgeInsets.only(left: screenWidth / 7.1, right: screenWidth / 7.1, top: screenHeight / 46.6),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text("Bekele Mekonene", style: TextStyle(fontWeight: FontWeight.w800, fontSize: 40, height: 1.0), textAlign: TextAlign.center,),
-                    const SizedBox(height: 20.0,),
+                    SizedBox(height: screenHeight / 46.6,),
                     const Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                       style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 20.0,),
+                    SizedBox(height: screenHeight / 46.6,),
                     OutlinedButton(
                       onPressed: () {},
                       child: Text('Edit Profile', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
@@ -72,8 +75,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10.0,),
-                    // const Text("Logout", style: TextStyle(color: Color.fromARGB(228, 202, 60, 50), fontWeight: FontWeight.w700, fontSize: 22),)
+                    SizedBox(height: screenHeight / 93.2),
                     OutlinedButton(
                       onPressed: () {},
                       child: Text('Logout', style: TextStyle(color: Color.fromARGB(228, 202, 60, 50), fontWeight: FontWeight.w600, fontSize: 18)),
