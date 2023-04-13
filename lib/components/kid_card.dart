@@ -8,11 +8,13 @@ class KidCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: MediaQuery.of(context).size.height / 2.9,
-        width: MediaQuery.of(context).size.width / 1.7,
+        height: screenHeight / 2.9,
+        width: screenWidth / 1.7,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             border:
@@ -32,12 +34,12 @@ class KidCard extends StatelessWidget {
                           image: DecorationImage(
                               image: AssetImage('assets/images/image1.jpg'),
                               fit: BoxFit.cover)),
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height / 5.5,
+                      width: screenWidth,
+                      height: screenHeight / 5.5,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 8.0, right: 8.0, top: 10.0),
+                      padding: EdgeInsets.only(
+                          left: screenWidth / 53.7 , right: screenWidth / 53.7, top: screenHeight / 93.2),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -56,11 +58,11 @@ class KidCard extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height / 25,
+                            height: screenHeight / 25,
                           ),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width / 0.2,
-                            height: MediaQuery.of(context).size.height / 17,
+                            width: screenWidth,
+                            height: screenHeight / 17,
                             child: DonationTracker(),
                           )
                         ],
