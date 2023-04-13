@@ -17,6 +17,9 @@ class KidTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return  Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -33,8 +36,8 @@ class KidTile extends StatelessWidget {
                 borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12), topLeft: Radius.circular(12)),
                 image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover)
               ),
-              width: 120,
-              height: 120,
+              width: screenWidth / 3.5,
+              height: screenHeight / 7.7,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 15.0),
@@ -59,8 +62,8 @@ class KidTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   Container(
-                    width: 240,
-                    height: 50,
+                    width: screenWidth / 1.8,
+                    height: screenHeight / 18.6,
                     child: const DonationTracker()
                   )
                 ],
