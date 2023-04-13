@@ -6,7 +6,7 @@ class Donor {
   final String lastName;
   final String image;
   final String description;
-  final List<Kid> kids;
+  final List<Kid>? kids;
 
   
   Donor({
@@ -15,7 +15,7 @@ class Donor {
     required this.lastName,
     required this.image,
     required this.description,
-    required this.kids,
+    this.kids,
   });
 
  factory Donor.fromJson(Map<String, dynamic> parsedJson) {
