@@ -11,8 +11,8 @@ class KidCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 320,
-        width: 250,
+        height: MediaQuery.of(context).size.height / 2.9,
+        width: MediaQuery.of(context).size.width / 1.7,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             border:
@@ -33,22 +33,22 @@ class KidCard extends StatelessWidget {
                               image: AssetImage('assets/images/image1.jpg'),
                               fit: BoxFit.cover)),
                       width: MediaQuery.of(context).size.width,
-                      height: 180,
+                      height: MediaQuery.of(context).size.height / 5.5,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 8.0, right: 8.0, top: 10.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Abem Mekonene',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
                           ),
-                          Text(
+                          const Text(
                             '12 years Old',
                             style: TextStyle(
                               fontSize: 14.0,
@@ -56,11 +56,11 @@ class KidCard extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: 30,
+                            height: MediaQuery.of(context).size.height / 25,
                           ),
                           SizedBox(
-                            width: 240,
-                            height: 50,
+                            width: MediaQuery.of(context).size.width / 0.2,
+                            height: MediaQuery.of(context).size.height / 17,
                             child: DonationTracker(),
                           )
                         ],
