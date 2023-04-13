@@ -18,7 +18,7 @@ class Kid {
   });
 
   factory Kid.fromJson(Map<String, dynamic> parsedJson) {
-    final _needs = parsedJson['needs'].map((e) => Need(id: e['id'], name: e['name'], amount: e['amount'], image: e['image']));
+    final _needs = parsedJson['needs'].map((e) => Need(id: e['id'], name: e['name'], amount: e['amount'], image: e['image'], donor: e['donor']));
     return Kid(
       id: parsedJson['id'],
       name: parsedJson['name'],
