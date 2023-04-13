@@ -34,76 +34,90 @@ class _HomePage extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: const [
-                TopNav(),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenPadding = screenWidth * 0.05;
+
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(left: screenPadding, right: screenPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  width: MediaQuery.of(context).size.width,
-                  height: 150.0,
-                  child: Stack(
-                    children: [
-                      Image.asset(
-                        _imagePaths[_currentIndex],
-                        fit: BoxFit.cover,
-                        width: 400.0,
-                        height: 300.0,
-                      ),
-                      const Positioned(
-                        bottom: 0, // Set the bottom position of the text
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 30, left: 20),
-                          child: Text(
-                            'Help this Kids',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24.0,
-                              fontWeight: FontWeight.bold,
+                Row(
+                  children: const [
+                    TopNav(),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: screenWidth - (screenWidth * 0.1),
+                      height: screenHeight * 0.18,
+                      child: Stack(
+                        children: [
+                          Image.asset(_imagePaths[_currentIndex],
+                              fit: BoxFit.cover, width: screenWidth),
+                          Positioned(
+                            bottom: 0, // Set the bottom position of the text
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  bottom: screenPadding, left: screenPadding),
+                              child: Text(
+                                'Help this Kids',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: screenHeight * 0.01,
+                  ),
+                  child: const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Urgent Fundrasing',
+                      style: TextStyle(
+                          fontSize: 22.0, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
+                Row(
+                  children: const [
+                    KidCard(),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: screenHeight * 0.01,
+                  ),
+                  child: const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'New Fundrasing',
+                      style: TextStyle(
+                          fontSize: 22.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                Row(
+                  children: const [KidCard()],
+                )
               ],
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '    Urgent Fundrasing',
-                style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Row(
-              children: const [
-                KidCard(),
-              ],
-            ),
-            const Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '    New Fundrasing',
-                style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Row(
-              children: const [KidCard()],
-            )
-          ],
+          ),
         ),
       ),
     );
