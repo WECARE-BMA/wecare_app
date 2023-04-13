@@ -2,29 +2,29 @@ import 'package:equatable/equatable.dart';
 
 abstract class HistoryEvent extends Equatable {}
 
-class GetHistoryItems extends HistoryEvent {
-  GetHistoryItems();
+class GetKidsHistory extends HistoryEvent {
+  GetKidsHistory();
 
   @override
   List<Object> get props => [];
 }
 
-class AddHistoryItem extends HistoryEvent {
-  String cartItem;
+class AddKidHistory extends HistoryEvent {
+  String kidList;
 
-  AddHistoryItem({
-    required this.cartItem
+  AddKidHistory({
+    required this.kidList
     });
 
   @override
   List<Object> get props => [];
 }
-class RemoveHistoryItem extends HistoryEvent {
-  String cartItem;
+class RemoveKidHistory extends HistoryEvent {
+  String kidList;
   int index;
 
-  RemoveHistoryItem({
-    required this.cartItem,
+  RemoveKidHistory({
+    required this.kidList,
     required this.index
     });
 
