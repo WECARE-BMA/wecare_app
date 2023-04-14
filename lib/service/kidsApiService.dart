@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:wecare_app/models/kid_model.dart';
 
 class KidServiceProvider {
@@ -66,8 +69,25 @@ class KidServiceProvider {
       ]
     },
   ];
+  final firestore = FirebaseFirestore.instance;
 
-  fetchKids() {
-    return Kid.KidList(kidsJson);
+  Future getKids() async {
+    final data = await firestore.collection("needs").get();
+    for (var doc in data.docs) {
+      print(doc.data());
+    }
+  }
+
+  Future addKids(amount, imageUrl, name, donorId, isDonated) async {
+    final need = <String, dynamic>{
+      "amount": amount,
+      "imageUrl": imageUrl,
+      "name": name,
+      "donorId": donorId,
+      "isDonated": isDonated
+    };
+
+    firestore.collection('needs').add(need).then((DocumentReference doc) =>
+        print('DocumentSnapshot added with ID: ${doc.id}'));
   }
 }

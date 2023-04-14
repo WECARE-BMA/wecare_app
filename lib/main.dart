@@ -1,20 +1,24 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:wecare_app/firebase_options.dart';
+import 'package:wecare_app/service/kidsApiService.dart';
 import 'package:wecare_app/views/auth_pages/signin_page.dart';
 import 'package:wecare_app/views/auth_pages/signup_page.dart';
 import 'package:wecare_app/views/history_page.dart';
 import 'package:wecare_app/views/profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  KidServiceProvider kidsprovider = KidServiceProvider();
+
   MyApp({super.key});
 
   final MaterialColor myCustomColor = const MaterialColor(0xFFADE25D, {
@@ -32,6 +36,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    kidsprovider.addKids(23.5, "jdflsdjfl", "nameem", "dfjskdjf", false);
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

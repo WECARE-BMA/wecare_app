@@ -45,12 +45,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyC2S3UzINERe5R35p_pL-E6PlZjlT_lF0g',
-    appId: '1:226010952992:web:1b8c8c706889ab4cb69345',
+    appId: '1:226010952992:web:bfb8a04096a8de4ab69345',
     messagingSenderId: '226010952992',
     projectId: 'wecare-bma',
     authDomain: 'wecare-bma.firebaseapp.com',
     storageBucket: 'wecare-bma.appspot.com',
-    measurementId: 'G-6LS4VR9FK4',
+    measurementId: 'G-ZPJBRZM26T',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
