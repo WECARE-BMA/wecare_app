@@ -6,42 +6,33 @@ import 'package:wecare_app/models/need_model.dart';
 import 'package:wecare_app/service/needsApiService.dart';
 
 class KidsServiceProvider {
-  final _kidsCollection = FirebaseFirestore.instance.collection('kids');
-  NeedsServiceProvider needsprovider = NeedsServiceProvider();
+  final CollectionReference _kidsCollection =
+      FirebaseFirestore.instance.collection('kids');
 
-  Future addKids(Kid kid) async {
-    _kidsCollection.add(kid.toJson()).then((DocumentReference doc) =>
-        print('DocumentSnapshot added with ID: ${doc.id}'));
-  }
-
-  Future<void> updateKid(String id, Kid kid) async {
-    await _kidsCollection.doc(id).update(kid.toJson());
-  }
-
-  Future<Kid?> getKid(String id) async {
-    final doc = await _kidsCollection.doc(id).get();
-    if (doc.exists) {
-      return Kid.fromJson(doc.data()!);
-    } else {
-      return null;
-    }
+  Future<void> addKid(Kid kid) async {
+    await _kidsCollection.add(kid.toJson());
   }
 
   Future<List<Kid>> getKids() async {
-    QuerySnapshot snapshot = await _kidsCollection.get();
-    List<Kid> kids = [];
-    for (final document in snapshot.docs) {
-      Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-      data['id'] = document.id;
+    final snapshot = await _kidsCollection.get();
+    return snapshot.docs.map((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      data['id'] = doc.id;
+      return Kid.fromJson(data);
+    }).toList();
+  }
 
-      List<Map<String, dynamic>> needs = [];
-      for (final e in data['needs']) {
-        await needsprovider.getANeed(e.id);
-      }
-      data['needs'] = needs;
+  Future<Kid> getKid(String id) async {
+    final doc = await _kidsCollection.doc(id).get();
+    final data = doc.data() as Map<String, dynamic>;
+    data['id'] = doc.id;
+    return Kid.fromJson(data);
+  }
 
-      kids.add(Kid.fromJson(data));
-    }
-    return kids;
+  Future<void> updateKid(Kid kid) async {
+    await _kidsCollection
+        .doc(kid.id)
+        .update(kid.toJson())
+        .then((value) => print('Document Updated'));
   }
 }

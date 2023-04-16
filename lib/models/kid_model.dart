@@ -1,19 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:wecare_app/models/need_model.dart';
 
 class Kid {
-  final String id;
-  final String name;
-  final int age;
-  final String description;
-  final String image;
-  final List<Need> needs;
+  String id;
+  String name;
+  int age;
+  String description;
+  String imageUrl;
+  List? needs;
 
   Kid({
     required this.id,
     required this.name,
     required this.age,
     required this.description,
-    required this.image,
+    required this.imageUrl,
     required this.needs,
   });
 
@@ -23,23 +24,21 @@ class Kid {
       name: parsedJson['name'],
       age: parsedJson['age'],
       description: parsedJson['description'],
-      image: parsedJson.containsKey('image')
+      imageUrl: parsedJson.containsKey('image')
           ? parsedJson['image']
           : parsedJson['imageUrl'],
-      needs: (parsedJson['needs'] as List)
-          .map((needJson) => Need.fromJson(needJson))
-          .toList(),
+      needs: parsedJson['needs'],
     );
   }
 
   toJson() {
-    Map<String, dynamic> json = {
-      'name': name,
-      'age': age,
-      'description': description,
-      'image': image,
-      'needs': needs.map((e) => "needs/${e.id}")
-    };
+    Map<String, dynamic> json = {};
+    json['id'] = id;
+    json['name'] = name;
+    json['age'] = age;
+    json['description'] = description;
+    json['imageUrl'] = imageUrl;
+    json['needs'] = needs;
 
     return json;
   }
