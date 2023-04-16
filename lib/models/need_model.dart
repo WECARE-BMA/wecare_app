@@ -4,7 +4,7 @@ class Need {
   final String id;
   final String name;
   final int amount;
-  String? imageUrl;
+  final String? imageUrl;
   final Donor? donor;
   final bool isDonated;
 
