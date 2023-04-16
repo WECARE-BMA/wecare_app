@@ -1,12 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:wecare_app/models/donor_model.dart';
 
 class Need {
-  final String id;
-  final String name;
-  final int amount;
-  final String? imageUrl;
-  final Donor? donor;
-  final bool isDonated;
+  String id;
+  String name;
+  int amount;
+  String? imageUrl;
+  dynamic? donor;
+  bool isDonated;
 
   Need(
       {required this.id,
@@ -17,7 +18,6 @@ class Need {
       required this.isDonated});
 
   factory Need.fromJson(Map<String, dynamic> parsedJson) {
-    // final _donor = Donor.fromJson(parsedJson['donor']);
     return Need(
         id: parsedJson['id'],
         name: parsedJson.containsKey('category')
@@ -35,7 +35,7 @@ class Need {
     json['name'] = name;
     json['amount'] = amount;
     json['imageUrl'] = imageUrl;
-    json['donor'] = donor?.toJson();
+    json['donor'] = donor;
     json['isDonated'] = isDonated;
     return json;
   }
