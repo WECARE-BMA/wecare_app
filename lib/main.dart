@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:wecare_app/firebase_options.dart';
 import 'package:wecare_app/service/kidsApiService.dart';
+import 'package:wecare_app/views/app_screen.dart';
 import 'package:wecare_app/views/auth_pages/signin_page.dart';
 import 'package:wecare_app/views/auth_pages/signup_page.dart';
 import 'package:wecare_app/views/history_page.dart';
@@ -18,8 +19,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  KidServiceProvider kidsprovider = KidServiceProvider();
-
   MyApp({super.key});
 
   final MaterialColor myCustomColor = const MaterialColor(0xFFADE25D, {
@@ -37,7 +36,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    kidsprovider.addKids(23.5, "jdflsdjfl", "nameem", "dfjskdjf", false);
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -52,46 +50,5 @@ class MyApp extends StatelessWidget {
             splashTransition: SplashTransition.fadeTransition,
             backgroundColor: Colors.white,
             nextScreen: AppScreen()));
-  }
-}
-
-class AppScreen extends StatefulWidget {
-  const AppScreen({super.key});
-
-  @override
-  State<AppScreen> createState() => _AppScreenState();
-}
-
-class _AppScreenState extends State<AppScreen> {
-  List _pages = [HistoryPage(), HomePage(), ProfilePage()];
-  int _currentIndex = 1;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-      ),
-    );
   }
 }
