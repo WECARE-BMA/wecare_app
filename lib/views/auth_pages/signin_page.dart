@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wecare_app/views/auth_pages/signup_page.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
@@ -178,9 +179,14 @@ class ThirdPartyAuths extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Don\'t have an account?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Color(0xff787878)))
+              TextButton(
+                  child: Text('Don\'t have an account?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Color(0xff787878))),
+                  onPressed: () => Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignupPage()),
+                      (route) => false)),
             ],
           ),
         )
