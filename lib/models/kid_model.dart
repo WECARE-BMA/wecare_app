@@ -1,40 +1,54 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:wecare_app/models/need_model.dart';
 
 class Kid {
-  final int id;
-  final String name;
-  final int age;
-  final String description;
-  final String image;
-  final List<Need> needs;  
+  String id;
+  String name;
+  int age;
+  String description;
+  String imageUrl;
+  List? needs;
 
   Kid({
     required this.id,
     required this.name,
     required this.age,
     required this.description,
-    required this.image,
+    required this.imageUrl,
     required this.needs,
   });
 
   factory Kid.fromJson(Map<String, dynamic> parsedJson) {
-    final _needs = parsedJson['needs'].map((e) => Need(id: e['id'], name: e['name'], amount: e['amount'], image: e['image'], donor: e['donor']));
     return Kid(
       id: parsedJson['id'],
       name: parsedJson['name'],
       age: parsedJson['age'],
       description: parsedJson['description'],
-      image: parsedJson['image'],
-      needs: _needs
+      imageUrl: parsedJson.containsKey('image')
+          ? parsedJson['image']
+          : parsedJson['imageUrl'],
+      needs: parsedJson['needs'],
     );
   }
 
-  static List KidList(List kids) {
-  List parsedKids = [];
-  for (var i = 0; i < kids.length; i++) {
-    parsedKids.add(Kid.fromJson(kids[i]));
+  toJson() {
+    Map<String, dynamic> json = {};
+    json['id'] = id;
+    json['name'] = name;
+    json['age'] = age;
+    json['description'] = description;
+    json['imageUrl'] = imageUrl;
+    json['needs'] = needs;
+
+    return json;
   }
-  return parsedKids;
+
+  static List<Kid>? kidList(List kids) {
+    List<Kid> parsedKids = [];
+    for (var i = 0; i < kids.length; i++) {
+      parsedKids.add(Kid.fromJson(kids[i]));
+    }
+    return parsedKids;
   }
 
   static void add(Kid kid) {}
