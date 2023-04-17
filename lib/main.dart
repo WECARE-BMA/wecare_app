@@ -10,6 +10,7 @@ import 'package:wecare_app/views/history_page.dart';
 import 'package:wecare_app/views/home_page.dart';
 import 'package:wecare_app/views/profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wecare_app/views/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,18 +38,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Wecare',
         theme: ThemeData(
           primarySwatch: myCustomColor,
           // textTheme: GoogleFonts.poppinsTextTheme(
           //   Theme.of(context).textTheme,
           // ),
         ),
-        home: AnimatedSplashScreen(
-            splash: Image.asset('assets/images/logo.png'),
-            duration: 3000,
-            splashTransition: SplashTransition.fadeTransition,
-            backgroundColor: Colors.white,
-            nextScreen: AppScreen()));
+        home: IntroScreen());
   }
 }
