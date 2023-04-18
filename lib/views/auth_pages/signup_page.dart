@@ -214,10 +214,8 @@ class ThirdPartyAuths extends StatelessWidget {
                   child: Text('Have an account?',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Color(0xff787878))),
-                  onPressed: () => Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => SigninPage()),
-                      (route) => false)),
+                  onPressed: () =>
+                      Navigator.popAndPushNamed(context, '/signInPage')),
             ],
           ),
         )
