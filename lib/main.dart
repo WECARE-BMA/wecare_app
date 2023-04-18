@@ -1,11 +1,15 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wecare_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:wecare_app/blocs/nav_bloc/nav_bloc_bloc.dart';
 import 'package:wecare_app/firebase_options.dart';
 import 'package:wecare_app/service/kidsApiService.dart';
 import 'package:wecare_app/views/app_screen.dart';
 import 'package:wecare_app/views/auth_pages/signin_page.dart';
 import 'package:wecare_app/views/auth_pages/signup_page.dart';
+import 'package:wecare_app/views/details_page.dart';
 import 'package:wecare_app/views/history_page.dart';
 import 'package:wecare_app/views/home_page.dart';
 import 'package:wecare_app/views/profile_page.dart';
@@ -37,14 +41,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Wecare',
-        theme: ThemeData(
-          primarySwatch: myCustomColor,
-          // textTheme: GoogleFonts.poppinsTextTheme(
-          //   Theme.of(context).textTheme,
-          // ),
-        ),
-        home: IntroScreen());
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AuthBloc(),
+          ),
+          BlocProvider(create: (contex) => NavBloc())
+        ],
+        child: MaterialApp(
+            title: 'Wecare',
+            theme: ThemeData(
+              primarySwatch: myCustomColor,
+              // textTheme: GoogleFonts.poppinsTextTheme(
+              //   Theme.of(context).textTheme,
+              // ),
+            ),
+            initialRoute: '/',
+            routes: {
+              '/': (context) => IntroScreen(),
+              '/detailsPage': (context) => DetailsPage(),
+              '/signInPage': (context) => SigninPage(),
+              '/signUpPage': (context) => SignupPage(),
+              '/appScreen': (context) => AppScreen()
+            }));
   }
 }
