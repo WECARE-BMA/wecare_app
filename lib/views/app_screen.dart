@@ -13,7 +13,6 @@ class AppScreen extends StatefulWidget {
 }
 
 class _AppScreenState extends State<AppScreen> {
-  List _pages = [HistoryPage(), HomePage(), ProfilePage()];
   int _currentIndex = 1;
 
   @override

@@ -13,7 +13,7 @@ class IntroScreen extends StatelessWidget {
     User? result = FirebaseAuth.instance.currentUser;
     return SplashScreen(
       navigateAfterSeconds: result != null ? HomePage() : SigninPage(),
-      seconds: 5,
+      seconds: 1,
       title: Text(''),
       image: Image.asset('assets/images/logo.png'),
       backgroundColor: Colors.white,
