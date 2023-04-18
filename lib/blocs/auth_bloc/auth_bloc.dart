@@ -6,33 +6,34 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final FirebaseAuth _firebaseAuth;
+  AuthBloc() : super(AuthLoadingState()) {
+    final FirebaseAuth _firebaseAuth;
+    _firebaseAuth = FirebaseAuth.instance;
 
-  AuthBloc()
-      : _firebaseAuth = FirebaseAuth.instance,
-        super(AuthLoadingState()) {
-    @override
-    Future<void> onEvent(AuthEvent event, Emitter<AuthState> emit) async {
-      if (event is LoginEvent) {
+    on<LoginEvent>(
+      (event, emit) async {
+        emit(AuthLoadingState());
         try {
-          emit(AuthLoadingState());
           final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
             email: event.email,
             password: event.password,
           );
           emit(AuthAuthenticatedState(userCredential.user!));
-        } catch (e) {
+        } on FirebaseAuthException catch (e) {
           emit(AuthFailedState(e.toString()));
         }
-      } else if (event is LogoutEvent) {
+      },
+    );
+
+    on<LogoutEvent>(
+      (event, emit) async {
         try {
-          emit(AuthLoadingState());
           await _firebaseAuth.signOut();
           emit(AuthUnauthenticatedState());
         } catch (e) {
           emit(AuthFailedState(e.toString()));
         }
-      }
-    }
+      },
+    );
   }
 }
