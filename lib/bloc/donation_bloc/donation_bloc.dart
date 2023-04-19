@@ -24,7 +24,7 @@ class DonationBloc extends Bloc<DonationEvent, DonationState> {
         double? donationAmount = state.amount;
 
         // Simulate processing the donation
-        await Future.delayed(Duration(seconds: 2));
+        await Future.delayed(const Duration(seconds: 2));
 
         // Notify the UI that the donation was successful
         yield DonationSuccessState();
