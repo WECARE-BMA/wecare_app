@@ -5,6 +5,10 @@ abstract class DonationState extends Equatable {
 
   @override
   List<Object> get props => [];
+
+  double? get amount => null;
+
+  String? get paymentInfo => null;
 }
 
 class DonationInitial extends DonationState {}
