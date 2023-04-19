@@ -14,11 +14,21 @@ class AppScreen extends StatefulWidget {
 
 class _AppScreenState extends State<AppScreen> {
   int _currentIndex = 1;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<NavBloc, NavState>(
+      body: BlocConsumer<NavBloc, NavState>(
+        listener: (context, state) {
+          if (state is HomePageLoaded) {
+            _currentIndex = state.index;
+          }
+          if (state is HistoryPageLoaded) {
+            _currentIndex = state.index;
+          }
+          if (state is ProfilePageLoaded) {
+            _currentIndex = state.index;
+          }
+        },
         builder: (context, state) {
           if (state is PageLoading) {
             return Center(
@@ -26,37 +36,45 @@ class _AppScreenState extends State<AppScreen> {
                   color: Theme.of(context).primaryColor),
             );
           } else if (state is HomePageLoaded) {
+            _currentIndex = state.index;
             return HomePage();
           } else if (state is ProfilePageLoaded) {
+            _currentIndex = state.index;
             return ProfilePage();
-          } else if (state is HistroyPageLoaded) {
+          } else if (state is HistoryPageLoaded) {
+            _currentIndex = state.index;
             return HistoryPage();
           }
 
           return Container();
         },
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          (index) => print(index);
-          context.read<NavBloc>().add(ClickedPageButton(index: index));
+      bottomNavigationBar: BlocBuilder<NavBloc, NavState>(
+        builder: (context, state) {
+          return ClipRRect(
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0)),
+            child: BottomNavigationBar(
+              currentIndex: context.select((NavBloc bloc) => bloc.currentIndex),
+              unselectedItemColor: Colors.grey,
+              selectedItemColor: Theme.of(context).primaryColor,
+              selectedLabelStyle: TextStyle(color: Colors.black),
+              elevation: 0,
+              backgroundColor: Colors.white,
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.receipt_long_rounded), label: 'History'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.home_rounded), label: 'Home'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.person_2), label: 'Profile'),
+              ],
+              onTap: (index) =>
+                  context.read<NavBloc>().add(ClickedPageButton(index: index)),
+            ),
+          );
         },
-        selectedItemColor: Theme.of(context).primaryColor,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
       ),
     );
   }
