@@ -17,18 +17,7 @@ class _AppScreenState extends State<AppScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<NavBloc, NavState>(
-        listener: (context, state) {
-          if (state is HomePageLoaded) {
-            _currentIndex = state.index;
-          }
-          if (state is HistoryPageLoaded) {
-            _currentIndex = state.index;
-          }
-          if (state is ProfilePageLoaded) {
-            _currentIndex = state.index;
-          }
-        },
+      body: BlocBuilder<NavBloc, NavState>(
         builder: (context, state) {
           if (state is PageLoading) {
             return Center(
@@ -36,13 +25,10 @@ class _AppScreenState extends State<AppScreen> {
                   color: Theme.of(context).primaryColor),
             );
           } else if (state is HomePageLoaded) {
-            _currentIndex = state.index;
             return HomePage();
           } else if (state is ProfilePageLoaded) {
-            _currentIndex = state.index;
             return ProfilePage();
           } else if (state is HistoryPageLoaded) {
-            _currentIndex = state.index;
             return HistoryPage();
           }
 
