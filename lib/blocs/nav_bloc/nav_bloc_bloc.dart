@@ -25,7 +25,7 @@ class NavBloc extends Bloc<NavEvent, NavState> {
         emit(HomePageLoaded());
       }
       if (this.currentIndex == 0) {
-        emit(HistroyPageLoaded());
+        emit(HistoryPageLoaded());
       }
     });
   }

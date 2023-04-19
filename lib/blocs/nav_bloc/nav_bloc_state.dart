@@ -26,7 +26,7 @@ class HomePageLoaded extends NavState {
   List<Object> get props => [];
 }
 
-class HistroyPageLoaded extends NavState {
+class HistoryPageLoaded extends NavState {
   @override
   List<Object> get props => [];
 }
