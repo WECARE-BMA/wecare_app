@@ -1,19 +1,41 @@
-part of 'donation_bloc.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class DonationState extends Equatable {
-  final int donationAmount;
-
-  DonationState({required this.donationAmount});
+  const DonationState();
 
   @override
-  List<Object> get props => [donationAmount];
+  List<Object> get props => [];
 }
 
-class DonationInitialState extends DonationState {
-  DonationInitialState() : super(donationAmount: 0);
+class DonationInitial extends DonationState {}
+
+class DonationAmountState extends DonationState {
+  final double amount;
+
+  const DonationAmountState({required this.amount});
+
+  @override
+  List<Object> get props => [amount];
 }
 
-class DonationUpdatedState extends DonationState {
-  DonationUpdatedState({required int donationAmount})
-      : super(donationAmount: donationAmount);
+class PaymentInfoState extends DonationState {
+  final String paymentInfo;
+
+  const PaymentInfoState({required this.paymentInfo});
+
+  @override
+  List<Object> get props => [paymentInfo];
+}
+
+class DonationProcessingState extends DonationState {}
+
+class DonationSuccessState extends DonationState {}
+
+class DonationFailureState extends DonationState {
+  final String error;
+
+  const DonationFailureState({required this.error});
+
+  @override
+  List<Object> get props => [error];
 }

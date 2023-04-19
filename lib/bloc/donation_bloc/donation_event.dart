@@ -1,19 +1,33 @@
-part of 'donation_bloc.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class DonationEvent extends Equatable {
+  const DonationEvent();
+
   @override
   List<Object> get props => [];
 }
 
-class IncrementDonationEvent extends DonationEvent {}
+class DonationAmountChanged extends DonationEvent {
+  final double amount;
 
-class DecrementDonationEvent extends DonationEvent {}
-
-class SubmitDonationEvent extends DonationEvent {
-  final int donationAmount;
-
-  SubmitDonationEvent({required this.donationAmount});
+  const DonationAmountChanged({required this.amount});
 
   @override
-  List<Object> get props => [donationAmount];
+  List<Object> get props => [amount];
+}
+
+class PaymentInfoChanged extends DonationEvent {
+  final String paymentInfo;
+
+  const PaymentInfoChanged({required this.paymentInfo});
+
+  @override
+  List<Object> get props => [paymentInfo];
+}
+
+class ProcessDonation extends DonationEvent {
+  const ProcessDonation();
+
+  @override
+  List<Object> get props => [];
 }
