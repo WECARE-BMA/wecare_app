@@ -28,6 +28,7 @@ dependencies:
       url: https://github.com/DPLYR-dev/SplashScreenFlutterPackage.git
       ref: master
   fluttertoast: ^8.2.1
+  image_picker: ^0.8.7+3
 
 dev_dependencies:
   flutter_test:
