@@ -2,8 +2,11 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wecare_app/components/kid_card.dart';
 import 'package:wecare_app/components/top_nav.dart';
+
+import '../blocs/top_nav_bloc/icon_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,84 +41,90 @@ class _HomePage extends State<HomePage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenPadding = screenWidth * 0.05;
 
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(left: screenPadding, right: screenPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: const [
-                    TopNav(),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: screenWidth - (screenWidth * 0.1),
-                      height: screenHeight * 0.18,
-                      child: Stack(
-                        children: [
-                          Image.asset(_imagePaths[_currentIndex],
-                              fit: BoxFit.cover, width: screenWidth),
-                          Positioned(
-                            bottom: 0, // Set the bottom position of the text
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  bottom: screenPadding, left: screenPadding),
-                              child: Text(
-                                'Help this Kids',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.bold,
+    return BlocProvider(
+      create: (_) => IconBloc(),
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding:
+                  EdgeInsets.only(left: screenPadding, right: screenPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: const [
+                      TopNav(
+                        isHomePage: true,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: screenWidth - (screenWidth * 0.1),
+                        height: screenHeight * 0.18,
+                        child: Stack(
+                          children: [
+                            Image.asset(_imagePaths[_currentIndex],
+                                fit: BoxFit.cover, width: screenWidth),
+                            Positioned(
+                              bottom: 0, // Set the bottom position of the text
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    bottom: screenPadding, left: screenPadding),
+                                child: const Text(
+                                  'Help this Kids',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: screenHeight * 0.01,
+                    ),
+                    child: const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Urgent Fundrasing',
+                        style: TextStyle(
+                            fontSize: 22.0, fontWeight: FontWeight.bold),
                       ),
                     ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: screenHeight * 0.01,
                   ),
-                  child: const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Urgent Fundrasing',
-                      style: TextStyle(
-                          fontSize: 22.0, fontWeight: FontWeight.bold),
+                  Row(
+                    children: const [
+                      KidCard(),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: screenHeight * 0.01,
+                    ),
+                    child: const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'New Fundrasing',
+                        style: TextStyle(
+                            fontSize: 22.0, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
-                ),
-                Row(
-                  children: const [
-                    KidCard(),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: screenHeight * 0.01,
-                  ),
-                  child: const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'New Fundrasing',
-                      style: TextStyle(
-                          fontSize: 22.0, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                Row(
-                  children: const [KidCard()],
-                )
-              ],
+                  Row(
+                    children: const [KidCard()],
+                  )
+                ],
+              ),
             ),
           ),
         ),
