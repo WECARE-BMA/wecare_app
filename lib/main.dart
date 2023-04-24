@@ -17,8 +17,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  KidServiceProvider kidsprovider = KidServiceProvider();
-
   MyApp({super.key});
 
   final MaterialColor myCustomColor = const MaterialColor(0xFFADE25D, {
@@ -36,7 +34,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    kidsprovider.addKids(23.5, "jdflsdjfl", "nameem", "dfjskdjf", false);
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
