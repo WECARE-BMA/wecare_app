@@ -8,16 +8,26 @@ import 'package:wecare_app/service/needsApiService.dart';
 class KidsServiceProvider {
   final CollectionReference _kidsCollection =
       FirebaseFirestore.instance.collection('kids');
+  NeedsServiceProvider _needsProvider = NeedsServiceProvider();
 
   Future<void> addKid(Kid kid) async {
     await _kidsCollection.add(kid.toJson());
   }
 
-  Future<List<Kid>> getKids() async {
+  Future getKids() async {
     final snapshot = await _kidsCollection.get();
     return snapshot.docs.map((doc) {
       final data = doc.data() as Map<String, dynamic>;
       data['id'] = doc.id;
+      final needs = data['needs'];
+      List<Need> needsList = [];
+
+      for (var n in needs) {
+        final need =
+            _needsProvider.getNeed(n.id).then((need) => needsList.add(need));
+      }
+
+      data['needs'] = needsList;
       return Kid.fromJson(data);
     }).toList();
   }
@@ -26,6 +36,15 @@ class KidsServiceProvider {
     final doc = await _kidsCollection.doc(id).get();
     final data = doc.data() as Map<String, dynamic>;
     data['id'] = doc.id;
+    final needs = data['needs'];
+    List<Need> needsList = [];
+
+    for (var n in needs) {
+      final need =
+          _needsProvider.getNeed(n.id).then((need) => needsList.add(need));
+    }
+
+    data['needs'] = needsList;
     return Kid.fromJson(data);
   }
 

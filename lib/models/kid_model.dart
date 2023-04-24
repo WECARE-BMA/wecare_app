@@ -7,7 +7,7 @@ class Kid {
   int age;
   String description;
   String imageUrl;
-  List? needs;
+  List<Need> needs;
 
   Kid({
     required this.id,
