@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
+import 'package:wecare_app/views/app_screen.dart';
 import 'package:wecare_app/views/auth_pages/signin_page.dart';
 import 'package:wecare_app/views/auth_pages/signup_page.dart';
 import 'package:wecare_app/views/home_page.dart';
@@ -12,7 +13,7 @@ class IntroScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     User? result = FirebaseAuth.instance.currentUser;
     return SplashScreen(
-      navigateAfterSeconds: result != null ? HomePage() : SigninPage(),
+      navigateAfterSeconds: result != null ? AppScreen() : SigninPage(),
       seconds: 1,
       title: Text(''),
       image: Image.asset('assets/images/logo.png'),
