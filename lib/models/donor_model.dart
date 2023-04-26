@@ -6,7 +6,7 @@ class Donor {
   String name;
   String image;
   String description;
-  List? kids;
+  List<Kid>? kids;
 
   Donor({
     required this.id,

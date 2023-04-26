@@ -21,7 +21,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   MyApp({super.key});
 
   final MaterialColor myCustomColor = const MaterialColor(0xFFADE25D, {
