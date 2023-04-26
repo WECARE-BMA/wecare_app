@@ -1,0 +1,250 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:wecare_app/views/auth_pages/third_party_auth.dart';
+
+class SignupForm extends StatefulWidget {
+  const SignupForm({super.key});
+
+  @override
+  State<SignupForm> createState() => _SignupFormState();
+}
+
+class _SignupFormState extends State<SignupForm> {
+  File? _image;
+
+  final _picker = ImagePicker();
+
+  Future<void> openImagePicker(ImageSource source) async {
+    final XFile? pickedImage = await _picker.pickImage(source: source);
+    if (pickedImage != null) {
+      _image = File(pickedImage.path);
+      print('IMagesadfHHHHHHH: $_image');
+    }
+  }
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Container(
+        padding: EdgeInsets.only(left: 20, right: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Welcome',
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
+            ),
+            Center(
+              child: Container(
+                height: 90,
+                width: 90,
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(100)),
+                child: IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            actionsAlignment: MainAxisAlignment.center,
+                            title: Text(
+                              'Choose your source',
+                              textAlign: TextAlign.center,
+                            ),
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                FilledButton(
+                                    style: FilledButton.styleFrom(
+                                        backgroundColor: Colors.grey.shade200,
+                                        foregroundColor: Colors.black87),
+                                    onPressed: () {
+                                      openImagePicker(ImageSource.camera);
+                                    },
+                                    child: Container(
+                                        height: 60,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.add_a_photo_rounded),
+                                            Text('Camera')
+                                          ],
+                                        ))),
+                                FilledButton(
+                                    style: FilledButton.styleFrom(
+                                        backgroundColor: Colors.grey.shade200,
+                                        foregroundColor: Colors.black87),
+                                    onPressed: () async {
+                                      openImagePicker(ImageSource.gallery);
+                                    },
+                                    child: Container(
+                                        height: 60,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.image),
+                                            Text('Gallery')
+                                          ],
+                                        ))),
+                              ],
+                            ),
+                            actions: [
+                              FilledButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('Close',
+                                    style: TextStyle(color: Colors.white)),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    icon: Icon(Icons.camera_alt_rounded)),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 15),
+              child: TextFormField(
+                style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    contentPadding: EdgeInsets.only(
+                        top: 18, bottom: 18, left: 15, right: 10),
+                    // hintText: 'Enter your email',
+                    labelText: 'Email'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 15),
+              child: TextFormField(
+                style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    contentPadding: EdgeInsets.only(
+                        top: 18, bottom: 18, left: 15, right: 10),
+                    // hintText: 'Enter your email',
+                    labelText: 'Full Name'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 15),
+              child: TextFormField(
+                style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  contentPadding:
+                      EdgeInsets.only(top: 18, bottom: 18, left: 15, right: 10),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  // hintText: 'Enter your password',
+                  labelText: 'Description',
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 15),
+              child: TextFormField(
+                style: TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  contentPadding:
+                      EdgeInsets.only(top: 18, bottom: 18, left: 15, right: 10),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  // hintText: 'Enter your password',
+                  labelText: 'Password',
+                ),
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 55,
+              child: TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Sign up',
+                  style: TextStyle(fontSize: 18),
+                ),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).primaryColor,
+                  // shape: RoundedRectangleBorder(
+                  //   borderRadius: BorderRadius.circular(10.0),
+                  // ).toMaterialBorderSide(),
+                  elevation: 0,
+                ),
+              ),
+            ),
+            ThirdPartyAuths(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ImageSoucePicker extends StatelessWidget {
+  const ImageSoucePicker({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          FilledButton(
+              style: FilledButton.styleFrom(
+                  backgroundColor: Colors.grey.shade200,
+                  foregroundColor: Colors.black87),
+              onPressed: () {},
+              child: Container(
+                  padding: EdgeInsets.all(10),
+                  height: 60,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.add_a_photo_rounded),
+                      Text('Take a Camera')
+                    ],
+                  ))),
+          FilledButton(
+              style: FilledButton.styleFrom(
+                  backgroundColor: Colors.grey.shade200,
+                  foregroundColor: Colors.black87),
+              onPressed: () {},
+              child: Container(
+                  padding: EdgeInsets.all(10),
+                  height: 60,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Icon(Icons.image), Text('Pick from Gallery')],
+                  ))),
+        ],
+      ),
+    );
+  }
+}
