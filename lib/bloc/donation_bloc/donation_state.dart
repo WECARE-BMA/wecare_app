@@ -22,15 +22,6 @@ class DonationAmountState extends DonationState {
   List<Object> get props => [amount];
 }
 
-class PaymentInfoState extends DonationState {
-  final String paymentInfo;
-
-  const PaymentInfoState({required this.paymentInfo});
-
-  @override
-  List<Object> get props => [paymentInfo];
-}
-
 class DonationProcessingState extends DonationState {}
 
 class DonationSuccessState extends DonationState {}

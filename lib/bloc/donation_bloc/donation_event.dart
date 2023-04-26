@@ -16,15 +16,6 @@ class DonationAmountChanged extends DonationEvent {
   List<Object> get props => [amount];
 }
 
-class PaymentInfoChanged extends DonationEvent {
-  final String paymentInfo;
-
-  const PaymentInfoChanged({required this.paymentInfo});
-
-  @override
-  List<Object> get props => [paymentInfo];
-}
-
 class ProcessDonation extends DonationEvent {
   const ProcessDonation();
 
