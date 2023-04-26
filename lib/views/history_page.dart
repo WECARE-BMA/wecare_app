@@ -23,10 +23,6 @@ class HistoryPage extends StatelessWidget {
               height: screenHeight / 13,
               child: TopNav()
             ),
-            IconButton(onPressed: () {
-                        BlocProvider.of<HistoryBloc>(context).add(GetKidsHistory());
-            }, icon: Icon(Icons.abc)
-            ),
             const Padding(
               padding: EdgeInsets.all(15.0),
               child: Text(
