@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:wecare_app/views/auth_pages/signin_page.dart';
 
 class SignupPage extends StatefulWidget {
@@ -19,13 +22,12 @@ class _SignupPageState extends State<SignupPage> {
               // mainAxisAlignment: MainAxisAlignment.st,
               children: [
                 Container(
-                    height: 250,
+                    height: 150,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage('assets/images/background.png'),
                             fit: BoxFit.cover)),
-                    margin: EdgeInsets.only(bottom: 20),
                     child: Image.asset('assets/images/logo.png')),
                 SignupForm(),
               ],
@@ -45,6 +47,21 @@ class SignupForm extends StatefulWidget {
 }
 
 class _SignupFormState extends State<SignupForm> {
+  File? _image;
+
+  final _picker = ImagePicker();
+
+  Future<void> _openImagePicker() async {
+    final XFile? pickedImage =
+        await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _image = File(pickedImage.path);
+      });
+    }
+    print(pickedImage);
+  }
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -56,15 +73,25 @@ class _SignupFormState extends State<SignupForm> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 18),
-              child: Text(
-                'Welcome',
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                ),
+            Text(
+              'Welcome',
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
+            ),
+            Center(
+              child: Container(
+                height: 90,
+                width: 90,
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(100)),
+                child: IconButton(
+                    onPressed: _openImagePicker,
+                    icon: Icon(Icons.camera_alt_rounded)),
               ),
             ),
             Padding(
@@ -109,7 +136,7 @@ class _SignupFormState extends State<SignupForm> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   // hintText: 'Enter your password',
-                  labelText: 'Password',
+                  labelText: 'Description',
                 ),
               ),
             ),
@@ -125,7 +152,7 @@ class _SignupFormState extends State<SignupForm> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   // hintText: 'Enter your password',
-                  labelText: 'Confirm password',
+                  labelText: 'Password',
                 ),
               ),
             ),
@@ -164,7 +191,7 @@ class ThirdPartyAuths extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: 20, top: 20),
+          padding: const EdgeInsets.only(bottom: 20, top: 10),
           child: Text(
             'or continue with',
             style: TextStyle(color: Color(0xff787878)),
@@ -205,7 +232,7 @@ class ThirdPartyAuths extends StatelessWidget {
           ],
         ),
         Container(
-          padding: const EdgeInsets.only(top: 20, bottom: 20),
+          padding: const EdgeInsets.only(top: 6, bottom: 20),
           width: double.infinity,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
