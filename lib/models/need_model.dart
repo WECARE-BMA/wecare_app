@@ -6,7 +6,7 @@ class Need {
   String name;
   int amount;
   String? imageUrl;
-  dynamic? donor;
+  String? donor;
   bool isDonated;
 
   Need(

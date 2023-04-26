@@ -21,6 +21,15 @@ class DonorsServiceProvider {
     return snapshot.docs.map((doc) {
       final data = doc.data() as Map<String, dynamic>;
       data['id'] = doc.id;
+
+      final kids = data['kids'];
+      List<Kid> kidsList = [];
+
+      for (var n in kids) {
+        final kid = kidsprovider.getKid(n.id).then((kid) => kidsList.add(kid));
+      }
+
+      data['kids'] = kidsList;
       return Donor.fromJson(data);
     }).toList();
   }
@@ -29,6 +38,16 @@ class DonorsServiceProvider {
     final doc = await _donorsCollection.doc(id).get();
     final data = doc.data() as Map<String, dynamic>;
     data['id'] = doc.id;
+
+    final kids = data['kids'];
+    List<Kid> kidsList = [];
+
+    for (var n in kids) {
+      final kid = kidsprovider.getKid(n.id).then((kid) => kidsList.add(kid));
+    }
+
+    data['kids'] = kidsList;
+
     return Donor.fromJson(data);
   }
 
