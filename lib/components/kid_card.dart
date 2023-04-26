@@ -4,7 +4,16 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:wecare_app/components/donation_tracker.dart';
 
 class KidCard extends StatelessWidget {
-  const KidCard({super.key});
+  final String name;
+  final String image;
+  final int age;
+
+  KidCard({
+    super.key,
+    required this.name,
+    required this.image,
+    required this.age,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +36,14 @@ class KidCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              topRight: Radius.circular(12)),
-                          image: DecorationImage(
-                              image: AssetImage('assets/images/image1.jpg'),
-                              fit: BoxFit.cover)),
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          topRight: Radius.circular(12)),
+                        image: DecorationImage(
+                          image: NetworkImage(image),
+                          fit: BoxFit.cover)
+                      ),
                       width: screenWidth,
                       height: screenHeight / 5.5,
                     ),
@@ -43,22 +53,22 @@ class KidCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Abem Mekonene',
-                            style: TextStyle(
+                          Text(
+                            name,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
                           ),
-                          const Text(
-                            '12 years Old',
-                            style: TextStyle(
+                          Text(
+                            '$age',
+                            style: const TextStyle(
                               fontSize: 14.0,
                               color: Colors.black,
                             ),
                           ),
                           SizedBox(
-                            height: screenHeight / 25,
+                            height: screenHeight / 80,
                           ),
                           SizedBox(
                             width: screenWidth,

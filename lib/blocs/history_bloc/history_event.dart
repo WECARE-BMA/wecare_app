@@ -19,15 +19,3 @@ class AddKidHistory extends HistoryEvent {
   @override
   List<Object> get props => [];
 }
-class RemoveKidHistory extends HistoryEvent {
-  String kidList;
-  int index;
-
-  RemoveKidHistory({
-    required this.kidList,
-    required this.index
-    });
-
-  @override
-  List<Object> get props => [];
-}
