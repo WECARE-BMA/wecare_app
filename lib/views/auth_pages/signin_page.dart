@@ -66,12 +66,10 @@ class _SigninFormState extends State<SigninForm> {
         }
 
         if (state is AuthAuthenticatedState) {
-          print(state.user);
           Navigator.popAndPushNamed(context, '/appScreen');
         }
 
         if (state is AuthFailedState) {
-          print(state.message);
           isloading = false;
           Fluttertoast.showToast(
               msg: state.message,
