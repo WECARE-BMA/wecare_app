@@ -53,15 +53,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             password: event.password,
           );
 
-          final imageUrl = await firestorageService.uploadFile(event.image);
+          final String imageUrl =
+              await firestorageService.uploadFile(event.image);
 
           Donor donor = Donor(
-              id: userCredential.user!.uid,
-              name: event.name,
-              image: imageUrl,
-              description: event.description);
+            id: userCredential.user!.uid,
+            image: imageUrl,
+            description: event.description,
+            name: event.name,
+          );
 
           await donorsServiceProvider.addDonor(donor);
+
+          emit(AuthAuthenticatedState(userCredential.user!));
         } catch (e) {
           emit(AuthFailedState(e.toString()));
         }
