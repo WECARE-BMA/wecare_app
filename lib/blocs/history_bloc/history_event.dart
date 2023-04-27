@@ -9,6 +9,13 @@ class GetKidsHistory extends HistoryEvent {
   List<Object> get props => [];
 }
 
+class GetSavedKid extends HistoryEvent {
+  GetSavedKid();
+
+  @override
+  List<Object> get props => [];
+}
+
 class AddKidHistory extends HistoryEvent {
   String kidList;
 

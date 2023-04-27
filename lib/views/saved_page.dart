@@ -46,7 +46,6 @@ class HistoryPage extends StatelessWidget {
               itemCount: state.KidL.length,
               itemBuilder: (context, index) {
                 return KidTile(
-                  kid: state.KidL[index],
                   name: state.KidL[index].name, 
                   image: state.KidL[index].imageUrl, 
                   age: state.KidL[index].age, 

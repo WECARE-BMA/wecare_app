@@ -52,4 +52,18 @@ class Kid {
   }
 
   static void add(Kid kid) {}
+
+  double fullAmount(){
+    List amounts = needs.map((need) => need.amount).toList();
+    return amounts.reduce((value, element) => value + element);
+  }
+
+  double currentAmount(){
+    List amounts = needs.map((need) => need.isDonated == true ? need.amount : 0).toList();
+    return amounts.reduce((value, element) => value + element);
+  }
+
+  int noOfDonors(){
+    return needs.map((need) => need.donor).toSet().toList().length;
+  }
 }

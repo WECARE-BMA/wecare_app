@@ -12,57 +12,57 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 250,
+            decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/images/details_image.png'),
+            fit: BoxFit.cover)),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Text(
+      'Bekele Mekureya',
+      style: TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+          color: Color(0xff212121)),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            // child: DonationTracker(),
+          ),
+          Padding(
+            padding:
+        const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+            child: Divider(
+      thickness: 2,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 20, left: 20),
             child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: 250,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/details_image.png'),
-                  fit: BoxFit.cover)),
-        ),
         Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.only(bottom: 5),
           child: Text(
-            'Bekele Mekureya',
-            style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Color(0xff212121)),
+            'Needs',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
-          child: DonationTracker(),
-        ),
-        Padding(
-          padding:
-              const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-          child: Divider(
-            thickness: 2,
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(right: 20, left: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: Text(
-                  'Needs',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-              ),
-              NeedsCard()
-            ],
-          ),
-        )
+        NeedsCard()
       ],
-    )));
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 

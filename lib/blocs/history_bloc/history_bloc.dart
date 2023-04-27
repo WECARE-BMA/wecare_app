@@ -6,6 +6,7 @@ import 'package:wecare_app/service/kidsApiService.dart';
 class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   final _kidsServiceProvider = KidsServiceProvider();
   List kidsList = [];
+  List savedList = [];
   List needList = [];
 
   HistoryBloc() : super(HistoryInitialState()) {
@@ -14,6 +15,12 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
       emit(HistoryLoadingState());
       kidsList = await _kidsServiceProvider.getKids();
       emit(HistorySuccessState(KidL: kidsList));
+    });
+
+    on<GetSavedKid>((event, emit) async {
+      emit(HistoryLoadingState());
+      savedList = await _kidsServiceProvider.getKids();
+      emit(HistorySuccessState(KidL: savedList));
     });
 
     on<AddKidHistory>((event, emit) {
