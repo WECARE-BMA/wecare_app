@@ -9,8 +9,7 @@ class TopNav extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenPadding = screenWidth * 0.05;
 
-    return Expanded(
-      child: Container(
+    return Container(
           padding: EdgeInsets.only(right: screenPadding, left: screenPadding),
           height: screenHeight * 0.1,
           child: Row(
@@ -43,8 +42,6 @@ class TopNav extends StatelessWidget {
               ),
             ],
           ) // Your content goes here
-
-          ),
     );
   }
 }

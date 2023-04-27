@@ -17,6 +17,7 @@ class _DonationTrackerState extends State<DonationTracker> {
     int currently_collected = widget.kid.currentAmount();
     int full_amount = widget.kid.fullAmount();
     int donors = widget.kid.noOfDonors();
+
     double progress_value = currently_collected / full_amount;
 
     return Container(

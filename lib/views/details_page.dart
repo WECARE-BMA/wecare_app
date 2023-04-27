@@ -1,6 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
+import 'package:wecare_app/blocs/history_bloc/history_event.dart';
+import 'package:wecare_app/blocs/history_bloc/history_state.dart';
 import 'package:wecare_app/components/donation_tracker.dart';
 import 'package:wecare_app/models/kid_model.dart';
 
@@ -20,7 +24,7 @@ class _DetailsPageState extends State<DetailsPage> {
     return Scaffold(
         body: SafeArea(
             child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(  
           alignment: Alignment.topLeft  ,
@@ -35,18 +39,36 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
         Padding(
           padding: const EdgeInsets.all(20),
-          child: Text(
-            widget.kid.name,
-            style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 0, 0, 0)),
+          child: Container(
+            alignment: Alignment.topLeft,
+            child: Text(
+              textAlign: TextAlign.start,
+              widget.kid.name,
+              style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 0, 0, 0)),
+            ),
           ),
         ),
-        // Padding(
-        //   padding: EdgeInsets.only(left: 20, right: 20),
-        //   child: DonationTracker(),
-        // ),
+        BlocBuilder<HistoryBloc, HistoryState>(
+            builder: (context, state) {
+          if (state is HistoryInitialState) {
+            return Container();
+          } else if (state is HistoryLoadingState) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is HistoryFailState) {
+            return Text(state.message);
+          } else if (state is HistorySuccessState) {
+            return Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: MediaQuery.of(context).size.height * 0.05,
+              child: DonationTracker(kid: widget.kid)
+            );
+          }
+          return Container();
+          }
+        ),
         Padding(
           padding:
               const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
@@ -114,20 +136,35 @@ class NeedsCard extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                OutlinedButton(
-                  onPressed: () {
+                BlocBuilder<HistoryBloc, HistoryState>(
+            builder: (context, state) {
+          if (state is HistoryInitialState) {
+            return Container();
+          } else if (state is HistoryLoadingState) {
+            return Container();
+          } else if (state is HistoryFailState) {
+            return Text(state.message);
+          } else if (state is HistorySuccessState) {
+            return OutlinedButton(
+                  onPressed: need.isDonated ? null : ()  {
                     need.isDonated = true;
                     need.donor = FirebaseAuth.instance.currentUser?.uid;
                     ns.updateNeed(need);
+                    BlocProvider.of<HistoryBloc>(context)
+                      .add(GetKidsHistory());
                   },
-                  child: Text('Donate'),
-                  style: OutlinedButton.styleFrom(
+                  child: need.isDonated ? Text('Donated') : Text('Donate'),
+                    style: OutlinedButton.styleFrom(
                     side: BorderSide(
-                      color: Theme.of(context)
-                          .primaryColor, // set the border color here
-                    ),
+                    color: Theme.of(context).primaryColor,
                   ),
-                )
+                  ),
+                );
+          }
+          return Container();
+          }
+        ),
+                
               ],
             ),
           );
