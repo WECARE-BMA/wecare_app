@@ -2,6 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:wecare_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:wecare_app/blocs/nav_bloc/nav_bloc_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
@@ -17,10 +18,12 @@ import 'package:wecare_app/views/home_page.dart';
 import 'package:wecare_app/views/profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wecare_app/views/splash_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Hive.initFlutter();
 
   runApp(MyApp());
 }

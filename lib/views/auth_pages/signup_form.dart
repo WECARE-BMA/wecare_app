@@ -259,7 +259,13 @@ class _SignupFormState extends State<SignupForm> {
                         ),
                       ),
               ),
-              ThirdPartyAuths(),
+              TextButton(
+                  child: Text('Have an account?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Color(0xff787878))),
+                  onPressed: () =>
+                      Navigator.popAndPushNamed(context, '/signInPage')),
+              // ThirdPartyAuths(),
             ],
           ),
         ),

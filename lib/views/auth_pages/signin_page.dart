@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wecare_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:wecare_app/views/auth_pages/signup_page.dart';
+import 'package:wecare_app/views/auth_pages/third_party_auth.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
@@ -184,80 +185,18 @@ class _SigninFormState extends State<SigninForm> {
                           ),
                         ),
                 ),
-                ThirdPartyAuths(),
+                TextButton(
+                    child: Text('Have an account?',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Color(0xff787878))),
+                    onPressed: () =>
+                        Navigator.popAndPushNamed(context, '/signUpPage')),
+                // ThirdPartyAuths(),
               ],
             ),
           ),
         );
       },
-    );
-  }
-}
-
-class ThirdPartyAuths extends StatelessWidget {
-  const ThirdPartyAuths({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 20, top: 20),
-          child: Text(
-            'or continue with',
-            style: TextStyle(color: Color(0xff787878)),
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              child: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                backgroundImage: AssetImage('assets/images/google_logo.png'),
-                radius: 25,
-              ),
-            ),
-            SizedBox(
-              width: 35,
-            ),
-            GestureDetector(
-              child: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                backgroundImage: AssetImage('assets/images/fb_logo.png'),
-                radius: 25,
-              ),
-            ),
-            SizedBox(
-              width: 35,
-            ),
-            GestureDetector(
-              child: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                backgroundImage: AssetImage(
-                  'assets/images/apple_logo.png',
-                ),
-                radius: 25,
-              ),
-            ),
-          ],
-        ),
-        Container(
-          padding: const EdgeInsets.only(top: 20, bottom: 20),
-          width: double.infinity,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                  child: Text('Don\'t have an account?',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Color(0xff787878))),
-                  onPressed: () =>
-                      Navigator.popAndPushNamed(context, '/signUpPage')),
-            ],
-          ),
-        )
-      ],
     );
   }
 }
