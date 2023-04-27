@@ -10,6 +10,7 @@ import 'package:wecare_app/components/kid_card.dart';
 import 'package:wecare_app/components/kid_tile.dart';
 import 'package:wecare_app/components/top_nav.dart';
 import 'package:wecare_app/views/details_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -70,8 +71,8 @@ class _HomePage extends State<HomePage> {
                         child: Padding(
                           padding: EdgeInsets.only(
                               bottom: screenPadding, left: screenPadding),
-                          child: const Text(
-                            'Help this Kids',
+                          child: Text(
+                            AppLocalizations.of(context)!.help,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 24.0,
@@ -87,10 +88,10 @@ class _HomePage extends State<HomePage> {
                   padding: EdgeInsets.only(
                     top: screenHeight * 0.01,
                   ),
-                  child: const Align(
+                  child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Urgent Fundrasing',
+                      AppLocalizations.of(context)!.urgent,
                       style: TextStyle(
                           fontSize: 22.0, fontWeight: FontWeight.bold),
                     ),
@@ -136,10 +137,10 @@ class _HomePage extends State<HomePage> {
                   padding: EdgeInsets.only(
                     top: screenHeight * 0.01,
                   ),
-                  child: const Align(
+                  child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'New Fundrasing',
+                      AppLocalizations.of(context)!.newf,
                       style: TextStyle(
                           fontSize: 22.0, fontWeight: FontWeight.bold),
                     ),

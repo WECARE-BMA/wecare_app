@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wecare_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:wecare_app/main.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -18,7 +20,7 @@ class ProfilePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-                height: screenHeight / 3.1,
+                height: screenHeight / 3.3,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                     image: DecorationImage(
@@ -88,7 +90,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   OutlinedButton(
                     onPressed: () {},
-                    child: Text('Edit Profile',
+                    child: Text(AppLocalizations.of(context)!.edit,
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 18)),
                     style: OutlinedButton.styleFrom(
@@ -104,7 +106,7 @@ class ProfilePage extends StatelessWidget {
                       BlocProvider.of<AuthBloc>(context).add(LogoutEvent());
                       Navigator.popAndPushNamed(context, '/signInPage');
                     },
-                    child: Text('Logout',
+                    child: Text(AppLocalizations.of(context)!.logout,
                         style: TextStyle(
                             color: Color.fromARGB(228, 202, 60, 50),
                             fontWeight: FontWeight.w600,
@@ -114,7 +116,30 @@ class ProfilePage extends StatelessWidget {
                         color: Color.fromARGB(228, 202, 60, 50),
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: screenHeight / 146,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                      onTap: () => Locales.change(context, 'en'),
+                      child: Text('English', 
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor, 
+                        fontSize: 18)),
+                      ),
+                      GestureDetector(
+                      onTap: () => Locales.change(context, 'am'),
+                      child: Text('Amharic', 
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor, 
+                        fontSize: 18)),
+                      ),
+                    ],
                   )
+
                 ],
               ),
             )
