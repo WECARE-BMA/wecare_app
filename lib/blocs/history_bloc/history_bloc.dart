@@ -9,7 +9,6 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   List needList = [];
 
   HistoryBloc() : super(HistoryInitialState()) {
-    
     on<GetKidsHistory>((event, emit) async {
       emit(HistoryLoadingState());
       kidsList = await _kidsServiceProvider.getKids();
@@ -19,9 +18,8 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
     on<AddKidHistory>((event, emit) {
       emit(HistoryLoadingState());
       kidsList.add(event.kidList);
-      
+
       emit(HistorySuccessState(KidL: kidsList));
     });
-
   }
 }

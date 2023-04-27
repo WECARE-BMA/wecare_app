@@ -23,7 +23,13 @@ dependencies:
   firebase_core_platform_interface: ^4.6.0
   firebase_messaging: ^14.4.0
   flutter_bloc: ^8.1.2
-  sqflite: ^2.2.7
+  splashscreen:
+    git:
+      url: https://github.com/DPLYR-dev/SplashScreenFlutterPackage.git
+      ref: master
+  fluttertoast: ^8.2.1
+  image_picker: ^0.8.7+3
+  firebase_storage: ^11.1.1
 
 dev_dependencies:
   flutter_test:
