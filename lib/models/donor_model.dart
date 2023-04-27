@@ -43,4 +43,21 @@ class Donor {
     }
     return parsedDonors;
   }
+
+
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
+
+  @override
+  bool operator ==(Object other){
+    if (identical(this, other)) return true;
+
+    return other is Donor && 
+    id == other.id && 
+    name == other.name && 
+    image == other.image && 
+    description == other.description && 
+    kids == other.kids;
+  }
 }
