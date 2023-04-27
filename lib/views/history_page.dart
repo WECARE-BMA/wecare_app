@@ -5,6 +5,7 @@ import 'package:wecare_app/components/top_nav.dart';
 import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_event.dart';
 import 'package:wecare_app/blocs/history_bloc/history_state.dart';
+import 'package:wecare_app/views/details_page.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
@@ -53,11 +54,21 @@ class HistoryPage extends StatelessWidget {
               return ListView.builder(
               itemCount: state.KidL.length,
               itemBuilder: (context, index) {
-                return KidTile(
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsPage(
+                          kid: state.KidL[index])) ,
+                    );
+                  },
+                child: KidTile(
                   name: state.KidL[index].name, 
                   image: state.KidL[index].imageUrl, 
                   age: state.KidL[index].age, 
                   description: state.KidL[index].description,
+                )
                 );
               }
             );
