@@ -53,20 +53,20 @@ class Kid {
 
   static void add(Kid kid) {}
 
-  int fullAmount(){
+  int fullAmount() {
     List<int> amounts = needs.map((need) => need.amount).toList();
     int sum = amounts.reduce((int value, int element) => value + element);
     return sum;
   }
 
-  int currentAmount(){
-    List<int> amounts = needs.map((need) => need.isDonated == true ? need.amount : 0).toList();
+  int currentAmount() {
+    List<int> amounts =
+        needs.map((need) => need.isDonated == true ? need.amount : 0).toList();
     int sum = amounts.reduce((int value, int element) => value + element);
     return sum;
   }
 
-  int noOfDonors(){
+  int noOfDonors() {
     return needs.map((need) => need.donor).toSet().toList().length;
-  } 
-
+  }
 }

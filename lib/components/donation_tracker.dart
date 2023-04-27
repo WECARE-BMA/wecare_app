@@ -10,8 +10,6 @@ class DonationTracker extends StatefulWidget {
 }
 
 class _DonationTrackerState extends State<DonationTracker> {
-
-
   @override
   Widget build(BuildContext context) {
     int currently_collected = widget.kid.currentAmount();

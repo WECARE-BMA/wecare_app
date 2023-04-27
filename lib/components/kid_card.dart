@@ -41,19 +41,19 @@ class KidCard extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          topRight: Radius.circular(12)),
-                        image: DecorationImage(
-                          image: NetworkImage(image),
-                          fit: BoxFit.cover)
-                      ),
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12)),
+                          image: DecorationImage(
+                              image: NetworkImage(image), fit: BoxFit.cover)),
                       width: screenWidth,
                       height: screenHeight / 5.5,
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: screenWidth / 53.7 , right: screenWidth / 53.7, top: screenHeight / 93.2),
+                          left: screenWidth / 53.7,
+                          right: screenWidth / 53.7,
+                          top: screenHeight / 93.2),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
