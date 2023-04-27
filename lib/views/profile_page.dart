@@ -118,7 +118,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: screenHeight / 146,
+                    height: screenHeight / 130,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -132,7 +132,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                       GestureDetector(
                       onTap: () => Locales.change(context, 'am'),
-                      child: Text('Amharic', 
+                      child: Text('አማርኛ', 
                       style: TextStyle(
                         color: Theme.of(context).primaryColor, 
                         fontSize: 18)),
