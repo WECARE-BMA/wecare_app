@@ -30,11 +30,11 @@ class _HomePage extends State<HomePage> {
   void initState() {
     super.initState();
 
-    Timer.periodic(const Duration(seconds: 5), (Timer timer) {
-      setState(() {
-        _currentIndex = (_currentIndex + 1) % _imagePaths.length;
-      });
-    });
+    // Timer.periodic(const Duration(seconds: 5), (Timer timer) {
+    //   setState(() {
+    //     _currentIndex = (_currentIndex + 1) % _imagePaths.length;
+    //   });
+    // });
   }
 
   @override
@@ -110,6 +110,7 @@ class _HomePage extends State<HomePage> {
                           itemCount: state.KidL.length,
                           itemBuilder: (context, index) {
                           return KidCard(
+                            kid: state.KidL[index],
                             name: state.KidL[index].name, 
                             image: state.KidL[index].imageUrl, 
                             age: state.KidL[index].age, 
@@ -148,6 +149,7 @@ class _HomePage extends State<HomePage> {
                           itemCount: state.KidL.length,
                           itemBuilder: (context, index) {
                           return KidCard(
+                            kid: state.KidL[index],
                             name: state.KidL[index].name, 
                             image: state.KidL[index].imageUrl, 
                             age: state.KidL[index].age, 

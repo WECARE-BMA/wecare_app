@@ -36,7 +36,7 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
         Padding(
           padding: EdgeInsets.only(left: 20, right: 20),
-          child: DonationTracker(),
+          // child: DonationTracker(),
         ),
         Padding(
           padding:

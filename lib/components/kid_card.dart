@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:wecare_app/components/donation_tracker.dart';
+import 'package:wecare_app/models/kid_model.dart';
+import 'package:wecare_app/views/auth_pages/signup_page.dart';
 
 class KidCard extends StatelessWidget {
+  final Kid kid;
   final String name;
   final String image;
   final int age;
 
   KidCard({
     super.key,
+    required this.kid,
     required this.name,
     required this.image,
     required this.age,
@@ -73,7 +77,7 @@ class KidCard extends StatelessWidget {
                           SizedBox(
                             width: screenWidth,
                             height: screenHeight / 17,
-                            child: DonationTracker(),
+                            child: DonationTracker(kid: kid),
                           )
                         ],
                       ),
