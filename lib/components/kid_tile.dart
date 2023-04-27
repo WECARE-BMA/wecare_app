@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:wecare_app/components/donation_tracker.dart';
+import 'package:wecare_app/models/kid_model.dart';
 
 class KidTile extends StatelessWidget {
+  final Kid kid;
   final String name;
   final String image;
   final int age;
@@ -9,6 +11,7 @@ class KidTile extends StatelessWidget {
 
   KidTile({
     super.key,
+    required this.kid,
     required this.name,
     required this.image,
     required this.age,
@@ -64,7 +67,7 @@ class KidTile extends StatelessWidget {
                   Container(
                     width: screenWidth / 1.7,
                     height: screenHeight / 18.6,
-                    child: const DonationTracker()
+                    child: DonationTracker(kid: kid)
                   )
                 ],
               ),
