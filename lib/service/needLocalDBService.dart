@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:wecare_app/models/need_model.dart';
 
-class NeedService {
+class NeedDBService {
   static const String _needBoxName = 'needs';
 
   Future<void> addNeed(Need need) async {

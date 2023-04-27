@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:wecare_app/models/kid_model.dart';
 
-class KidService {
+class KidDBService {
   static const String _kidBoxName = 'kids';
 
   Future<void> addKid(Kid kid) async {

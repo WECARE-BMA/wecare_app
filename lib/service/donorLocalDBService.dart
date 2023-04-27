@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:wecare_app/models/donor_model.dart';
 
-class DonorService {
+class DonorDBService {
   static const String _donorBoxName = 'donors';
 
   Future<void> addDonor(Donor donor) async {
