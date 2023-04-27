@@ -64,6 +64,7 @@ class HistoryPage extends StatelessWidget {
                     );
                   },
                 child: KidTile(
+                  kid: state.KidL[index],
                   name: state.KidL[index].name, 
                   image: state.KidL[index].imageUrl, 
                   age: state.KidL[index].age, 

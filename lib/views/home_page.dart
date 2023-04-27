@@ -122,9 +122,10 @@ class _HomePage extends State<HomePage> {
                                   );
                                 },
                                 child: KidCard(
+                                  kid: state.KidL[index],
                                   name: state.KidL[index].name,
                                   image: state.KidL[index].imageUrl,
-                                  age: state.KidL[index].age,
+                                        age: state.KidL[index].age,
                                 ),
                               );
                             });
@@ -169,9 +170,10 @@ class _HomePage extends State<HomePage> {
                                   );
                                 },
                                 child: KidCard(
-                                  name: state.KidL[index].name,
+                                  kid: state.KidL[index],
+                                name: state.KidL[index].name,
                                   image: state.KidL[index].imageUrl,
-                                  age: state.KidL[index].age,
+                                        age: state.KidL[index].age,
                                 ),
                               );
                             });
