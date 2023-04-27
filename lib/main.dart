@@ -19,11 +19,15 @@ import 'package:wecare_app/views/profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wecare_app/views/splash_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp
+  ]);
 
   runApp(MyApp());
 }
