@@ -38,7 +38,7 @@ class Kid {
     json['age'] = age;
     json['description'] = description;
     json['imageUrl'] = imageUrl;
-    json['needs'] = needs;
+    json['needs'] = needs.map((need) => need.toJson());
 
     return json;
   }

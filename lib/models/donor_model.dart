@@ -20,7 +20,7 @@ class Donor {
     return Donor(
       id: parsedJson['id'],
       name: parsedJson['name'],
-      image: parsedJson['imageUrl'],
+      image: parsedJson['image'],
       description: parsedJson['description'],
       kids: parsedJson['kids'],
     );
@@ -32,7 +32,8 @@ class Donor {
     json['name'] = name;
     json['image'] = image;
     json['description'] = description;
-    json['kids'] = kids;
+    json['kids'] =
+        kids == null ? null : kids!.map((kid) => kid.toJson()).toList();
     return json;
   }
 
@@ -44,20 +45,18 @@ class Donor {
     return parsedDonors;
   }
 
-
-
   @override
   int get hashCode => id.hashCode ^ name.hashCode;
 
   @override
-  bool operator ==(Object other){
+  bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Donor && 
-    id == other.id && 
-    name == other.name && 
-    image == other.image && 
-    description == other.description && 
-    kids == other.kids;
+    return other is Donor &&
+        id == other.id &&
+        name == other.name &&
+        image == other.image &&
+        description == other.description &&
+        kids == other.kids;
   }
 }
