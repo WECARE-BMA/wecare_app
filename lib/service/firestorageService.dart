@@ -1,26 +1,29 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart';
 
 class FirestorageService {
-  final FirebaseStorage _storage = FirebaseStorage.instance;
+  final FirebaseStorage storage = FirebaseStorage.instance;
 
-  // Upload a file to a specified path
-  Future<String> uploadFile(String path, File file) async {
+  Future uploadFile(File file) async {
     try {
-      // Create a reference to the file path
-      final Reference ref = _storage.ref().child(path);
+      // Create a unique filename for the uploaded file
+      String filename = basename(file.path);
 
-      // Upload the file to the specified path
-      final UploadTask uploadTask = ref.putFile(file);
+      // Get a reference to the Firebase Storage bucket
+      final Reference ref = storage.ref().child(filename);
 
-      // Wait for the upload to complete and return the URL of the uploaded file
-      final TaskSnapshot snapshot = await uploadTask.whenComplete(() => null);
-      final String downloadUrl = await snapshot.ref.getDownloadURL();
-      return downloadUrl;
+      // Upload the file to Firebase Storage
+      UploadTask uploadTask = ref.putFile(file);
+
+      // Get the download URL for the uploaded file
+      String downloadURL = await (await uploadTask).ref.getDownloadURL();
+
+      // Return the download URL
+      return downloadURL;
     } catch (e) {
-      // Handle any errors that occur during the upload process
       print('Error uploading file: $e');
-      return 'Error uploading file: $e';
+      return null;
     }
   }
 }
