@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wecare_app/components/kid_tile.dart';
 import 'package:wecare_app/components/top_nav.dart';
+import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
+import 'package:wecare_app/blocs/history_bloc/history_event.dart';
+import 'package:wecare_app/blocs/history_bloc/history_state.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
@@ -29,17 +33,37 @@ class HistoryPage extends StatelessWidget {
                 )
               ),
             ),
-            Expanded(child: ListView.builder(
-              itemCount: 5,
+            Expanded(
+              child: BlocBuilder<HistoryBloc, HistoryState>(builder: (context, state) {
+              if (state is HistoryInitialState) {
+              return Container(
+                child: const Text(
+                "History of your donations",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24
+                )
+                )
+              );
+            } else if (state is HistoryLoadingState) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is HistoryFailState) {
+              return Text(state.message);
+            } else if (state is HistorySuccessState) {
+              return ListView.builder(
+              itemCount: state.KidL.length,
               itemBuilder: (context, index) {
                 return KidTile(
-                  name: "Abel Mekonene", 
-                  image: "https://nationaltoday.com/wp-content/uploads/2021/04/Every-Kid-Healthy.jpg", 
-                  age: 12, 
-                  description: "Lorem Ipsum blah blah some stuff just talking, also very good student we love homeboy"
+                  name: state.KidL[index].name, 
+                  image: state.KidL[index].imageUrl, 
+                  age: state.KidL[index].age, 
+                  description: state.KidL[index].description,
                 );
               }
-            )
+            );
+            }
+            return Container();
+          })
           )],
         ),
       ),

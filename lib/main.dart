@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wecare_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:wecare_app/blocs/nav_bloc/nav_bloc_bloc.dart';
+import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
+import 'package:wecare_app/blocs/history_bloc/history_event.dart';
 import 'package:wecare_app/firebase_options.dart';
 import 'package:wecare_app/service/kidsApiService.dart';
 import 'package:wecare_app/views/app_screen.dart';
@@ -46,7 +48,8 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => AuthBloc(),
           ),
-          BlocProvider(create: (contex) => NavBloc())
+          BlocProvider(create: (contex) => NavBloc()),
+          BlocProvider(create: (context) => HistoryBloc())
         ],
         child: MaterialApp(
             title: 'Wecare',

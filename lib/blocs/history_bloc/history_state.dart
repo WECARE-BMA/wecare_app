@@ -16,10 +16,10 @@ class HistoryLoadingState extends HistoryState {
 
 
 class HistorySuccessState extends HistoryState {
-  final List Kid;
+  final List KidL;
 
   HistorySuccessState({
-    required this.Kid, 
+    required this.KidL, 
   });
   
   @override
