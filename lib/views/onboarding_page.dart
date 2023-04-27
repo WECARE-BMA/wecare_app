@@ -7,7 +7,7 @@ class OnBoarding extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: OnBoardingSlider(
-        headerBackgroundColor: Colors.white,
+        headerBackgroundColor: Color.fromRGBO(255, 255, 255, 1),
         finishButtonText: 'Register',
         finishButtonStyle: FinishButtonStyle(
           backgroundColor: Colors.green,
