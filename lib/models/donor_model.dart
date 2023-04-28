@@ -7,23 +7,25 @@ class Donor {
   String image;
   String description;
   List<Kid>? kids;
+  List<dynamic>? savedKids;
 
-  Donor({
-    required this.id,
-    required this.name,
-    required this.image,
-    required this.description,
-    this.kids,
-  });
+  Donor(
+      {required this.id,
+      required this.name,
+      required this.image,
+      required this.description,
+      this.kids,
+      this.savedKids});
 
   factory Donor.fromJson(Map<String, dynamic> parsedJson) {
     return Donor(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      image: parsedJson['image'],
-      description: parsedJson['description'],
-      kids: parsedJson['kids'],
-    );
+        id: parsedJson['id'],
+        name: parsedJson['name'],
+        image: parsedJson['image'],
+        description: parsedJson['description'],
+        kids: parsedJson['kids'],
+        savedKids:
+            parsedJson.containsKey('savedKids') ? parsedJson['savedKids'] : []);
   }
 
   toJson() {
@@ -32,7 +34,11 @@ class Donor {
     json['name'] = name;
     json['image'] = image;
     json['description'] = description;
-    json['kids'] = kids;
+    json['kids'] = kids!
+        .map((e) => FirebaseFirestore.instance.collection('kids').doc(e.id));
+    json['savedKids'] = savedKids!
+        .map((e) => FirebaseFirestore.instance.collection('kids').doc(e.id));
+    ;
     return json;
   }
 

@@ -46,22 +46,34 @@ class DonorsServiceProvider {
     final kids = data['kids'];
     List<Kid> kidsList = [];
 
-    if (kids != null) {
+    final savedKids = data['savedKids'];
+    List<Kid> savedKidsL = [];
+
+    if (kids != null && savedKids != null) {
       for (var n in kids) {
-        final kid = kidsprovider.getKid(n.id).then((kid) => kidsList.add(kid));
+        final kid = await kidsprovider.getKid(n.id);
+        kids.add(kid);
+      }
+      for (var n in savedKids) {
+        final kid = await kidsprovider.getKid(n.id);
+        savedKidsL.add(kid);
       }
     }
 
     data['kids'] = kidsList;
+    data['savedKids'] = savedKidsL;
 
     return Donor.fromJson(data);
   }
 
   Future<void> updateDonor(Donor donor) async {
-    await _donorsCollection
-        .doc(donor.id)
-        .update(donor.toJson())
-        .then((value) => print('Document Updated'));
+    final querySnapshot =
+        await _donorsCollection.where('id', isEqualTo: donor.id).get();
+    if (querySnapshot.docs.isNotEmpty) {
+      final docId = querySnapshot.docs.first.id;
+      await _donorsCollection.doc(docId).update(donor.toJson());
+      print('Document Updated');
+    }
   }
 
   // Future addDonor(Donor donor) async {

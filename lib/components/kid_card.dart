@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -6,6 +7,7 @@ import 'package:wecare_app/blocs/saved_bloc/saved_bloc.dart';
 import 'package:wecare_app/blocs/saved_bloc/saved_event.dart';
 import 'package:wecare_app/components/donation_tracker.dart';
 import 'package:wecare_app/models/kid_model.dart';
+import 'package:wecare_app/service/donorsApiService.dart';
 import 'package:wecare_app/service/kidsApiService.dart';
 import 'package:wecare_app/views/auth_pages/signup_page.dart';
 
@@ -26,6 +28,9 @@ class KidCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     KidsServiceProvider ks = KidsServiceProvider();
+    DonorsServiceProvider ds = DonorsServiceProvider();
+    User? user = FirebaseAuth.instance.currentUser;
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
@@ -46,19 +51,19 @@ class KidCard extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          topRight: Radius.circular(12)),
-                        image: DecorationImage(
-                          image: NetworkImage(image),
-                          fit: BoxFit.cover)
-                      ),
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12)),
+                          image: DecorationImage(
+                              image: NetworkImage(image), fit: BoxFit.cover)),
                       width: screenWidth,
                       height: screenHeight / 5.5,
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: screenWidth / 53.7 , right: screenWidth / 53.7, top: screenHeight / 93.2),
+                          left: screenWidth / 53.7,
+                          right: screenWidth / 53.7,
+                          top: screenHeight / 93.2),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -93,12 +98,22 @@ class KidCard extends StatelessWidget {
                   top: 0,
                   right: 0,
                   child: ElevatedButton.icon(
-                    onPressed: kid.isSaved ? null : ()  {
-                    kid.isSaved = true;
-                    ks.updateKid(kid);
-                    BlocProvider.of<SavedBloc>(context)
-                      .add(GetKidsSaved());
-                  },
+                    onPressed: kid.isSaved
+                        ? null
+                        : () async {
+                            kid.isSaved = true;
+                            ks.updateKid(kid);
+                            final donor = await ds.getDonor(user!.uid);
+                            List savedList = donor.savedKids ?? [];
+                            savedList.add(kid);
+
+                            donor.savedKids = savedList;
+
+                            ds.updateDonor(donor);
+
+                            BlocProvider.of<SavedBloc>(context)
+                                .add(GetKidsSaved());
+                          },
                     icon: const Icon(
                       Icons.bookmark_add_outlined,
                       size: 30,
