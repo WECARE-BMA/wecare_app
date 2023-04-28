@@ -4,7 +4,6 @@ import 'package:wecare_app/blocs/saved_bloc/saved_event.dart';
 import 'package:wecare_app/blocs/saved_bloc/saved_state.dart';
 import 'package:wecare_app/models/kid_model.dart';
 import 'package:wecare_app/service/donorsApiService.dart';
-import 'package:wecare_app/service/kidsApiService.dart';
 
 class SavedBloc extends Bloc<SavedEvent, SavedState> {
   final _donorsServiceProvider = DonorsServiceProvider();

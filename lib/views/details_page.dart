@@ -1,12 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wecare_app/blocs/donated_bloc/donated_bloc.dart';
 import 'package:wecare_app/blocs/donated_bloc/donated_event.dart';
-import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
-import 'package:wecare_app/blocs/history_bloc/history_event.dart';
-import 'package:wecare_app/blocs/history_bloc/history_state.dart';
 import 'package:wecare_app/blocs/kid_bloc/kid_bloc.dart';
 import 'package:wecare_app/components/donation_tracker.dart';
 import 'package:wecare_app/models/kid_model.dart';
@@ -43,7 +39,7 @@ class _DetailsPageState extends State<DetailsPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
                 color: Colors.white,
               )),
@@ -55,7 +51,7 @@ class _DetailsPageState extends State<DetailsPage> {
             child: Text(
               textAlign: TextAlign.start,
               widget.kid.name,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 0, 0, 0)),
@@ -70,27 +66,27 @@ class _DetailsPageState extends State<DetailsPage> {
           } else if (state is KidFailState) {
             return Text(state.message);
           } else if (state is KidSuccessState) {
-            return Container(
+            return SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: MediaQuery.of(context).size.height * 0.05,
                 child: DonationTracker(kid: widget.kid));
           }
           return Container();
         }),
-        Padding(
+        const Padding(
           padding:
-              const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+              EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
           child: Divider(
             thickness: 2,
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(right: 20, left: 20),
+          padding: const EdgeInsets.only(right: 20, left: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 5),
                 child: Text(
                   'Needs',
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
@@ -118,14 +114,14 @@ class NeedsCard extends StatelessWidget {
     NeedsServiceProvider ns = NeedsServiceProvider();
     DonorsServiceProvider ds = DonorsServiceProvider();
     User? user = FirebaseAuth.instance.currentUser;
-    return Container(
+    return SizedBox(
       height: 350,
       child: ListView.builder(
         itemCount: needs!.length,
         itemBuilder: (BuildContext context, int index) {
           var need = needs![index];
           return Container(
-            padding: EdgeInsets.only(top: 8, bottom: 8),
+            padding: const EdgeInsets.only(top: 8, bottom: 8),
             height: 90,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -139,7 +135,7 @@ class NeedsCard extends StatelessWidget {
                     children: [
                       Text(
                         need.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -149,7 +145,7 @@ class NeedsCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 BlocBuilder<KidBloc, KidState>(builder: (context, state) {
                   if (state is KidInitial) {
                     return Container();
@@ -178,7 +174,7 @@ class NeedsCard extends StatelessWidget {
                               BlocProvider.of<DonatedBloc>(context)
                                   .add(GetKidsDonated());
                             },
-                      child: need.isDonated ? Text('Donated') : Text('Donate'),
+                      child: need.isDonated ? const Text('Donated') : const Text('Donate'),
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(
                           color: Theme.of(context).primaryColor,

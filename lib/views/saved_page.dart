@@ -24,23 +24,23 @@ class SavedPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                   width: screenWidth,
                   height: screenHeight / 13,
-                  child: TopNav()),
+                  child: const TopNav()),
               IconButton(
                   onPressed: () {
                     Navigator.popAndPushNamed(context, '/appScreen');
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back,
                     color: Colors.black,
                   )),
               Padding(
-                padding: EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Text(AppLocalizations.of(context)!.saved,
                     style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+                        const TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
               ),
               Expanded(child:
                   BlocBuilder<SavedBloc, SavedState>(builder: (context, state) {

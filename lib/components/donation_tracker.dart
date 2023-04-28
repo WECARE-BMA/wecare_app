@@ -14,13 +14,13 @@ class _DonationTrackerState extends State<DonationTracker> {
 
   @override
   Widget build(BuildContext context) {
-    int currently_collected = widget.kid.currentAmount();
-    int full_amount = widget.kid.fullAmount();
+    int currentlyCollected = widget.kid.currentAmount();
+    int fullAmount = widget.kid.fullAmount();
     int donors = widget.kid.noOfDonors();
 
-    double progress_value = currently_collected / full_amount;
+    double progressValue = currentlyCollected / fullAmount;
 
-    return Container(
+    return SizedBox(
       height: double.infinity,
       width: double.infinity,
       child: Column(
@@ -29,21 +29,21 @@ class _DonationTrackerState extends State<DonationTracker> {
           Row(
             children: [
               Text(
-                '\$$currently_collected ',
+                '\$$currentlyCollected ',
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.normal,
                     fontSize: 15),
               ),
               Text(
-                'fund raised from \$$full_amount',
-                style: TextStyle(color: Color(0xff787878)),
+                'fund raised from \$$fullAmount',
+                style: const TextStyle(color: Color(0xff787878)),
               )
             ],
           ),
           LinearProgressIndicator(
-            value: progress_value,
-            backgroundColor: Color.fromARGB(255, 230, 230, 230),
+            value: progressValue,
+            backgroundColor: const Color.fromARGB(255, 230, 230, 230),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -52,7 +52,7 @@ class _DonationTrackerState extends State<DonationTracker> {
                 children: [
                   Text('$donors ',
                       style: TextStyle(color: Theme.of(context).primaryColor)),
-                  Text(
+                  const Text(
                     'Donator\'s',
                     style: TextStyle(color: Color(0xff787878)),
                   ),

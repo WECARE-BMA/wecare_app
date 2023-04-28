@@ -28,20 +28,20 @@ class TopNav extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    // Code to execute when the button is pressed
-                  },
-                  icon: Icon(
-                    Icons.notifications_none_outlined,
-                    size: 30,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
+                // IconButton(
+                //   onPressed: () {
+                   
+                //   },
+                //   icon: Icon(
+                //     Icons.notifications_none_outlined,
+                //     size: 30,
+                //     color: Theme.of(context).primaryColor,
+                //   ),
+                // ),
               ],
             ),
           ],
-        ) // Your content goes here
+        )
         );
   }
 }

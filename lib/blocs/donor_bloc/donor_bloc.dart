@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wecare_app/blocs/donor_bloc/donor_event.dart';
 import 'package:wecare_app/blocs/donor_bloc/donor_state.dart';
 import 'package:wecare_app/db/hive_service.dart';
-import 'package:wecare_app/models/donor_model.dart';
 import 'package:wecare_app/models/kid_model.dart';
 import 'package:wecare_app/service/donorsApiService.dart';
 

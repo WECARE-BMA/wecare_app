@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:wecare_app/models/donor_model.dart';
 import 'package:wecare_app/models/kid_model.dart';
-import 'package:wecare_app/models/need_model.dart';
 import 'package:wecare_app/service/kidsApiService.dart';
 
 class DonorsServiceProvider {
