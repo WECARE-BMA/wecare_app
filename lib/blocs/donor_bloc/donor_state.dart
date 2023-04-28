@@ -31,9 +31,9 @@ class DonorSuccessState extends DonorState {
 
 
 class DonorFailState extends DonorState {
-  String message;
+  final String message;
 
-  DonorFailState(this.message);
+  DonorFailState({required this.message});
 
   @override
   // TODO: implement props

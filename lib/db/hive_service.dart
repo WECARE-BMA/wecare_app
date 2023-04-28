@@ -17,7 +17,12 @@ class HiveService {
 
   Future<dynamic> getData(String key) async {
     final box = await _box;
-    return box.get(key);
+    final donor = box.get(key);
+    if (donor != null) {
+      return Donor.fromJsonLDB(donor);
+    } else {
+      return null;
+    }
   }
 
   Future<void> updateData(String key, dynamic value) async {
@@ -30,41 +35,41 @@ class HiveService {
     box.delete(key);
   }
 
-  Future<Donor> getOneData(String id) async {
-    final box = await _box;
-    final donor = box.get(id);
+  // Future<Donor> getOneData(String id) async {
+  //   final box = await _box;
+  //   final donor = box.get(id);
 
-    final kids = Map<String, dynamic>.from(donor['kids']);
+  //   final kids = Map<String, dynamic>.from(donor['kids']);
 
-    print(kids);
+  //   print(kids);
 
-    List<Kid> kidsList = [];
+  //   List<Kid> kidsList = [];
 
-    final savedKids = donor['savedKids'];
-    List<Kid> savedKidsL = [];
+  //   final savedKids = donor['savedKids'];
+  //   List<Kid> savedKidsL = [];
 
-    if (kids != null && savedKids != null) {
-      for (var kid in kids['needs']) {
-        List<Need> needs = [];
-        for (var need in kid['needs']) {
-          needs.add(Need.fromJson(Map<String, dynamic>.from(need)));
-        }
-        kid['needs'] = needs;
-        kidsList.add(Kid.fromJson(kid));
-      }
-      for (var kid in savedKids) {
-        List<Need> needs = [];
-        for (var need in kid['needs']) {
-          needs.add(Need.fromJson(Map<String, dynamic>.from(need)));
-        }
-        kid['needs'] = needs;
-        kidsList.add(Kid.fromJson(kid));
-      }
-    }
+  //   if (kids != null && savedKids != null) {
+  //     for (var kid in kids['needs']) {
+  //       List<Need> needs = [];
+  //       for (var need in kid['needs']) {
+  //         needs.add(Need.fromJson(Map<String, dynamic>.from(need)));
+  //       }
+  //       kid['needs'] = needs;
+  //       kidsList.add(Kid.fromJson(kid));
+  //     }
+  //     for (var kid in savedKids) {
+  //       List<Need> needs = [];
+  //       for (var need in kid['needs']) {
+  //         needs.add(Need.fromJson(Map<String, dynamic>.from(need)));
+  //       }
+  //       kid['needs'] = needs;
+  //       kidsList.add(Kid.fromJson(kid));
+  //     }
+  //   }
 
-    donor['kids'] = Kid.fromJson(kids);
-    donor['savedKids'] = Kid.fromJson(savedKids);
+  //   donor['kids'] = Kid.fromJson(kids);
+  //   donor['savedKids'] = Kid.fromJson(savedKids);
 
-    return Donor.fromJson(donor);
-  }
+  //   return Donor.fromJson(donor);
+  // }
 }
