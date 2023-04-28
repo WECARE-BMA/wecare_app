@@ -8,6 +8,7 @@ class Kid {
   String description;
   String imageUrl;
   List<Need> needs;
+  bool isSaved;
 
   Kid({
     required this.id,
@@ -16,6 +17,7 @@ class Kid {
     required this.description,
     required this.imageUrl,
     required this.needs,
+    required this.isSaved
   });
 
   factory Kid.fromJson(Map<String, dynamic> parsedJson) {
@@ -28,6 +30,7 @@ class Kid {
           ? parsedJson['image']
           : parsedJson['imageUrl'],
       needs: parsedJson['needs'],
+      isSaved: parsedJson['isSaved']
     );
   }
 
@@ -39,6 +42,7 @@ class Kid {
     json['description'] = description;
     json['imageUrl'] = imageUrl;
     json['needs'] = needs;
+    json['isSaved'] = isSaved;
 
     return json;
   }
