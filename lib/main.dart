@@ -1,14 +1,22 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wecare_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:wecare_app/blocs/donated_bloc/donated_bloc.dart';
+import 'package:wecare_app/blocs/donor_bloc/donor_bloc.dart';
+import 'package:wecare_app/blocs/kid_bloc/kid_bloc.dart';
 import 'package:wecare_app/blocs/nav_bloc/nav_bloc_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
+import 'package:wecare_app/blocs/history_bloc/history_event.dart';
+import 'package:wecare_app/blocs/saved_bloc/saved_bloc.dart';
 import 'package:wecare_app/firebase_options.dart';
 import 'package:wecare_app/views/app_screen.dart';
 import 'package:wecare_app/views/auth_pages/signin_page.dart';
 import 'package:wecare_app/views/auth_pages/signup_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wecare_app/views/saved_page.dart';
 import 'package:wecare_app/views/splash_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/services.dart';
@@ -18,9 +26,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp
-  ]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(MyApp());
 }
@@ -64,6 +70,7 @@ class _MyAppState extends State<MyApp> {
     800: Color(0xFF72A842),
     900: Color(0xFF578B32),
   });
+  User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +80,11 @@ class _MyAppState extends State<MyApp> {
             create: (context) => AuthBloc(),
           ),
           BlocProvider(create: (contex) => NavBloc()),
-          BlocProvider(create: (context) => HistoryBloc())
+          BlocProvider(create: (context) => HistoryBloc()),
+          BlocProvider(create: (context) => DonatedBloc()),
+          BlocProvider(create: (context) => DonorBloc()),
+          BlocProvider(create: (context) => SavedBloc()),
+          BlocProvider(create: (context) => KidBloc()),
         ],
         child: MaterialApp(
             title: 'Wecare',
@@ -91,7 +102,8 @@ class _MyAppState extends State<MyApp> {
               '/': (context) => IntroScreen(),
               '/signInPage': (context) => SigninPage(),
               '/signUpPage': (context) => SignupPage(),
-              '/appScreen': (context) => AppScreen()
+              '/appScreen': (context) => AppScreen(),
+              '/savedScreen': (context) => SavedPage()
             }));
   }
 }

@@ -6,12 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_event.dart';
 import 'package:wecare_app/blocs/history_bloc/history_state.dart';
+import 'package:wecare_app/blocs/kid_bloc/kid_bloc.dart';
 import 'package:wecare_app/components/kid_card.dart';
 import 'package:wecare_app/components/kid_tile.dart';
 import 'package:wecare_app/components/top_nav.dart';
 import 'package:wecare_app/views/details_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -46,8 +46,12 @@ class _HomePage extends State<HomePage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenPadding = screenWidth * 0.05;
 
-    return Scaffold(
-      body: SafeArea(
+    return RefreshIndicator(
+      onRefresh: () async {
+        await BlocProvider.of<KidBloc>(context)
+          ..add(GetKids());
+      },
+      child: SafeArea(
         child: Container(
           height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.only(left: screenPadding, right: screenPadding),
@@ -55,10 +59,7 @@ class _HomePage extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                    width: screenWidth,
-                    height: screenHeight / 15,
-                    child: TopNav()),
+                TopNav(),
                 SizedBox(
                   width: screenWidth - (screenWidth * 0.1),
                   height: screenHeight * 0.18,
@@ -99,19 +100,18 @@ class _HomePage extends State<HomePage> {
                 ),
                 SizedBox(
                     height: screenHeight / 3,
-                    child: BlocBuilder<HistoryBloc, HistoryState>(
+                    child: BlocBuilder<KidBloc, KidState>(
                         builder: (context, state) {
-                      if (state is HistoryInitialState) {
-                        BlocProvider.of<HistoryBloc>(context)
-                            .add(GetKidsHistory());
-                      } else if (state is HistoryLoadingState) {
+                      if (state is KidInitial) {
+                        BlocProvider.of<KidBloc>(context).add(GetKids());
+                      } else if (state is KidLoadingState) {
                         return const Center(child: CircularProgressIndicator());
-                      } else if (state is HistoryFailState) {
+                      } else if (state is KidFailState) {
                         return Text(state.message);
-                      } else if (state is HistorySuccessState) {
+                      } else if (state is KidSuccessState) {
                         return ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: state.KidL.length,
+                            itemCount: state.uKidList.length,
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
@@ -119,14 +119,14 @@ class _HomePage extends State<HomePage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => DetailsPage(
-                                            kid: state.KidL[index])),
+                                            kid: state.uKidList[index])),
                                   );
                                 },
                                 child: KidCard(
-                                  kid: state.KidL[index],
-                                  name: state.KidL[index].name,
-                                  image: state.KidL[index].imageUrl,
-                                        age: state.KidL[index].age,
+                                  kid: state.uKidList[index],
+                                  name: state.uKidList[index].name,
+                                  image: state.uKidList[index].imageUrl,
+                                  age: state.uKidList[index].age,
                                 ),
                               );
                             });
@@ -148,18 +148,17 @@ class _HomePage extends State<HomePage> {
                 ),
                 SizedBox(
                     height: screenHeight / 3,
-                    child: BlocBuilder<HistoryBloc, HistoryState>(
+                    child: BlocBuilder<KidBloc, KidState>(
                         builder: (context, state) {
-                      if (state is HistoryInitialState) {
-                        return Container();
-                      } else if (state is HistoryLoadingState) {
+                      if (state is KidInitial) {
+                      } else if (state is KidLoadingState) {
                         return const Center(child: CircularProgressIndicator());
-                      } else if (state is HistoryFailState) {
+                      } else if (state is KidFailState) {
                         return Text(state.message);
-                      } else if (state is HistorySuccessState) {
+                      } else if (state is KidSuccessState) {
                         return ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: state.KidL.length,
+                            itemCount: state.lKidList.length,
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
@@ -167,14 +166,14 @@ class _HomePage extends State<HomePage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => DetailsPage(
-                                            kid: state.KidL[index])),
+                                            kid: state.lKidList[index])),
                                   );
                                 },
                                 child: KidCard(
-                                  kid: state.KidL[index],
-                                name: state.KidL[index].name,
-                                  image: state.KidL[index].imageUrl,
-                                        age: state.KidL[index].age,
+                                  kid: state.lKidList[index],
+                                  name: state.lKidList[index].name,
+                                  image: state.lKidList[index].imageUrl,
+                                  age: state.lKidList[index].age,
                                 ),
                               );
                             });
