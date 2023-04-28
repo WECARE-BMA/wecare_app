@@ -23,7 +23,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
       for (var x in kids!) {
         kidsList.add(x);
       }
-      emit(HistorySuccessState(KidL: kidsList));
+      emit(HistorySuccessState(KidL: kidsList.toSet().toList()));
     });
 
     on<AddKidHistory>((event, emit) {

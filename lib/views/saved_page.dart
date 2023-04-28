@@ -50,8 +50,9 @@ class SavedPage extends StatelessWidget {
                 } else if (state is SavedFailState) {
                   return Text(state.message);
                 } else if (state is SavedSuccessState) {
+                  final KidL = state.KidL.toSet().toList();
                   return ListView.builder(
-                      itemCount: state.KidL.length,
+                      itemCount: KidL.length,
                       itemBuilder: (context, index) {
                         return InkWell(
                             onTap: () {
@@ -59,15 +60,15 @@ class SavedPage extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        DetailsPage(kid: state.KidL[index])),
+                                        DetailsPage(kid: KidL[index])),
                               );
                             },
                             child: KidTile(
-                              kid: state.KidL[index],
-                              name: state.KidL[index].name,
-                              image: state.KidL[index].imageUrl,
-                              age: state.KidL[index].age,
-                              description: state.KidL[index].description,
+                              kid: KidL[index],
+                              name: KidL[index].name,
+                              image: KidL[index].imageUrl,
+                              age: KidL[index].age,
+                              description: KidL[index].description,
                             ));
                       });
                 }

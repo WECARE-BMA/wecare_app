@@ -78,4 +78,28 @@ class Kid {
   int noOfDonors() {
     return needs.map((need) => need.donor).toSet().toList().length;
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Kid &&
+        other.id == id &&
+        other.name == name &&
+        other.age == age &&
+        other.description == description &&
+        other.imageUrl == imageUrl &&
+        other.isSaved == isSaved &&
+        other.isUrgent == isUrgent;
+  }
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      name.hashCode ^
+      age.hashCode ^
+      description.hashCode ^
+      imageUrl.hashCode ^
+      isSaved.hashCode ^
+      isUrgent.hashCode;
 }
