@@ -20,7 +20,7 @@ class Donor {
     return Donor(
       id: parsedJson['id'],
       name: parsedJson['name'],
-      image: parsedJson['imageUrl'],
+      image: parsedJson['image'],
       description: parsedJson['description'],
       kids: parsedJson['kids'],
     );
@@ -42,5 +42,45 @@ class Donor {
       parsedDonors.add(Donor.fromJson(donors[i]));
     }
     return parsedDonors;
+  }
+
+  int getCauses() {
+    int count = 0;
+    if (kids != null) {
+      for (final kid in kids!) {
+        for (final need in kid.needs) {
+          if (need.donor == id) {
+            count++;
+          }
+        }
+      }
+    }
+    return count;
+  }
+
+  String getTotalDonatedAmount() {
+    int total = 0;
+    if (kids != null) {
+      for (final kid in kids!) {
+        for (final need in kid.needs) {
+          if (need.donor == id) {
+            total += need.amount;
+          }
+        }
+      }
+    }
+    return formatNumber(total);
+  }
+
+  String formatNumber(num number) {
+    if (number >= 1000000000) {
+      return '${(number / 1000000000).toStringAsFixed(1)}B';
+    } else if (number >= 1000000) {
+      return '${(number / 1000000).toStringAsFixed(1)}M';
+    } else if (number >= 1000) {
+      return '${(number / 1000).toStringAsFixed(1)}K';
+    } else {
+      return number.toString();
+    }
   }
 }

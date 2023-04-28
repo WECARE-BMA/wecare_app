@@ -1,4 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,9 +30,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp
-  ]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(MyApp());
 }
@@ -51,6 +50,7 @@ class MyApp extends StatelessWidget {
     800: Color(0xFF72A842),
     900: Color(0xFF578B32),
   });
+  User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,6 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => DonatedBloc()),
           BlocProvider(create: (context) => DonorBloc()),
           BlocProvider(create: (context) => SavedBloc())
-
         ],
         child: MaterialApp(
             title: 'Wecare',

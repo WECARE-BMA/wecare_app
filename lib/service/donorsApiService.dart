@@ -24,29 +24,32 @@ class DonorsServiceProvider {
       final kids = data['kids'];
       List<Kid> kidsList = [];
 
-      if(kids != null){
+      if (kids != null) {
         for (var n in kids) {
-          final kid = kidsprovider.getKid(n.id).then((kid) => kidsList.add(kid));
+          final kid =
+              kidsprovider.getKid(n.id).then((kid) => kidsList.add(kid));
         }
         data['kids'] = kidsList;
-      }
-      else {
+      } else {
         data['kids'] = kidsList;
       }
-      
+
       return Donor.fromJson(data);
     }).toList();
   }
 
   Future<Donor> getDonor(String id) async {
-    final doc = await _donorsCollection.doc(id).get();
-    final data = doc.data() as Map<String, dynamic>;
+    final queryDocs = await _donorsCollection.where('id', isEqualTo: id).get();
+    ;
+    final data = queryDocs.docs.first.data() as Map<String, dynamic>;
 
     final kids = data['kids'];
     List<Kid> kidsList = [];
 
-    for (var n in kids) {
-      final kid = kidsprovider.getKid(n.id).then((kid) => kidsList.add(kid));
+    if (kids != null) {
+      for (var n in kids) {
+        final kid = kidsprovider.getKid(n.id).then((kid) => kidsList.add(kid));
+      }
     }
 
     data['kids'] = kidsList;
