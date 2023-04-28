@@ -10,28 +10,26 @@ class Kid {
   List<Need> needs;
   bool isSaved;
 
-  Kid({
-    required this.id,
-    required this.name,
-    required this.age,
-    required this.description,
-    required this.imageUrl,
-    required this.needs,
-    required this.isSaved
-  });
+  Kid(
+      {required this.id,
+      required this.name,
+      required this.age,
+      required this.description,
+      required this.imageUrl,
+      required this.needs,
+      required this.isSaved});
 
   factory Kid.fromJson(Map<String, dynamic> parsedJson) {
     return Kid(
-      id: parsedJson['id'],
-      name: parsedJson['name'],
-      age: parsedJson['age'],
-      description: parsedJson['description'],
-      imageUrl: parsedJson.containsKey('image')
-          ? parsedJson['image']
-          : parsedJson['imageUrl'],
-      needs: parsedJson['needs'],
-      isSaved: parsedJson['isSaved']
-    );
+        id: parsedJson['id'],
+        name: parsedJson['name'],
+        age: parsedJson['age'],
+        description: parsedJson['description'],
+        imageUrl: parsedJson.containsKey('image')
+            ? parsedJson['image']
+            : parsedJson['imageUrl'],
+        needs: parsedJson['needs'],
+        isSaved: parsedJson['isSaved']);
   }
 
   toJson() {
@@ -41,7 +39,8 @@ class Kid {
     json['age'] = age;
     json['description'] = description;
     json['imageUrl'] = imageUrl;
-    json['needs'] = needs.map((e) => e.toJson());
+    json['needs'] = needs
+        .map((e) => FirebaseFirestore.instance.collection('needs').doc(e.id));
     json['isSaved'] = isSaved;
 
     return json;
@@ -57,20 +56,20 @@ class Kid {
 
   static void add(Kid kid) {}
 
-  int fullAmount(){
+  int fullAmount() {
     List<int> amounts = needs.map((need) => need.amount).toList();
     int sum = amounts.reduce((int value, int element) => value + element);
     return sum;
   }
 
-  int currentAmount(){
-    List<int> amounts = needs.map((need) => need.isDonated == true ? need.amount : 0).toList();
+  int currentAmount() {
+    List<int> amounts =
+        needs.map((need) => need.isDonated == true ? need.amount : 0).toList();
     int sum = amounts.reduce((int value, int element) => value + element);
     return sum;
   }
 
-  int noOfDonors(){
+  int noOfDonors() {
     return needs.map((need) => need.donor).toSet().toList().length;
-  } 
-
+  }
 }
