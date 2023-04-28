@@ -7,6 +7,7 @@ import 'package:wecare_app/blocs/donated_bloc/donated_event.dart';
 import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_event.dart';
 import 'package:wecare_app/blocs/history_bloc/history_state.dart';
+import 'package:wecare_app/blocs/kid_bloc/kid_bloc.dart';
 import 'package:wecare_app/components/donation_tracker.dart';
 import 'package:wecare_app/models/kid_model.dart';
 import 'package:wecare_app/service/donorsApiService.dart';
@@ -61,14 +62,14 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
           ),
         ),
-        BlocBuilder<HistoryBloc, HistoryState>(builder: (context, state) {
-          if (state is HistoryInitialState) {
+        BlocBuilder<KidBloc, KidState>(builder: (context, state) {
+          if (state is KidInitial) {
             return Container();
-          } else if (state is HistoryLoadingState) {
+          } else if (state is KidLoadingState) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is HistoryFailState) {
+          } else if (state is KidFailState) {
             return Text(state.message);
-          } else if (state is HistorySuccessState) {
+          } else if (state is KidSuccessState) {
             return Container(
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: MediaQuery.of(context).size.height * 0.05,
@@ -149,15 +150,14 @@ class NeedsCard extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                BlocBuilder<HistoryBloc, HistoryState>(
-                    builder: (context, state) {
-                  if (state is HistoryInitialState) {
+                BlocBuilder<KidBloc, KidState>(builder: (context, state) {
+                  if (state is KidInitial) {
                     return Container();
-                  } else if (state is HistoryLoadingState) {
+                  } else if (state is KidLoadingState) {
                     return Container();
-                  } else if (state is HistoryFailState) {
+                  } else if (state is KidFailState) {
                     return Text(state.message);
-                  } else if (state is HistorySuccessState) {
+                  } else if (state is KidSuccessState) {
                     return OutlinedButton(
                       onPressed: need.isDonated
                           ? null
@@ -174,8 +174,7 @@ class NeedsCard extends StatelessWidget {
 
                               ds.updateDonor(donor);
 
-                              BlocProvider.of<HistoryBloc>(context)
-                                  .add(GetKidsHistory());
+                              BlocProvider.of<KidBloc>(context).add(GetKids());
                               BlocProvider.of<DonatedBloc>(context)
                                   .add(GetKidsDonated());
                             },

@@ -14,62 +14,54 @@ class HistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: SafeArea(
+    return RefreshIndicator(
+      onRefresh: () async {
+        BlocProvider.of<DonatedBloc>(context).add(GetKidsDonated());
+      },
+      child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              width: screenWidth,
-              height: screenHeight / 13,
-              child: TopNav()
-            ),
+                width: screenWidth, height: screenHeight / 13, child: TopNav()),
             const Padding(
               padding: EdgeInsets.all(15.0),
-              child: Text(
-                "History of your donations",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24
-                )
-              ),
+              child: Text("History of your donations",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
             ),
-            Expanded(
-              child: BlocBuilder<DonatedBloc, DonatedState>(builder: (context, state) {
+            Expanded(child: BlocBuilder<DonatedBloc, DonatedState>(
+                builder: (context, state) {
               if (state is DonatedInitialState) {
-                BlocProvider.of<DonatedBloc>(context)
-                            .add(GetKidsDonated());
-            } else if (state is DonatedLoadingState) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is DonatedFailState) {
-              return Text(state.message);
-            } else if (state is DonatedSuccessState){
-              return ListView.builder(
-              itemCount: state.KidL.length,
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailsPage(
-                          kid: state.KidL[index])) ,
-                    );
-                  },
-                child: KidTile(
-                  kid: state.KidL[index],
-                  name: state.KidL[index].name, 
-                  image: state.KidL[index].imageUrl, 
-                  age: state.KidL[index].age, 
-                  description: state.KidL[index].description,
-                )
-                );
+                BlocProvider.of<DonatedBloc>(context).add(GetKidsDonated());
+              } else if (state is DonatedLoadingState) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is DonatedFailState) {
+                return Text(state.message);
+              } else if (state is DonatedSuccessState) {
+                return ListView.builder(
+                    itemCount: state.KidL.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      DetailsPage(kid: state.KidL[index])),
+                            );
+                          },
+                          child: KidTile(
+                            kid: state.KidL[index],
+                            name: state.KidL[index].name,
+                            image: state.KidL[index].imageUrl,
+                            age: state.KidL[index].age,
+                            description: state.KidL[index].description,
+                          ));
+                    });
               }
-            );
-            }
-            return Container();
-          })
-          )],
+              return Container();
+            }))
+          ],
         ),
       ),
     );
