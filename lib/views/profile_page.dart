@@ -5,6 +5,8 @@ import 'package:wecare_app/blocs/donor_bloc/donor_bloc.dart';
 import 'package:wecare_app/blocs/donor_bloc/donor_event.dart';
 import 'package:wecare_app/blocs/donor_bloc/donor_state.dart';
 import 'package:wecare_app/components/profile_component.dart';
+import 'package:wecare_app/main.dart';
+
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

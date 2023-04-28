@@ -5,7 +5,6 @@ build/
 local.properties
 
 # iOS specific files
-ios/
 Pods/
 Podfile.lock
 Podfile.resolved
