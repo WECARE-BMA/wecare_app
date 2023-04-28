@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wecare_app/components/donation_tracker.dart';
 import 'package:wecare_app/models/kid_model.dart';
 import 'package:wecare_app/views/auth_pages/signup_page.dart';
@@ -88,9 +89,11 @@ class KidCard extends StatelessWidget {
                   top: 0,
                   right: 0,
                   child: ElevatedButton.icon(
-                    onPressed: () {
-                      // Code to execute when the button is pressed
-                    },
+                    onPressed: kid.isSaved ? null : ()  {
+                    kid.isSaved = true;
+                    BlocProvider.of<SavedBloc>(context)
+                      .add(GetKidsSaved());
+                  },
                     icon: const Icon(
                       Icons.bookmark_add_outlined,
                       size: 30,
