@@ -13,7 +13,6 @@ class DatabaseConnection {
 
   _onCreatingDatabase(Database database, int version) async {
     await database.execute(
-        "CREATE TABLE donor(id Text PRIMARY KEY ,name TEXT,image TEXT,description TEXT)");
-    }
+        "CREATE TABLE donor(id STRING PRIMARY KEY, name STRING, image STRING, description STRING");
+  }
 }
-

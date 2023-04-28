@@ -52,6 +52,20 @@ class Kid {
     return json;
   }
 
+  forDB() {
+    Map<String, dynamic> json = {};
+    json['id'] = id;
+    json['name'] = name;
+    json['age'] = age;
+    json['description'] = description;
+    json['imageUrl'] = imageUrl;
+    json['needs'] = needs.map((e) => e.toJson()).toList();
+    json['isSaved'] = isSaved;
+    json['isUrgent'] = isUrgent;
+
+    return json;
+  }
+
   static List<Kid>? kidList(List kids) {
     List<Kid> parsedKids = [];
     for (var i = 0; i < kids.length; i++) {

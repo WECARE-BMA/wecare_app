@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:wecare_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:wecare_app/blocs/donated_bloc/donated_bloc.dart';
 import 'package:wecare_app/blocs/donor_bloc/donor_bloc.dart';
@@ -13,19 +12,15 @@ import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_event.dart';
 import 'package:wecare_app/blocs/saved_bloc/saved_bloc.dart';
 import 'package:wecare_app/firebase_options.dart';
-import 'package:wecare_app/service/kidsApiService.dart';
 import 'package:wecare_app/views/app_screen.dart';
 import 'package:wecare_app/views/auth_pages/signin_page.dart';
 import 'package:wecare_app/views/auth_pages/signup_page.dart';
-import 'package:wecare_app/views/details_page.dart';
-import 'package:wecare_app/views/history_page.dart';
-import 'package:wecare_app/views/home_page.dart';
-import 'package:wecare_app/views/profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wecare_app/views/saved_page.dart';
 import 'package:wecare_app/views/splash_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,9 +31,33 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class Locales {
+  static void change(BuildContext context, String locale) {
+    var newLocale = Locale(locale);
+    MyApp.setLocale(context, newLocale);
+  }
+}
+
+class MyApp extends StatefulWidget {
+  static void setLocale(BuildContext context, Locale locale) {
+    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
+    state?.setLocale(locale);
+  }
+
   MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale _locale = Locale('en', 'am');
+
+  void setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
   final MaterialColor myCustomColor = const MaterialColor(0xFFADE25D, {
     50: Color(0xFFF6FFE1),
     100: Color(0xFFE9FFA6),
@@ -75,6 +94,9 @@ class MyApp extends StatelessWidget {
               //   Theme.of(context).textTheme,
               // ),
             ),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: _locale,
             initialRoute: '/',
             routes: {
               '/': (context) => IntroScreen(),

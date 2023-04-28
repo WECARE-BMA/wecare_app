@@ -6,6 +6,7 @@ import 'package:wecare_app/blocs/saved_bloc/saved_bloc.dart';
 import 'package:wecare_app/blocs/saved_bloc/saved_event.dart';
 import 'package:wecare_app/blocs/saved_bloc/saved_state.dart';
 import 'package:wecare_app/views/details_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SavedPage extends StatelessWidget {
   const SavedPage({super.key});
@@ -35,9 +36,9 @@ class SavedPage extends StatelessWidget {
                     Icons.arrow_back,
                     color: Colors.black,
                   )),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(15.0),
-                child: Text("Saved donations",
+                child: Text(AppLocalizations.of(context)!.saved,
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
               ),

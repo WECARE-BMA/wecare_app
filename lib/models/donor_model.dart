@@ -25,7 +25,17 @@ class Donor {
         description: parsedJson['description'],
         kids: parsedJson['kids'],
         savedKids:
-            parsedJson.containsKey('savedKids') ? parsedJson['savedKids'] : []);
+            parsedJson.containsKey('savedKids') ? parsedJson['savedKids'] : []
+      );
+  }
+  
+  factory Donor.fromJsonLDB(Map<String, dynamic> parsedJson) {
+    return Donor(
+        id: parsedJson['id'],
+        name: parsedJson['name'],
+        image: parsedJson['image'],
+        description: parsedJson['description'],
+      );
   }
 
   toJson() {
@@ -42,6 +52,18 @@ class Donor {
     return json;
   }
 
+  forDB() {
+    Map<String, dynamic> json = {};
+    json['id'] = id;
+    json['name'] = name;
+    json['image'] = image;
+    json['description'] = description;
+    json['kids'] = kids?.map((e) => e.forDB()).toList();
+    json['savedKids'] = savedKids?.map((e) => e.forDB()).toList();
+
+    return json;
+  }
+
   static List DonorList(List donors) {
     List parsedDonors = [];
     for (var i = 0; i < donors.length; i++) {
@@ -50,11 +72,11 @@ class Donor {
     return parsedDonors;
   }
 
-  int getCauses() {
+  int getCauses(List<Kid>? kid) {
     int count = 0;
-    if (kids != null) {
-      for (final kid in kids!) {
-        for (final need in kid.needs) {
+    if (kid != null) {
+      for (final kid1 in kid!) {
+        for (final need in kid1.needs) {
           if (need.donor == id) {
             count++;
           }
@@ -64,11 +86,11 @@ class Donor {
     return count;
   }
 
-  String getTotalDonatedAmount() {
+  String getTotalDonatedAmount(List<Kid>? kid) {
     int total = 0;
-    if (kids != null) {
-      for (final kid in kids!) {
-        for (final need in kid.needs) {
+    if (kid != null) {
+      for (final kid1 in kid) {
+        for (final need in kid1.needs) {
           if (need.donor == id) {
             total += need.amount;
           }

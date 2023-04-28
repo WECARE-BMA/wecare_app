@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:wecare_app/models/donor_model.dart';
+import 'package:wecare_app/models/kid_model.dart';
 
 abstract class DonorState extends Equatable {}
 
@@ -18,9 +19,11 @@ class DonorLoadingState extends DonorState {
 
 class DonorSuccessState extends DonorState {
   final Donor donors;
+  final List<Kid>? kids;
 
   DonorSuccessState({
     required this.donors, 
+    this.kids
   });
   
   @override
@@ -31,9 +34,9 @@ class DonorSuccessState extends DonorState {
 
 
 class DonorFailState extends DonorState {
-  String message;
+  final String message;
 
-  DonorFailState(this.message);
+  DonorFailState({required this.message});
 
   @override
   // TODO: implement props
