@@ -50,6 +50,28 @@ class ProfilePage extends StatelessWidget {
                 }
                 return Container();
               }),
+              Padding(
+              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.12, right: MediaQuery.of(context).size.width * 0.12, top: MediaQuery.of(context).size.height * 0.04 ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                  onTap: () => Locales.change(context, 'en'),
+                  child: Text('English', 
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor, 
+                    fontSize: 18)),
+                  ),
+                  GestureDetector(
+                  onTap: () => Locales.change(context, 'am'),
+                  child: Text('አማርኛ', 
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor, 
+                    fontSize: 18)),
+                  ),
+                ],
+              ),
+            )
             ],
           ),
         ),
