@@ -20,7 +20,7 @@ class TopNav extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      // Code to execute when the button is pressed
+                      Navigator.popAndPushNamed(context, '/savedScreen');
                     },
                     icon: Icon(
                       Icons.bookmark_outline,

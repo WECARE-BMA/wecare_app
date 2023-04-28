@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wecare_app/blocs/saved_bloc/saved_bloc.dart';
+import 'package:wecare_app/blocs/saved_bloc/saved_event.dart';
 import 'package:wecare_app/components/donation_tracker.dart';
 import 'package:wecare_app/models/kid_model.dart';
+import 'package:wecare_app/service/kidsApiService.dart';
 import 'package:wecare_app/views/auth_pages/signup_page.dart';
 
 class KidCard extends StatelessWidget {
@@ -22,6 +25,7 @@ class KidCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    KidsServiceProvider ks = KidsServiceProvider();
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
@@ -91,6 +95,7 @@ class KidCard extends StatelessWidget {
                   child: ElevatedButton.icon(
                     onPressed: kid.isSaved ? null : ()  {
                     kid.isSaved = true;
+                    ks.updateKid(kid);
                     BlocProvider.of<SavedBloc>(context)
                       .add(GetKidsSaved());
                   },

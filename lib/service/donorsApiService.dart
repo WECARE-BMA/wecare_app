@@ -20,16 +20,20 @@ class DonorsServiceProvider {
     final snapshot = await _donorsCollection.get();
     return snapshot.docs.map((doc) {
       final data = doc.data() as Map<String, dynamic>;
-      data['id'] = doc.id;
 
       final kids = data['kids'];
       List<Kid> kidsList = [];
 
-      for (var n in kids) {
-        final kid = kidsprovider.getKid(n.id).then((kid) => kidsList.add(kid));
+      if(kids != null){
+        for (var n in kids) {
+          final kid = kidsprovider.getKid(n.id).then((kid) => kidsList.add(kid));
+        }
+        data['kids'] = kidsList;
       }
-
-      data['kids'] = kidsList;
+      else {
+        data['kids'] = kidsList;
+      }
+      
       return Donor.fromJson(data);
     }).toList();
   }
@@ -37,7 +41,6 @@ class DonorsServiceProvider {
   Future<Donor> getDonor(String id) async {
     final doc = await _donorsCollection.doc(id).get();
     final data = doc.data() as Map<String, dynamic>;
-    data['id'] = doc.id;
 
     final kids = data['kids'];
     List<Kid> kidsList = [];

@@ -9,6 +9,7 @@ import 'package:wecare_app/blocs/donor_bloc/donor_bloc.dart';
 import 'package:wecare_app/blocs/nav_bloc/nav_bloc_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_event.dart';
+import 'package:wecare_app/blocs/saved_bloc/saved_bloc.dart';
 import 'package:wecare_app/firebase_options.dart';
 import 'package:wecare_app/service/kidsApiService.dart';
 import 'package:wecare_app/views/app_screen.dart';
@@ -19,6 +20,7 @@ import 'package:wecare_app/views/history_page.dart';
 import 'package:wecare_app/views/home_page.dart';
 import 'package:wecare_app/views/profile_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wecare_app/views/saved_page.dart';
 import 'package:wecare_app/views/splash_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/services.dart';
@@ -77,7 +79,8 @@ class MyApp extends StatelessWidget {
               '/': (context) => IntroScreen(),
               '/signInPage': (context) => SigninPage(),
               '/signUpPage': (context) => SignupPage(),
-              '/appScreen': (context) => AppScreen()
+              '/appScreen': (context) => AppScreen(),
+              '/savedScreen': (context) => SavedPage()
             }));
   }
 }

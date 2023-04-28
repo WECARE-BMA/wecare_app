@@ -24,6 +24,9 @@ class SavedPage extends StatelessWidget {
               height: screenHeight / 13,
               child: TopNav()
             ),
+            IconButton(onPressed: () {
+            Navigator.popAndPushNamed(context, '/appScreen');
+            }, icon: Icon(Icons.arrow_back, color: Colors.black,)),
             const Padding(
               padding: EdgeInsets.all(15.0),
               child: Text(
