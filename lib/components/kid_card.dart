@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:wecare_app/components/donation_tracker.dart';
 import 'package:wecare_app/models/kid_model.dart';
+import 'package:wecare_app/views/auth_pages/signup_page.dart';
 
 class KidCard extends StatelessWidget {
   final Kid kid;
@@ -40,19 +41,19 @@ class KidCard extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          topRight: Radius.circular(12)),
-                        image: DecorationImage(
-                          image: NetworkImage(image),
-                          fit: BoxFit.cover)
-                      ),
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12)),
+                          image: DecorationImage(
+                              image: NetworkImage(image), fit: BoxFit.cover)),
                       width: screenWidth,
                       height: screenHeight / 5.5,
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: screenWidth / 53.7 , right: screenWidth / 53.7, top: screenHeight / 93.2),
+                          left: screenWidth / 53.7,
+                          right: screenWidth / 53.7,
+                          top: screenHeight / 93.2),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

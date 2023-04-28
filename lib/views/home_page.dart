@@ -2,8 +2,14 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
+import 'package:wecare_app/blocs/history_bloc/history_event.dart';
+import 'package:wecare_app/blocs/history_bloc/history_state.dart';
 import 'package:wecare_app/components/kid_card.dart';
+import 'package:wecare_app/components/kid_tile.dart';
 import 'package:wecare_app/components/top_nav.dart';
+import 'package:wecare_app/views/details_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,11 +31,11 @@ class _HomePage extends State<HomePage> {
   void initState() {
     super.initState();
 
-    Timer.periodic(const Duration(seconds: 5), (Timer timer) {
-      setState(() {
-        _currentIndex = (_currentIndex + 1) % _imagePaths.length;
-      });
-    });
+    // Timer.periodic(const Duration(seconds: 5), (Timer timer) {
+    //   setState(() {
+    //     _currentIndex = (_currentIndex + 1) % _imagePaths.length;
+    //   });
+    // });
   }
 
   @override
@@ -40,46 +46,41 @@ class _HomePage extends State<HomePage> {
 
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(left: screenPadding, right: screenPadding),
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          padding: EdgeInsets.only(left: screenPadding, right: screenPadding),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: const [
-                    TopNav(),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: screenWidth - (screenWidth * 0.1),
-                      height: screenHeight * 0.18,
-                      child: Stack(
-                        children: [
-                          Image.asset(_imagePaths[_currentIndex],
-                              fit: BoxFit.cover, width: screenWidth),
-                          Positioned(
-                            bottom: 0, // Set the bottom position of the text
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  bottom: screenPadding, left: screenPadding),
-                              child: Text(
-                                'Help this Kids',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                SizedBox(
+                    width: screenWidth,
+                    height: screenHeight / 15,
+                    child: TopNav()),
+                SizedBox(
+                  width: screenWidth - (screenWidth * 0.1),
+                  height: screenHeight * 0.18,
+                  child: Stack(
+                    children: [
+                      Image.asset(_imagePaths[_currentIndex],
+                          fit: BoxFit.cover, width: screenWidth),
+                      Positioned(
+                        bottom: 0, // Set the bottom position of the text
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              bottom: screenPadding, left: screenPadding),
+                          child: const Text(
+                            'Help this Kids',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -94,11 +95,42 @@ class _HomePage extends State<HomePage> {
                     ),
                   ),
                 ),
-                Row(
-                  children: const [
-                    KidCard(),
-                  ],
-                ),
+                SizedBox(
+                    height: screenHeight / 3,
+                    child: BlocBuilder<HistoryBloc, HistoryState>(
+                        builder: (context, state) {
+                      if (state is HistoryInitialState) {
+                        BlocProvider.of<HistoryBloc>(context)
+                            .add(GetKidsHistory());
+                      } else if (state is HistoryLoadingState) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is HistoryFailState) {
+                        return Text(state.message);
+                      } else if (state is HistorySuccessState) {
+                        return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state.KidL.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailsPage(
+                                            kid: state.KidL[index])),
+                                  );
+                                },
+                                child: KidCard(
+                                  kid: state.KidL[index],
+                                  name: state.KidL[index].name,
+                                  image: state.KidL[index].imageUrl,
+                                  age: state.KidL[index].age,
+                                ),
+                              );
+                            });
+                      }
+                      return Container();
+                    })),
                 Padding(
                   padding: EdgeInsets.only(
                     top: screenHeight * 0.01,
@@ -112,9 +144,41 @@ class _HomePage extends State<HomePage> {
                     ),
                   ),
                 ),
-                Row(
-                  children: const [KidCard()],
-                )
+                SizedBox(
+                    height: screenHeight / 3,
+                    child: BlocBuilder<HistoryBloc, HistoryState>(
+                        builder: (context, state) {
+                      if (state is HistoryInitialState) {
+                        return Container();
+                      } else if (state is HistoryLoadingState) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is HistoryFailState) {
+                        return Text(state.message);
+                      } else if (state is HistorySuccessState) {
+                        return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state.KidL.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailsPage(
+                                            kid: state.KidL[index])),
+                                  );
+                                },
+                                child: KidCard(
+                                  kid: state.KidL[index],
+                                  name: state.KidL[index].name,
+                                  image: state.KidL[index].imageUrl,
+                                  age: state.KidL[index].age,
+                                ),
+                              );
+                            });
+                      }
+                      return Container();
+                    }))
               ],
             ),
           ),

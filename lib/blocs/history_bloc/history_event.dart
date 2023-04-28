@@ -19,9 +19,14 @@ class GetSavedKid extends HistoryEvent {
 class AddKidHistory extends HistoryEvent {
   String kidList;
 
-  AddKidHistory({
-    required this.kidList
-    });
+  AddKidHistory({required this.kidList});
+
+  @override
+  List<Object> get props => [];
+}
+
+class GetKids extends HistoryEvent {
+  GetKids();
 
   @override
   List<Object> get props => [];

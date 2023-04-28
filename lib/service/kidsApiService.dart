@@ -14,22 +14,24 @@ class KidsServiceProvider {
     await _kidsCollection.add(kid.toJson());
   }
 
-  Future getKids() async {
+  Future<List> getKids() async {
     final snapshot = await _kidsCollection.get();
-    return snapshot.docs.map((doc) {
+    final futures = snapshot.docs.map((doc) async {
       final data = doc.data() as Map<String, dynamic>;
       data['id'] = doc.id;
       final needs = data['needs'];
       List<Need> needsList = [];
 
       for (var n in needs) {
-        final need =
-            _needsProvider.getNeed(n.id).then((need) => needsList.add(need));
+        final need = await _needsProvider.getNeed(n.id);
+        needsList.add(need);
       }
 
       data['needs'] = needsList;
       return Kid.fromJson(data);
     }).toList();
+
+    return Future.wait(futures);
   }
 
   Future<Kid> getKid(String id) async {
@@ -40,8 +42,8 @@ class KidsServiceProvider {
     List<Need> needsList = [];
 
     for (var n in needs) {
-      final need =
-          _needsProvider.getNeed(n.id).then((need) => needsList.add(need));
+      final need = await _needsProvider.getNeed(n.id);
+      needsList.add(need);
     }
 
     data['needs'] = needsList;

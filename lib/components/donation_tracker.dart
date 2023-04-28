@@ -3,7 +3,6 @@ import 'package:wecare_app/models/kid_model.dart';
 
 class DonationTracker extends StatefulWidget {
   final Kid kid;
-
   const DonationTracker({super.key, required this.kid});
 
   @override
@@ -11,14 +10,11 @@ class DonationTracker extends StatefulWidget {
 }
 
 class _DonationTrackerState extends State<DonationTracker> {
-  
-
   @override
   Widget build(BuildContext context) {
-    double currently_collected = widget.kid.currentAmount();
-    double full_amount = widget.kid.fullAmount();
+    int currently_collected = widget.kid.currentAmount();
+    int full_amount = widget.kid.fullAmount();
     int donors = widget.kid.noOfDonors();
-    int days = 12;
 
     double progress_value = currently_collected / full_amount;
 
@@ -48,7 +44,7 @@ class _DonationTrackerState extends State<DonationTracker> {
             backgroundColor: Color.fromARGB(255, 230, 230, 230),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Row(
                 children: [
@@ -60,18 +56,6 @@ class _DonationTrackerState extends State<DonationTracker> {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  Text(
-                    '$days',
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                  ),
-                  Text(
-                    ' day\’s left',
-                    style: TextStyle(color: Color(0xff787878)),
-                  ),
-                ],
-              )
             ],
           )
         ],
