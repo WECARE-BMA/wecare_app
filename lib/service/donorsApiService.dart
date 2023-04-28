@@ -52,7 +52,7 @@ class DonorsServiceProvider {
     if (kids != null && savedKids != null) {
       for (var n in kids) {
         final kid = await kidsprovider.getKid(n.id);
-        kids.add(kid);
+        kidsList.add(kid);
       }
       for (var n in savedKids) {
         final kid = await kidsprovider.getKid(n.id);

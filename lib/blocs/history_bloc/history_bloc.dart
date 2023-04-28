@@ -1,17 +1,25 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wecare_app/blocs/history_bloc/history_event.dart';
 import 'package:wecare_app/blocs/history_bloc/history_state.dart';
+import 'package:wecare_app/service/donorsApiService.dart';
 import 'package:wecare_app/service/kidsApiService.dart';
 
 class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
-  final _kidsServiceProvider = KidsServiceProvider();
+  final _donorsServiceProvider = DonorsServiceProvider();
+  User? user = FirebaseAuth.instance.currentUser;
+
   List kidsList = [];
   List needList = [];
 
   HistoryBloc() : super(HistoryInitialState()) {
     on<GetKidsHistory>((event, emit) async {
       emit(HistoryLoadingState());
-      kidsList = await _kidsServiceProvider.getKids();
+      final donor = await _donorsServiceProvider.getDonor(user!.uid);
+      final kids = donor.kids;
+      for (var x in kids!) {
+        kidsList.add(x);
+      }
       emit(HistorySuccessState(KidL: kidsList));
     });
 
