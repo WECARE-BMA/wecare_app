@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wecare_app/blocs/donated_bloc/donated_bloc.dart';
+import 'package:wecare_app/blocs/donated_bloc/donated_event.dart';
 import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_event.dart';
 import 'package:wecare_app/blocs/history_bloc/history_state.dart';
@@ -152,6 +154,8 @@ class NeedsCard extends StatelessWidget {
                     ns.updateNeed(need);
                     BlocProvider.of<HistoryBloc>(context)
                       .add(GetKidsHistory());
+                    BlocProvider.of<DonatedBloc>(context)
+                      .add(GetKidsDonated());
                   },
                   child: need.isDonated ? Text('Donated') : Text('Donate'),
                     style: OutlinedButton.styleFrom(

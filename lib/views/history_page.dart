@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wecare_app/components/kid_tile.dart';
 import 'package:wecare_app/components/top_nav.dart';
-import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
-import 'package:wecare_app/blocs/history_bloc/history_event.dart';
-import 'package:wecare_app/blocs/history_bloc/history_state.dart';
+import 'package:wecare_app/blocs/donated_bloc/donated_bloc.dart';
+import 'package:wecare_app/blocs/donated_bloc/donated_event.dart';
+import 'package:wecare_app/blocs/donated_bloc/donated_state.dart';
 import 'package:wecare_app/views/details_page.dart';
 
 class HistoryPage extends StatelessWidget {
@@ -35,22 +35,15 @@ class HistoryPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: BlocBuilder<HistoryBloc, HistoryState>(builder: (context, state) {
-              if (state is HistoryInitialState) {
-              return Container(
-                child: const Text(
-                "History of your donations",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24
-                )
-                )
-              );
-            } else if (state is HistoryLoadingState) {
+              child: BlocBuilder<DonatedBloc, DonatedState>(builder: (context, state) {
+              if (state is DonatedInitialState) {
+                BlocProvider.of<DonatedBloc>(context)
+                            .add(GetKidsDonated());
+            } else if (state is DonatedLoadingState) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state is HistoryFailState) {
+            } else if (state is DonatedFailState) {
               return Text(state.message);
-            } else if (state is HistorySuccessState) {
+            } else if (state is DonatedSuccessState){
               return ListView.builder(
               itemCount: state.KidL.length,
               itemBuilder: (context, index) {

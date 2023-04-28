@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:wecare_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:wecare_app/blocs/donated_bloc/donated_bloc.dart';
 import 'package:wecare_app/blocs/nav_bloc/nav_bloc_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_event.dart';
@@ -56,7 +57,8 @@ class MyApp extends StatelessWidget {
             create: (context) => AuthBloc(),
           ),
           BlocProvider(create: (contex) => NavBloc()),
-          BlocProvider(create: (context) => HistoryBloc())
+          BlocProvider(create: (context) => HistoryBloc()),
+          BlocProvider(create: (context) => DonatedBloc())
         ],
         child: MaterialApp(
             title: 'Wecare',
