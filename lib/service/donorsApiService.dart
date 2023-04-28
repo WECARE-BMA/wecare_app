@@ -20,42 +20,60 @@ class DonorsServiceProvider {
     final snapshot = await _donorsCollection.get();
     return snapshot.docs.map((doc) {
       final data = doc.data() as Map<String, dynamic>;
-      data['id'] = doc.id;
 
       final kids = data['kids'];
       List<Kid> kidsList = [];
 
-      for (var n in kids) {
-        final kid = kidsprovider.getKid(n.id).then((kid) => kidsList.add(kid));
+      if (kids != null) {
+        for (var n in kids) {
+          final kid =
+              kidsprovider.getKid(n.id).then((kid) => kidsList.add(kid));
+        }
+        data['kids'] = kidsList;
+      } else {
+        data['kids'] = kidsList;
       }
 
-      data['kids'] = kidsList;
       return Donor.fromJson(data);
     }).toList();
   }
 
   Future<Donor> getDonor(String id) async {
-    final doc = await _donorsCollection.doc(id).get();
-    final data = doc.data() as Map<String, dynamic>;
-    data['id'] = doc.id;
+    final queryDocs = await _donorsCollection.where('id', isEqualTo: id).get();
+    ;
+    final data = queryDocs.docs.first.data() as Map<String, dynamic>;
 
     final kids = data['kids'];
     List<Kid> kidsList = [];
 
-    for (var n in kids) {
-      final kid = kidsprovider.getKid(n.id).then((kid) => kidsList.add(kid));
+    final savedKids = data['savedKids'];
+    List<Kid> savedKidsL = [];
+
+    if (kids != null && savedKids != null) {
+      for (var n in kids) {
+        final kid = await kidsprovider.getKid(n.id);
+        kidsList.add(kid);
+      }
+      for (var n in savedKids) {
+        final kid = await kidsprovider.getKid(n.id);
+        savedKidsL.add(kid);
+      }
     }
 
     data['kids'] = kidsList;
+    data['savedKids'] = savedKidsL;
 
     return Donor.fromJson(data);
   }
 
   Future<void> updateDonor(Donor donor) async {
-    await _donorsCollection
-        .doc(donor.id)
-        .update(donor.toJson())
-        .then((value) => print('Document Updated'));
+    final querySnapshot =
+        await _donorsCollection.where('id', isEqualTo: donor.id).get();
+    if (querySnapshot.docs.isNotEmpty) {
+      final docId = querySnapshot.docs.first.id;
+      await _donorsCollection.doc(docId).update(donor.toJson());
+      print('Document Updated');
+    }
   }
 
   // Future addDonor(Donor donor) async {

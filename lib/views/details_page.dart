@@ -2,11 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wecare_app/blocs/donated_bloc/donated_bloc.dart';
+import 'package:wecare_app/blocs/donated_bloc/donated_event.dart';
 import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_event.dart';
 import 'package:wecare_app/blocs/history_bloc/history_state.dart';
+import 'package:wecare_app/blocs/kid_bloc/kid_bloc.dart';
 import 'package:wecare_app/components/donation_tracker.dart';
 import 'package:wecare_app/models/kid_model.dart';
+import 'package:wecare_app/service/donorsApiService.dart';
 
 import '../service/needsApiService.dart';
 
@@ -24,18 +28,25 @@ class _DetailsPageState extends State<DetailsPage> {
     return Scaffold(
         body: SafeArea(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(  
-          alignment: Alignment.topLeft  ,
+        Container(
+          alignment: Alignment.topLeft,
           height: 250,
           width: double.infinity,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: NetworkImage(widget.kid.imageUrl), fit: BoxFit.cover, alignment: Alignment.topCenter)),
-          child: IconButton(onPressed: () {
-            Navigator.pop(context);
-          }, icon: Icon(Icons.arrow_back, color: Colors.white,)),
+                  image: NetworkImage(widget.kid.imageUrl),
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter)),
+          child: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              )),
         ),
         Padding(
           padding: const EdgeInsets.all(20),
@@ -51,24 +62,21 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
           ),
         ),
-        BlocBuilder<HistoryBloc, HistoryState>(
-            builder: (context, state) {
-          if (state is HistoryInitialState) {
+        BlocBuilder<KidBloc, KidState>(builder: (context, state) {
+          if (state is KidInitial) {
             return Container();
-          } else if (state is HistoryLoadingState) {
+          } else if (state is KidLoadingState) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is HistoryFailState) {
+          } else if (state is KidFailState) {
             return Text(state.message);
-          } else if (state is HistorySuccessState) {
+          } else if (state is KidSuccessState) {
             return Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.height * 0.05,
-              child: DonationTracker(kid: widget.kid)
-            );
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.05,
+                child: DonationTracker(kid: widget.kid));
           }
           return Container();
-          }
-        ),
+        }),
         Padding(
           padding:
               const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
@@ -88,7 +96,10 @@ class _DetailsPageState extends State<DetailsPage> {
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
               ),
-              NeedsCard(needs: widget.kid.needs)
+              NeedsCard(
+                needs: widget.kid.needs,
+                kid: widget.kid,
+              )
             ],
           ),
         )
@@ -99,11 +110,14 @@ class _DetailsPageState extends State<DetailsPage> {
 
 class NeedsCard extends StatelessWidget {
   final List? needs;
-  const NeedsCard({super.key, required this.needs});
+  final Kid kid;
+  const NeedsCard({super.key, required this.needs, required this.kid});
 
   @override
   Widget build(BuildContext context) {
     NeedsServiceProvider ns = NeedsServiceProvider();
+    DonorsServiceProvider ds = DonorsServiceProvider();
+    User? user = FirebaseAuth.instance.currentUser;
     return Container(
       height: 350,
       child: ListView.builder(
@@ -136,35 +150,44 @@ class NeedsCard extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                BlocBuilder<HistoryBloc, HistoryState>(
-            builder: (context, state) {
-          if (state is HistoryInitialState) {
-            return Container();
-          } else if (state is HistoryLoadingState) {
-            return Container();
-          } else if (state is HistoryFailState) {
-            return Text(state.message);
-          } else if (state is HistorySuccessState) {
-            return OutlinedButton(
-                  onPressed: need.isDonated ? null : ()  {
-                    need.isDonated = true;
-                    need.donor = FirebaseAuth.instance.currentUser?.uid;
-                    ns.updateNeed(need);
-                    BlocProvider.of<HistoryBloc>(context)
-                      .add(GetKidsHistory());
-                  },
-                  child: need.isDonated ? Text('Donated') : Text('Donate'),
-                    style: OutlinedButton.styleFrom(
-                    side: BorderSide(
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  ),
-                );
-          }
-          return Container();
-          }
-        ),
-                
+                BlocBuilder<KidBloc, KidState>(builder: (context, state) {
+                  if (state is KidInitial) {
+                    return Container();
+                  } else if (state is KidLoadingState) {
+                    return Container();
+                  } else if (state is KidFailState) {
+                    return Text(state.message);
+                  } else if (state is KidSuccessState) {
+                    return OutlinedButton(
+                      onPressed: need.isDonated
+                          ? null
+                          : () async {
+                              need.isDonated = true;
+                              need.donor = user!.uid;
+
+                              ns.updateNeed(need);
+
+                              var donor = await ds.getDonor(user.uid);
+                              List<Kid> kidsList = donor.kids ?? [];
+                              kidsList.add(kid);
+                              donor.kids = kidsList;
+
+                              ds.updateDonor(donor);
+
+                              BlocProvider.of<KidBloc>(context).add(GetKids());
+                              BlocProvider.of<DonatedBloc>(context)
+                                  .add(GetKidsDonated());
+                            },
+                      child: need.isDonated ? Text('Donated') : Text('Donate'),
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    );
+                  }
+                  return Container();
+                }),
               ],
             ),
           );
