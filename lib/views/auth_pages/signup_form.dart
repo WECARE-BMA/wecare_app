@@ -93,6 +93,8 @@ class _SignupFormState extends State<SignupForm> {
                                           backgroundColor: Colors.grey.shade200,
                                           foregroundColor: Colors.black87),
                                       onPressed: () {
+                                        Navigator.of(context).pop();
+
                                         openImagePicker(ImageSource.camera);
                                       },
                                       child: Container(
@@ -110,6 +112,7 @@ class _SignupFormState extends State<SignupForm> {
                                           backgroundColor: Colors.grey.shade200,
                                           foregroundColor: Colors.black87),
                                       onPressed: () async {
+                                        Navigator.of(context).pop();
                                         openImagePicker(ImageSource.gallery);
                                       },
                                       child: Container(

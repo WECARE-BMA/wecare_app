@@ -1,7 +1,7 @@
 import 'package:wecare_app/db/database_repo.dart';
 import 'package:wecare_app/models/donor_model.dart';
 
-class Service {
+class DonorDBService {
   Repository? _repository;
 
   Service() {
@@ -9,14 +9,19 @@ class Service {
   }
 
   saveDonor(Donor donor) async {
-    return await _repository!.insertData('donor', donor.toJson());
+    final x = await _repository!.insertData('donor', donor.toJson());
+    return x;
   }
 
   readDonor() async {
-    return await _repository!.readData('donor');
+    return await _repository?.readData('donor');
   }
 
-  deleteDonor(dispatchId) async {
-    return await _repository!.deleteData('donor', dispatchId);
+  readOneDonor(donorId) async {
+    return await _repository?.readDataId('donor', donorId);
+  }
+
+  deleteDonor(donorId) async {
+    return await _repository!.deleteData('donor', donorId);
   }
 }

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:wecare_app/db/hive_service.dart';
 import 'package:wecare_app/models/donor_model.dart';
 import 'package:wecare_app/service/donorsApiService.dart';
 import 'package:wecare_app/service/firestorageService.dart';
@@ -14,6 +15,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthLoadingState()) {
     final FirebaseAuth _firebaseAuth;
     _firebaseAuth = FirebaseAuth.instance;
+    DonorsServiceProvider donorsServiceProvider = DonorsServiceProvider();
+    HiveService hiveService = HiveService(boxName: 'donor');
 
     on<LoginEvent>(
       (event, emit) async {
@@ -23,6 +26,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             email: event.email,
             password: event.password,
           );
+
+          Donor donor =
+              await donorsServiceProvider.getDonor(userCredential.user!.uid);
+
+          await hiveService
+              .addData(donor.id, donor)
+              .then((value) => print('donor stored in hive'));
+
           emit(AuthAuthenticatedState(userCredential.user!));
         } on FirebaseAuthException catch (e) {
           emit(AuthFailedState(e.toString()));
@@ -33,6 +44,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LogoutEvent>(
       (event, emit) async {
         try {
+          await hiveService.deleteData(_firebaseAuth.currentUser!.uid);
           await _firebaseAuth.signOut();
           emit(AuthUnauthenticatedState());
         } catch (e) {
@@ -64,6 +76,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           );
 
           await donorsServiceProvider.addDonor(donor);
+
+          await hiveService
+              .addData(donor.id, donor)
+              .then((value) => print('donor stored in hive'));
 
           emit(AuthAuthenticatedState(userCredential.user!));
         } catch (e) {

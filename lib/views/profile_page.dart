@@ -15,35 +15,41 @@ class ProfilePage extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        // child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-                height: screenHeight / 3.1,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/background.png'),
-                        fit: BoxFit.cover)),
-                child: Image.asset('assets/images/logo.png')),
-            BlocBuilder<DonorBloc, DonorState>(builder: (context, state) {
-              if (state is DonorInitialState) {
-                BlocProvider.of<DonorBloc>(context).add(GetKidsDonor());
-              } else if (state is DonorLoadingState) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is DonorFailState) {
-                return Text(state.message);
-              } else if (state is DonorSuccessState) {
-                return ProfileComponent(
-                  donor: state.donors,
-                );
-              }
-              return Container();
-            }),
-          ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await BlocProvider.of<DonorBloc>(context)
+            ..add(GetKidsDonor());
+        },
+        child: Container(
+          color: Colors.white,
+          // child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  height: screenHeight / 3.1,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/background.png'),
+                          fit: BoxFit.cover)),
+                  child: Image.asset('assets/images/logo.png')),
+              BlocBuilder<DonorBloc, DonorState>(builder: (context, state) {
+                if (state is DonorInitialState) {
+                  BlocProvider.of<DonorBloc>(context).add(GetKidsDonor());
+                } else if (state is DonorLoadingState) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is DonorFailState) {
+                  return Text(state.message);
+                } else if (state is DonorSuccessState) {
+                  return ProfileComponent(
+                    donor: state.donors,
+                  );
+                }
+                return Container();
+              }),
+            ],
+          ),
         ),
       ),
     );

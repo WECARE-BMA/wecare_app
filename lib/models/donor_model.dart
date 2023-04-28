@@ -42,6 +42,18 @@ class Donor {
     return json;
   }
 
+  forDB() {
+    Map<String, dynamic> json = {};
+    json['id'] = id;
+    json['name'] = name;
+    json['image'] = image;
+    json['description'] = description;
+    json['kids'] = kids?.map((e) => e.forDB()).toList();
+    json['savedKids'] = savedKids?.map((e) => e.forDB()).toList();
+
+    return json;
+  }
+
   static List DonorList(List donors) {
     List parsedDonors = [];
     for (var i = 0; i < donors.length; i++) {
