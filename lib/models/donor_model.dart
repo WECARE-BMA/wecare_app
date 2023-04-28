@@ -72,11 +72,11 @@ class Donor {
     return parsedDonors;
   }
 
-  int getCauses() {
+  int getCauses(List<Kid>? kid) {
     int count = 0;
-    if (kids != null) {
-      for (final kid in kids!) {
-        for (final need in kid.needs) {
+    if (kid != null) {
+      for (final kid1 in kid!) {
+        for (final need in kid1.needs) {
           if (need.donor == id) {
             count++;
           }
@@ -86,11 +86,11 @@ class Donor {
     return count;
   }
 
-  String getTotalDonatedAmount() {
+  String getTotalDonatedAmount(List<Kid>? kid) {
     int total = 0;
-    if (kids != null) {
-      for (final kid in kids!) {
-        for (final need in kid.needs) {
+    if (kid != null) {
+      for (final kid1 in kid) {
+        for (final need in kid1.needs) {
           if (need.donor == id) {
             total += need.amount;
           }

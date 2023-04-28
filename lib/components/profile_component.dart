@@ -3,18 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wecare_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:wecare_app/models/donor_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:wecare_app/models/kid_model.dart';
 
 class ProfileComponent extends StatelessWidget {
   final Donor donor;
+  final List<Kid>? kid;
 
-  const ProfileComponent({super.key, required this.donor});
+  const ProfileComponent({super.key, required this.donor, required this.kid});
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    final causes = donor.getCauses();
-    final total = donor.getTotalDonatedAmount();
+    final causes = donor.getCauses(kid);
+    final total = donor.getTotalDonatedAmount(kid);
 
     return Column(
       children: [

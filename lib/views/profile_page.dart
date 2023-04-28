@@ -46,6 +46,7 @@ class ProfilePage extends StatelessWidget {
                 } else if (state is DonorSuccessState) {
                   return ProfileComponent(
                     donor: state.donors,
+                    kid: state.kids,
                   );
                 }
                 return Container();
