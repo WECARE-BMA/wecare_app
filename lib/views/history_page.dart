@@ -29,32 +29,35 @@ class HistoryPage extends StatelessWidget {
             Expanded(child: BlocBuilder<HistoryBloc, HistoryState>(
                 builder: (context, state) {
               if (state is HistoryInitialState) {
-                return Container();
+                BlocProvider.of<HistoryBloc>(context).add(GetKids());
               } else if (state is HistoryLoadingState) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is HistoryFailState) {
                 return Text(state.message);
-              } else if (state is HistorySuccessState) {
-                return ListView.builder(
-                    itemCount: state.KidL.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      DetailsPage(kid: state.KidL[index])),
-                            );
-                          },
-                          child: KidTile(
-                            kid: state.KidL[index],
-                            name: state.KidL[index].name,
-                            image: state.KidL[index].imageUrl,
-                            age: state.KidL[index].age,
-                            description: state.KidL[index].description,
-                          ));
-                    });
+              } else if (state is KidsSuccessState) {
+                print(state.KidL);
+                return state.KidL.length == 0
+                    ? Center(child: Text('You haven\'t donated yet'))
+                    : ListView.builder(
+                        itemCount: state.KidL.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          DetailsPage(kid: state.KidL[index])),
+                                );
+                              },
+                              child: KidTile(
+                                kid: state.KidL[index],
+                                name: state.KidL[index].name,
+                                image: state.KidL[index].imageUrl,
+                                age: state.KidL[index].age,
+                                description: state.KidL[index].description,
+                              ));
+                        });
               }
               return Container();
             }))

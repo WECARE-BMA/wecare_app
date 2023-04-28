@@ -14,20 +14,29 @@ class HistoryLoadingState extends HistoryState {
   List<Object> get props => [];
 }
 
-
 class HistorySuccessState extends HistoryState {
   final List KidL;
 
   HistorySuccessState({
-    required this.KidL, 
+    required this.KidL,
   });
-  
+
   @override
   // TODO: implement props
   List<Object> get props => [];
 }
 
+class KidsSuccessState extends HistoryState {
+  final List KidL;
 
+  KidsSuccessState({
+    required this.KidL,
+  });
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+}
 
 class HistoryFailState extends HistoryState {
   String message;
@@ -38,4 +47,3 @@ class HistoryFailState extends HistoryState {
   // TODO: implement props
   List<Object> get props => [];
 }
-

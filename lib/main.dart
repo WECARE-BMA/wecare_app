@@ -1,4 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:wecare_app/blocs/nav_bloc/nav_bloc_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
 import 'package:wecare_app/blocs/history_bloc/history_event.dart';
 import 'package:wecare_app/firebase_options.dart';
+import 'package:wecare_app/service/HiveService.dart';
 import 'package:wecare_app/service/kidsApiService.dart';
 import 'package:wecare_app/views/app_screen.dart';
 import 'package:wecare_app/views/auth_pages/signin_page.dart';

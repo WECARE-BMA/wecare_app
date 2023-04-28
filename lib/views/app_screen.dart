@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
+import 'package:wecare_app/blocs/history_bloc/history_event.dart';
 import 'package:wecare_app/blocs/nav_bloc/nav_bloc_bloc.dart';
 import 'package:wecare_app/views/history_page.dart';
 import 'package:wecare_app/views/home_page.dart';
@@ -29,6 +31,7 @@ class _AppScreenState extends State<AppScreen> {
           } else if (state is ProfilePageLoaded) {
             return ProfilePage();
           } else if (state is HistoryPageLoaded) {
+            BlocProvider.of<HistoryBloc>(context).add(GetKids());
             return HistoryPage();
           }
 

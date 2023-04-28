@@ -3,19 +3,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wecare_app/blocs/history_bloc/history_event.dart';
 import 'package:wecare_app/blocs/history_bloc/history_state.dart';
 import 'package:wecare_app/models/donor_model.dart';
-import 'package:wecare_app/service/donorLocalDBService.dart';
+import 'package:wecare_app/service/HiveService.dart';
 import 'package:wecare_app/service/kidLocalDBService.dart';
 import 'package:wecare_app/service/kidsApiService.dart';
+import 'package:wecare_app/service/needLocalDBService.dart';
 
 class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   final _kidsServiceProvider = KidsServiceProvider();
   final KidDBService kidDBService = KidDBService();
-  final DonorDBService donorDBService = DonorDBService();
+  final HiveService hiveService = HiveService();
+  final NeedDBService needDBService = NeedDBService();
 
   final User? currentUser = FirebaseAuth.instance.currentUser;
 
   List kidsList = [];
-  List savedList = [];
   List needList = [];
 
   HistoryBloc() : super(HistoryInitialState()) {
@@ -25,32 +26,22 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
       emit(HistorySuccessState(KidL: kidsList));
     });
 
-    on<GetSavedKid>((event, emit) async {
-      emit(HistoryLoadingState());
-      savedList = await _kidsServiceProvider.getKids();
-      emit(HistorySuccessState(KidL: savedList));
-    });
-
     on<AddKidHistory>((event, emit) {
       emit(HistoryLoadingState());
-      kidsList.add(event.kidList);
 
       emit(HistorySuccessState(KidL: kidsList));
     });
 
     on<GetKids>(((event, emit) async {
       emit(HistoryLoadingState());
-      final donors = await donorDBService.getDonors();
+      print(currentUser!.uid);
 
-      late Donor donor;
+      final donorJson = await hiveService.read('donors', currentUser!.uid);
 
-      for (var d in donors) {
-        if (d.id == currentUser!.uid) {
-          donor = d;
-        }
-      }
-
-      kidsList = donor.kids!;
+      kidsList = Donor.fromJson(donorJson).kids == null
+          ? []
+          : Donor.fromJson(donorJson).kids!;
+      emit(KidsSuccessState(KidL: kidsList));
     }));
   }
 }
