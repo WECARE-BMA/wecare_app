@@ -9,6 +9,7 @@ class Kid {
   String imageUrl;
   List<Need> needs;
   bool isSaved;
+  bool isUrgent;
 
   Kid(
       {required this.id,
@@ -17,7 +18,8 @@ class Kid {
       required this.description,
       required this.imageUrl,
       required this.needs,
-      required this.isSaved});
+      required this.isSaved,
+      required this.isUrgent});
 
   factory Kid.fromJson(Map<String, dynamic> parsedJson) {
     return Kid(
@@ -29,7 +31,10 @@ class Kid {
             ? parsedJson['image']
             : parsedJson['imageUrl'],
         needs: parsedJson['needs'],
-        isSaved: parsedJson['isSaved']);
+        isSaved: parsedJson['isSaved'],
+        isUrgent: parsedJson.containsKey('isUrgent')
+            ? parsedJson['isUrgent']
+            : false);
   }
 
   toJson() {
@@ -42,6 +47,7 @@ class Kid {
     json['needs'] = needs
         .map((e) => FirebaseFirestore.instance.collection('needs').doc(e.id));
     json['isSaved'] = isSaved;
+    json['isUrgent'] = isUrgent;
 
     return json;
   }
