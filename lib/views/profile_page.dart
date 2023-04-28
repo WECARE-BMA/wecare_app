@@ -6,7 +6,7 @@ import 'package:wecare_app/blocs/donor_bloc/donor_event.dart';
 import 'package:wecare_app/blocs/donor_bloc/donor_state.dart';
 import 'package:wecare_app/components/profile_component.dart';
 import 'package:wecare_app/main.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -24,7 +24,7 @@ class ProfilePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-                height: screenHeight / 3.3,
+                height: screenHeight * 0.32,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                     image: DecorationImage(
@@ -45,6 +45,28 @@ class ProfilePage extends StatelessWidget {
               }
               return Container();
             }),
+            Padding(
+              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.12, right: MediaQuery.of(context).size.width * 0.12, top: MediaQuery.of(context).size.height * 0.04 ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                  onTap: () => Locales.change(context, 'en'),
+                  child: Text('English', 
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor, 
+                    fontSize: 18)),
+                  ),
+                  GestureDetector(
+                  onTap: () => Locales.change(context, 'am'),
+                  child: Text('አማርኛ', 
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor, 
+                    fontSize: 18)),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),

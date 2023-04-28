@@ -25,9 +25,9 @@ class HistoryPage extends StatelessWidget {
           children: [
             Container(
                 width: screenWidth, height: screenHeight / 13, child: TopNav()),
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(15.0),
-              child: Text("History of your donations",
+              child: Text(AppLocalizations.of(context)!.history,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
             ),
             Expanded(child: BlocBuilder<DonatedBloc, DonatedState>(

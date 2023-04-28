@@ -3,6 +3,9 @@
     "urgent": "Urgent Fundraising",
     "newf": "New Fundraising",
     "history": "History of your donations",
+    "saved": "Saved for later donations",
     "logout": "Logout",
-    "edit": "Edit Profile"
+    "edit": "Edit Profile",
+    "donation": "Donations",
+    "causes": "Causes"
 }
