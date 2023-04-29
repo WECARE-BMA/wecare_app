@@ -74,7 +74,7 @@ class Donor {
   int getCauses(List<Kid>? kid) {
     int count = 0;
     if (kid != null) {
-      for (final kid1 in kid!) {
+      for (final kid1 in kid) {
         for (final need in kid1.needs) {
           if (need.donor == id) {
             count++;
