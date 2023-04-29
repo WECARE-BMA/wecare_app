@@ -47,7 +47,6 @@ class Donor {
         .map((e) => FirebaseFirestore.instance.collection('kids').doc(e.id));
     json['savedKids'] = savedKids!
         .map((e) => FirebaseFirestore.instance.collection('kids').doc(e.id));
-    ;
     return json;
   }
 
@@ -61,14 +60,6 @@ class Donor {
     json['savedKids'] = savedKids?.map((e) => e.forDB()).toList();
 
     return json;
-  }
-
-  static List DonorList(List donors) {
-    List parsedDonors = [];
-    for (var i = 0; i < donors.length; i++) {
-      parsedDonors.add(Donor.fromJson(donors[i]));
-    }
-    return parsedDonors;
   }
 
   int getCauses(List<Kid>? kid) {

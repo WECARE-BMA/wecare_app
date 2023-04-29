@@ -1,7 +1,5 @@
 import 'package:hive/hive.dart';
 import 'package:wecare_app/models/donor_model.dart';
-import 'package:wecare_app/models/kid_model.dart';
-import 'package:wecare_app/models/need_model.dart';
 
 class HiveService {
   final String boxName;

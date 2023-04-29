@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wecare_app/blocs/history_bloc/history_event.dart';
 import 'package:wecare_app/blocs/history_bloc/history_state.dart';
-import 'package:wecare_app/models/kid_model.dart';
 import 'package:wecare_app/service/donorsApiService.dart';
 import 'package:wecare_app/service/kidsApiService.dart';
 

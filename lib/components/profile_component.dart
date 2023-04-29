@@ -28,10 +28,10 @@ class ProfileComponent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(AppLocalizations.of(context)!.causes,
-                      style: TextStyle(fontSize: 14, color: Colors.grey)),
+                      style: const TextStyle(fontSize: 14, color: Colors.grey)),
                   Text("$causes",
                       style:
-                          TextStyle(fontWeight: FontWeight.w800, fontSize: 30))
+                          const TextStyle(fontWeight: FontWeight.w800, fontSize: 30))
                 ],
               ),
             ),
@@ -43,10 +43,10 @@ class ProfileComponent extends StatelessWidget {
               child: Column(
                 children: [
                   Text(AppLocalizations.of(context)!.donation,
-                      style: TextStyle(fontSize: 14, color: Colors.grey)),
+                      style: const TextStyle(fontSize: 14, color: Colors.grey)),
                   Text("\$$total",
                       style:
-                          TextStyle(fontWeight: FontWeight.w800, fontSize: 30))
+                          const TextStyle(fontWeight: FontWeight.w800, fontSize: 30))
                 ],
               ),
             ),
@@ -83,33 +83,22 @@ class ProfileComponent extends StatelessWidget {
         SizedBox(
           height: screenHeight / 46.6,
         ),
-        // OutlinedButton(
-        //   onPressed: () {},
-        //   child: Text('Edit Profile',
-        //       style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
-        //   style: OutlinedButton.styleFrom(
-        //     side: BorderSide(
-        //       color:
-        //           Theme.of(context).primaryColor, // set the border color here
-        //     ),
-        //   ),
-        // ),
         SizedBox(height: screenHeight / 93.2),
         OutlinedButton(
           onPressed: () {
             BlocProvider.of<AuthBloc>(context).add(LogoutEvent());
             Navigator.popAndPushNamed(context, '/signInPage');
           },
-          child: Text(AppLocalizations.of(context)!.logout,
-              style: TextStyle(
-                  color: Color.fromARGB(228, 202, 60, 50),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18)),
           style: OutlinedButton.styleFrom(
             side: const BorderSide(
               color: Color.fromARGB(228, 202, 60, 50),
             ),
           ),
+          child: Text(AppLocalizations.of(context)!.logout,
+              style: const TextStyle(
+                  color: Color.fromARGB(228, 202, 60, 50),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18)),
         )
       ],
     );

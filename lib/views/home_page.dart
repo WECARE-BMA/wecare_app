@@ -1,14 +1,7 @@
-// ignore_for_file: camel_case_types, library_private_types_in_public_api
-
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wecare_app/blocs/history_bloc/history_bloc.dart';
-import 'package:wecare_app/blocs/history_bloc/history_event.dart';
-import 'package:wecare_app/blocs/history_bloc/history_state.dart';
 import 'package:wecare_app/blocs/kid_bloc/kid_bloc.dart';
 import 'package:wecare_app/components/kid_card.dart';
-import 'package:wecare_app/components/kid_tile.dart';
 import 'package:wecare_app/components/top_nav.dart';
 import 'package:wecare_app/views/details_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -59,7 +52,7 @@ class _HomePage extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TopNav(),
+                const TopNav(),
                 SizedBox(
                   width: screenWidth - (screenWidth * 0.1),
                   height: screenHeight * 0.18,
@@ -74,7 +67,7 @@ class _HomePage extends State<HomePage> {
                               bottom: screenPadding, left: screenPadding),
                           child: Text(
                             AppLocalizations.of(context)!.help,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,
@@ -89,13 +82,11 @@ class _HomePage extends State<HomePage> {
                   padding: EdgeInsets.only(
                     top: screenHeight * 0.01,
                   ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      AppLocalizations.of(context)!.urgent,
-                      style: TextStyle(
-                          fontSize: 22.0, fontWeight: FontWeight.bold),
-                    ),
+                  child: Text(
+                    textAlign: TextAlign.left,
+                    AppLocalizations.of(context)!.urgent,
+                    style: const TextStyle(
+                      fontSize: 22.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(
@@ -138,14 +129,12 @@ class _HomePage extends State<HomePage> {
                   padding: EdgeInsets.only(
                     top: screenHeight * 0.01,
                   ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
+                  child: Text(
+                      textAlign: TextAlign.left,
                       AppLocalizations.of(context)!.newf,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 22.0, fontWeight: FontWeight.bold),
                     ),
-                  ),
                 ),
                 SizedBox(
                     height: screenHeight * 0.36,

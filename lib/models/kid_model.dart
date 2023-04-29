@@ -66,16 +66,6 @@ class Kid {
     return json;
   }
 
-  static List<Kid>? kidList(List kids) {
-    List<Kid> parsedKids = [];
-    for (var i = 0; i < kids.length; i++) {
-      parsedKids.add(Kid.fromJson(kids[i]));
-    }
-    return parsedKids;
-  }
-
-  static void add(Kid kid) {}
-
   int fullAmount() {
     List<int> amounts = needs.map((need) => need.amount).toList();
     int sum = amounts.reduce((int value, int element) => value + element);
