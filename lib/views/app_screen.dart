@@ -4,6 +4,7 @@ import 'package:wecare_app/blocs/nav_bloc/nav_bloc_bloc.dart';
 import 'package:wecare_app/views/history_page.dart';
 import 'package:wecare_app/views/home_page.dart';
 import 'package:wecare_app/views/profile_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppScreen extends StatefulWidget {
   const AppScreen({super.key});
@@ -48,13 +49,16 @@ class _AppScreenState extends State<AppScreen> {
               selectedLabelStyle: TextStyle(color: Colors.black),
               elevation: 0,
               backgroundColor: Colors.white,
-              items: const <BottomNavigationBarItem>[
+              items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.receipt_long_rounded), label: 'History'),
+                    icon: Icon(Icons.receipt_long_rounded),
+                    label: AppLocalizations.of(context)!.historybn),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.home_rounded), label: 'Home'),
+                    icon: Icon(Icons.home_rounded),
+                    label: AppLocalizations.of(context)!.home),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.person_2), label: 'Profile'),
+                    icon: Icon(Icons.person_2),
+                    label: AppLocalizations.of(context)!.profile),
               ],
               onTap: (index) =>
                   context.read<NavBloc>().add(ClickedPageButton(index: index)),
