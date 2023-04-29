@@ -21,6 +21,9 @@ class DetailsPage extends StatefulWidget {
 class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
         body: SafeArea(
             child: Column(
@@ -28,7 +31,7 @@ class _DetailsPageState extends State<DetailsPage> {
       children: [
         Container(
           alignment: Alignment.topLeft,
-          height: 250,
+          height: screenHeight * 0.3,
           width: double.infinity,
           decoration: BoxDecoration(
               image: DecorationImage(
@@ -51,32 +54,38 @@ class _DetailsPageState extends State<DetailsPage> {
             child: Text(
               textAlign: TextAlign.start,
               widget.kid.name,
-              style: const TextStyle(
-                  fontSize: 28,
+              style: TextStyle(
+                  fontSize: screenHeight * 0.04,
                   fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 0, 0, 0)),
+                  color: const Color.fromARGB(255, 0, 0, 0)),
             ),
           ),
         ),
-        BlocBuilder<KidBloc, KidState>(builder: (context, state) {
-          if (state is KidInitial) {
+        SizedBox(
+          height: screenHeight * 0.07,
+          child: BlocBuilder<KidBloc, KidState>(builder: (context, state) {
+            if (state is KidInitial) {
+              return Container();
+            } else if (state is KidLoadingState) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is KidFailState) {
+              return Text(state.message);
+            } else if (state is KidSuccessState) {
+              return SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  child: DonationTracker(kid: widget.kid));
+            }
             return Container();
-          } else if (state is KidLoadingState) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is KidFailState) {
-            return Text(state.message);
-          } else if (state is KidSuccessState) {
-            return SizedBox(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.05,
-                child: DonationTracker(kid: widget.kid));
-          }
-          return Container();
-        }),
-        const Padding(
-          padding:
-              EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-          child: Divider(
+          }),
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+              left: screenWidth * 0.06,
+              right: screenWidth * 0.06,
+              top: screenHeight * 0.009,
+              bottom: screenHeight * 0.009),
+          child: const Divider(
             thickness: 2,
           ),
         ),
@@ -85,11 +94,13 @@ class _DetailsPageState extends State<DetailsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(bottom: 5),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 5),
                 child: Text(
                   'Needs',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: screenHeight * 0.03,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               NeedsCard(
@@ -111,11 +122,14 @@ class NeedsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     NeedsServiceProvider ns = NeedsServiceProvider();
     DonorsServiceProvider ds = DonorsServiceProvider();
     User? user = FirebaseAuth.instance.currentUser;
     return SizedBox(
-      height: 350,
+      height: screenHeight * 0.37,
       child: ListView.builder(
         itemCount: needs!.length,
         itemBuilder: (BuildContext context, int index) {
@@ -126,7 +140,10 @@ class NeedsCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.asset('assets/images/need_icon.png'),
+                Image.asset(
+                  'assets/images/need_icon.png',
+                  width: screenWidth * 0.15,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Column(
@@ -135,8 +152,9 @@ class NeedsCard extends StatelessWidget {
                     children: [
                       Text(
                         need.name,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: screenHeight * 0.025,
+                            fontWeight: FontWeight.bold),
                       ),
                       Text(
                         need.amount.toString(),

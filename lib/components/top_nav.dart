@@ -28,16 +28,6 @@ class TopNav extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
-                // IconButton(
-                //   onPressed: () {
-                   
-                //   },
-                //   icon: Icon(
-                //     Icons.notifications_none_outlined,
-                //     size: 30,
-                //     color: Theme.of(context).primaryColor,
-                //   ),
-                // ),
               ],
             ),
           ],

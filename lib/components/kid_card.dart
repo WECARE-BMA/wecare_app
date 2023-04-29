@@ -33,7 +33,7 @@ class KidCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: screenHeight / 2.9,
+        height: screenHeight / 6,
         width: screenWidth / 1.7,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
@@ -66,15 +66,15 @@ class KidCard extends StatelessWidget {
                         children: [
                           Text(
                             name,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 20,
+                              fontSize: screenHeight * 0.03,
                             ),
                           ),
                           Text(
                             '$age',
-                            style: const TextStyle(
-                              fontSize: 14.0,
+                            style: TextStyle(
+                              fontSize: screenHeight * 0.019,
                               color: Colors.black,
                             ),
                           ),

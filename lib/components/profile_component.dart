@@ -37,7 +37,7 @@ class ProfileComponent extends StatelessWidget {
             ),
             CircleAvatar(
               backgroundImage: NetworkImage(donor.image),
-              radius: 90,
+              radius: screenHeight / 10,
             ),
             Expanded(
               child: Column(
@@ -63,8 +63,10 @@ class ProfileComponent extends StatelessWidget {
                 children: [
                   Text(
                     donor.name,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w800, fontSize: 40, height: 1.0),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: screenHeight / 25,
+                        height: 1.0),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
@@ -72,24 +74,15 @@ class ProfileComponent extends StatelessWidget {
                   ),
                   Text(
                     donor.description,
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
                     textAlign: TextAlign.center,
                   )
                 ])),
         SizedBox(
           height: screenHeight / 46.6,
         ),
-        // OutlinedButton(
-        //   onPressed: () {},
-        //   child: Text('Edit Profile',
-        //       style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
-        //   style: OutlinedButton.styleFrom(
-        //     side: BorderSide(
-        //       color:
-        //           Theme.of(context).primaryColor, // set the border color here
-        //     ),
-        //   ),
-        // ),
         SizedBox(height: screenHeight / 93.2),
         OutlinedButton(
           onPressed: () {

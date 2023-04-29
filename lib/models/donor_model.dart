@@ -25,17 +25,16 @@ class Donor {
         description: parsedJson['description'],
         kids: parsedJson['kids'],
         savedKids:
-            parsedJson.containsKey('savedKids') ? parsedJson['savedKids'] : []
-      );
+            parsedJson.containsKey('savedKids') ? parsedJson['savedKids'] : []);
   }
-  
+
   factory Donor.fromJsonLDB(Map<String, dynamic> parsedJson) {
     return Donor(
-        id: parsedJson['id'],
-        name: parsedJson['name'],
-        image: parsedJson['image'],
-        description: parsedJson['description'],
-      );
+      id: parsedJson['id'],
+      name: parsedJson['name'],
+      image: parsedJson['image'],
+      description: parsedJson['description'],
+    );
   }
 
   toJson() {
