@@ -17,6 +17,7 @@ class _DonationTrackerState extends State<DonationTracker> {
 
     int currentlyCollected = widget.kid.currentAmount();
     int fullAmount = widget.kid.fullAmount();
+
     int donors = widget.kid.noOfDonors();
 
     double progressValue = currentlyCollected / fullAmount;
@@ -37,6 +38,7 @@ class _DonationTrackerState extends State<DonationTracker> {
                     fontSize: screenHeight * 0.02),
               ),
               Text(
+
                 'fund raised from \$$fullAmount',
                 style: TextStyle(
                     color: Color(0xff787878), fontSize: screenHeight * 0.02),
