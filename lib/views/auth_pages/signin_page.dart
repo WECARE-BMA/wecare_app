@@ -186,7 +186,7 @@ class _SigninFormState extends State<SigninForm> {
                         ),
                 ),
                 TextButton(
-                    child: Text('Have an account?',
+                    child: Text("Don't have an account?",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Color(0xff787878))),
                     onPressed: () =>
