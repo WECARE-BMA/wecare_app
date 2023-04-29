@@ -99,7 +99,7 @@ class _HomePage extends State<HomePage> {
                   ),
                 ),
                 SizedBox(
-                    height: screenHeight / 3,
+                    height: screenHeight * 0.36,
                     child: BlocBuilder<KidBloc, KidState>(
                         builder: (context, state) {
                       if (state is KidInitial) {
@@ -109,24 +109,25 @@ class _HomePage extends State<HomePage> {
                       } else if (state is KidFailState) {
                         return Text(state.message);
                       } else if (state is KidSuccessState) {
+                        final uKidList = state.uKidList;
                         return ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: state.uKidList.length,
+                            itemCount: uKidList.length,
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => DetailsPage(
-                                            kid: state.uKidList[index])),
+                                        builder: (context) =>
+                                            DetailsPage(kid: uKidList[index])),
                                   );
                                 },
                                 child: KidCard(
-                                  kid: state.uKidList[index],
-                                  name: state.uKidList[index].name,
-                                  image: state.uKidList[index].imageUrl,
-                                  age: state.uKidList[index].age,
+                                  kid: uKidList[index],
+                                  name: uKidList[index].name,
+                                  image: uKidList[index].imageUrl,
+                                  age: uKidList[index].age,
                                 ),
                               );
                             });
@@ -147,7 +148,7 @@ class _HomePage extends State<HomePage> {
                   ),
                 ),
                 SizedBox(
-                    height: screenHeight / 3,
+                    height: screenHeight * 0.36,
                     child: BlocBuilder<KidBloc, KidState>(
                         builder: (context, state) {
                       if (state is KidInitial) {
@@ -156,24 +157,25 @@ class _HomePage extends State<HomePage> {
                       } else if (state is KidFailState) {
                         return Text(state.message);
                       } else if (state is KidSuccessState) {
+                        final lKidList = state.lKidList;
                         return ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: state.lKidList.length,
+                            itemCount: lKidList.length,
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => DetailsPage(
-                                            kid: state.lKidList[index])),
+                                        builder: (context) =>
+                                            DetailsPage(kid: lKidList[index])),
                                   );
                                 },
                                 child: KidCard(
-                                  kid: state.lKidList[index],
-                                  name: state.lKidList[index].name,
-                                  image: state.lKidList[index].imageUrl,
-                                  age: state.lKidList[index].age,
+                                  kid: lKidList[index],
+                                  name: lKidList[index].name,
+                                  image: lKidList[index].imageUrl,
+                                  age: lKidList[index].age,
                                 ),
                               );
                             });

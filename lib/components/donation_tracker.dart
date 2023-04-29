@@ -10,10 +10,11 @@ class DonationTracker extends StatefulWidget {
 }
 
 class _DonationTrackerState extends State<DonationTracker> {
-
-
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     int currently_collected = widget.kid.currentAmount();
     int full_amount = widget.kid.fullAmount();
     int donors = widget.kid.noOfDonors();
@@ -33,11 +34,12 @@ class _DonationTrackerState extends State<DonationTracker> {
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.normal,
-                    fontSize: 15),
+                    fontSize: screenHeight * 0.02),
               ),
               Text(
                 'fund raised from \$$full_amount',
-                style: TextStyle(color: Color(0xff787878)),
+                style: TextStyle(
+                    color: Color(0xff787878), fontSize: screenHeight * 0.02),
               )
             ],
           ),
@@ -54,7 +56,9 @@ class _DonationTrackerState extends State<DonationTracker> {
                       style: TextStyle(color: Theme.of(context).primaryColor)),
                   Text(
                     'Donator\'s',
-                    style: TextStyle(color: Color(0xff787878)),
+                    style: TextStyle(
+                        color: Color(0xff787878),
+                        fontSize: screenHeight * 0.02),
                   ),
                 ],
               ),

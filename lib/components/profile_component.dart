@@ -37,7 +37,7 @@ class ProfileComponent extends StatelessWidget {
             ),
             CircleAvatar(
               backgroundImage: NetworkImage(donor.image),
-              radius: 90,
+              radius: screenHeight / 10,
             ),
             Expanded(
               child: Column(
@@ -64,7 +64,9 @@ class ProfileComponent extends StatelessWidget {
                   Text(
                     donor.name,
                     style: TextStyle(
-                        fontWeight: FontWeight.w800, fontSize: 40, height: 1.0),
+                        fontWeight: FontWeight.w800,
+                        fontSize: screenHeight / 25,
+                        height: 1.0),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
@@ -72,6 +74,8 @@ class ProfileComponent extends StatelessWidget {
                   ),
                   Text(
                     donor.description,
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
                     textAlign: TextAlign.center,
                   )

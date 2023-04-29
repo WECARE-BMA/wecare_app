@@ -69,11 +69,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               await firestorageService.uploadFile(event.image);
 
           Donor donor = Donor(
-            id: userCredential.user!.uid,
-            image: imageUrl,
-            description: event.description,
-            name: event.name,
-          );
+              id: userCredential.user!.uid,
+              image: imageUrl,
+              description: event.description,
+              name: event.name,
+              kids: [],
+              savedKids: []);
 
           await donorsServiceProvider.addDonor(donor);
 
