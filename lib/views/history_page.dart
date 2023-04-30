@@ -23,12 +23,12 @@ class HistoryPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-                width: screenWidth, height: screenHeight / 13, child: TopNav()),
+            SizedBox(
+                width: screenWidth, height: screenHeight / 13, child: const TopNav()),
             Padding(
-              padding: EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(15.0),
               child: Text(AppLocalizations.of(context)!.history,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
             ),
             Expanded(child: BlocBuilder<DonatedBloc, DonatedState>(
                 builder: (context, state) {

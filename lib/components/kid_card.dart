@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wecare_app/blocs/saved_bloc/saved_bloc.dart';
 import 'package:wecare_app/blocs/saved_bloc/saved_event.dart';
@@ -9,7 +7,6 @@ import 'package:wecare_app/components/donation_tracker.dart';
 import 'package:wecare_app/models/kid_model.dart';
 import 'package:wecare_app/service/donorsApiService.dart';
 import 'package:wecare_app/service/kidsApiService.dart';
-import 'package:wecare_app/views/auth_pages/signup_page.dart';
 
 class KidCard extends StatelessWidget {
   final Kid kid;

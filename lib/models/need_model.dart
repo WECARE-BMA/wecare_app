@@ -40,13 +40,4 @@ class Need {
     return json;
   }
 
-  static List NeedList(List needs) {
-    List parsedNeeds = [];
-    for (var i = 0; i < needs.length; i++) {
-      parsedNeeds.add(Need.fromJson(needs[i]));
-    }
-    return parsedNeeds;
-  }
-
-  static void add(Need need) {}
 }

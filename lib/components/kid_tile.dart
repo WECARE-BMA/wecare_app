@@ -29,14 +29,14 @@ class KidTile extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: Color.fromARGB(255, 203, 203, 203)
+            color: const Color.fromARGB(255, 203, 203, 203)
           )
         ),
         child: Row(
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12), topLeft: Radius.circular(12)),
+                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(12), topLeft: Radius.circular(12)),
                 image: DecorationImage(image: NetworkImage(image), fit: BoxFit.cover)
               ),
               width: screenWidth / 3.5,
@@ -64,7 +64,7 @@ class KidTile extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  Container(
+                  SizedBox(
                     width: screenWidth / 1.7,
                     height: screenHeight / 18.6,
                     child: DonationTracker(kid: kid)

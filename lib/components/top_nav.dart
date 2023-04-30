@@ -31,7 +31,7 @@ class TopNav extends StatelessWidget {
               ],
             ),
           ],
-        ) // Your content goes here
+        )
         );
   }
 }
