@@ -71,6 +71,7 @@ class ProfilePage extends StatelessWidget {
                               color: Theme.of(context).primaryColor,
                               fontSize: 18)),
                     ),
+                    
                   ],
                 ),
               )

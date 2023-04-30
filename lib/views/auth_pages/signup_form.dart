@@ -147,6 +147,17 @@ class _SignupFormState extends State<SignupForm> {
                 ),
               ),
               Padding(
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.02),
+                child: Text(
+                  "*Image is a required field*", 
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.03, 
+                    fontWeight: FontWeight.w300,
+                    color: Colors.red
+                  ),
+                ),
+              ),
+              Padding(
                 padding: EdgeInsets.only(bottom: 15),
                 child: TextFormField(
                   style: TextStyle(fontSize: 14),

@@ -55,6 +55,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<SignUpEvent>(
       (event, emit) async {
+        emit(AuthLoadingState());
         DonorsServiceProvider donorsServiceProvider = DonorsServiceProvider();
         FirestorageService firestorageService = FirestorageService();
 
